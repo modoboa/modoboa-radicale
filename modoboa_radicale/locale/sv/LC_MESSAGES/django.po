@@ -1,0 +1,135 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+# Martin Persson <martin.jens.persson@gmail.com>, 2014
+# Olle Gustafsson <olle@dalnix.se>, 2013
+# Olle Gustafsson <olle@dalnix.se>, 2013,2015
+msgid ""
+msgstr ""
+"Project-Id-Version: Modoboa\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-02-11 13:00+0100\n"
+"PO-Revision-Date: 2015-01-13 15:18+0000\n"
+"Last-Translator: Olle Gustafsson <olle@dalnix.se>\n"
+"Language-Team: Swedish (http://www.transifex.com/projects/p/modoboa/language/"
+"sv/)\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: app_settings.py:12
+msgid "Server settings"
+msgstr "Serverinställningar"
+#: app_settings.py:16
+msgid "Server URL"
+msgstr "Server URL"
+#: app_settings.py:18
+msgid ""
+"The URL of your Radicale server. It will be used to construct calendar URLs."
+msgstr ""
+"URL till din Radicale server. Den kommer användas för att konstruera "
+"calender URL:er."
+#: app_settings.py:25
+msgid "Rights management"
+msgstr "Rättighetshantering"
+#: app_settings.py:28
+msgid "Rights file's path"
+msgstr "Rättighets fil sökväg"
+#: app_settings.py:31
+msgid "Path to the file that contains rights definition"
+msgstr "Sökväg till filen som innehåller rättighetsdefinitioner"
+#: app_settings.py:37
+msgid "Allow calendars administration"
+msgstr "Tillåt kalendrars administration"
+#: app_settings.py:40
+msgid "Allow domain administrators to manage user calendars (read and write)"
+msgstr ""
+"Tillåt domänadmininstratörer att ändra användares kalendrar (läsa och skriva)"
+#: forms.py:77
+msgid "Username"
+msgstr "Användarnamn"
+#: forms.py:81 templates/modoboa_radicale/accessrule.html:6
+msgid "Read"
+msgstr "Läsa"
+#: forms.py:84 templates/modoboa_radicale/accessrule.html:7
+msgid "Write"
+msgstr "Skriva"
+#: forms.py:136
+#, python-format
+msgid "Mailbox %s does not exist"
+msgstr "Brevlåda %s existerar inte"
+#: forms.py:157 forms.py:187
+msgid "General"
+msgstr "Generellt"
+#: forms.py:159 forms.py:194
+msgid "Rights"
+msgstr "Rättigheter"
+#: forms.py:164
+msgid "New calendar"
+msgstr "Ny kalendrar"
+#: forms.py:176 views.py:133
+msgid "Calendar created"
+msgstr "Kalender skapad"
+#: forms.py:215 views.py:170
+msgid "Calendar updated"
+msgstr "Kalender uppdaterad"
+#: general_callbacks.py:36
+msgid "Calendars"
+msgstr "Kalendrar"
+#: models.py:95
+msgid "User"
+msgstr "Användare"
+#: models.py:140
+msgid "Shared"
+msgstr "Delad"
+#: modo_extension.py:17
+msgid "Radicale management"
+msgstr "Radicale hantering"
+#: modo_extension.py:21
+msgid "Management frontend for Radicale, a simple calendar and contact server."
+msgstr ""
+"Hanterings frontend för Radicale, en enkel kalender- och kontakt-server"
+#: templates/modoboa_radicale/calendar_detail.html:6
+msgid "To access this calendar, use the following address:"
+msgstr "För att få tillgång till denna kalender, använd följande adress:"
+#: templates/modoboa_radicale/calendars.html:48
+msgid "Name"
+msgstr "Namn"
+#: templates/modoboa_radicale/calendars.html:49
+msgid "Owner"
+msgstr "Ägare"
+#: templates/modoboa_radicale/calendars.html:50
+msgid "Tags"
+msgstr "Tagg"
+#: templates/modoboa_radicale/calendars.html:51
+msgid "Actions"
+msgstr "Åtgärder"
+#: templatetags/radicale_tags.py:26
+msgid "Add calendar"
+msgstr "Lägg till kalender"
+#: templatetags/radicale_tags.py:35
+msgid "Add shared calendar"
+msgstr "Lägg till delad kalender"
+#: templatetags/radicale_tags.py:52
+msgid "View calendar detail"
+msgstr "Visa kalender detaljer"
+#: templatetags/radicale_tags.py:70
+#, python-format
+msgid "Edit %s"
+msgstr "Redigera %s"
+#: templatetags/radicale_tags.py:74
+#, python-format
+msgid "Delete %s?"
+msgstr "Radera %s?"
+#: views.py:106 views.py:165
+msgid "Calendar removed"
+msgstr "Kalender flyttad"
+#: views.py:141
+msgid "New shared calendar"
+msgstr "Ny delad kalender"
+#: views.py:144 views.py:181
+msgid "Submit"
+msgstr "Skicka"

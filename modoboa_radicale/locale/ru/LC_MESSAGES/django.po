@@ -1,0 +1,173 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: Modoboa\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-02-11 13:00+0100\n"
+"PO-Revision-Date: 2013-12-03 09:35+0000\n"
+"Last-Translator: Antoine Nguyen <tonio@ngyn.org>\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/modoboa/language/"
+"ru/)\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+#: app_settings.py:12
+#, fuzzy
+msgid "Server settings"
+msgstr "Настройки фильтров содержания"
+#: app_settings.py:16
+#, fuzzy
+msgid "Server URL"
+msgstr "Порт сервера"
+#: app_settings.py:18
+msgid ""
+"The URL of your Radicale server. It will be used to construct calendar URLs."
+msgstr ""
+#: app_settings.py:25
+#, fuzzy
+msgid "Rights management"
+msgstr "Управление карантином"
+#: app_settings.py:28
+msgid "Rights file's path"
+msgstr ""
+#: app_settings.py:31
+msgid "Path to the file that contains rights definition"
+msgstr ""
+#: app_settings.py:37
+#, fuzzy
+msgid "Allow calendars administration"
+msgstr "Администратор домена"
+#: app_settings.py:40
+#, fuzzy
+msgid "Allow domain administrators to manage user calendars (read and write)"
+msgstr ""
+"Максимальное количество создаваемых администраторов домена для этого "
+"пользователя"
+#: forms.py:77
+msgid "Username"
+msgstr "Логин пользователя"
+#: forms.py:81 templates/modoboa_radicale/accessrule.html:6
+msgid "Read"
+msgstr ""
+#: forms.py:84 templates/modoboa_radicale/accessrule.html:7
+msgid "Write"
+msgstr ""
+#: forms.py:136
+#, fuzzy, python-format
+msgid "Mailbox %s does not exist"
+msgstr "Домен '%s' не существует"
+#: forms.py:157 forms.py:187
+msgid "General"
+msgstr "Основные"
+#: forms.py:159 forms.py:194
+msgid "Rights"
+msgstr ""
+#: forms.py:164
+#, fuzzy
+msgid "New calendar"
+msgstr "Новый синоним"
+#: forms.py:176 views.py:133
+#, fuzzy
+msgid "Calendar created"
+msgstr "Фильтр создан"
+#: forms.py:215 views.py:170
+#, fuzzy
+msgid "Calendar updated"
+msgstr "Профиль обновлен"
+#: general_callbacks.py:36
+msgid "Calendars"
+msgstr ""
+#: models.py:95
+#, fuzzy
+msgid "User"
+msgstr "Логин пользователя"
+#: models.py:140
+msgid "Shared"
+msgstr ""
+#: modo_extension.py:17
+#, fuzzy
+msgid "Radicale management"
+msgstr "Управление карантином"
+#: modo_extension.py:21
+msgid "Management frontend for Radicale, a simple calendar and contact server."
+msgstr ""
+#: templates/modoboa_radicale/calendar_detail.html:6
+msgid "To access this calendar, use the following address:"
+msgstr ""
+#: templates/modoboa_radicale/calendars.html:48
+msgid "Name"
+msgstr "Логин"
+#: templates/modoboa_radicale/calendars.html:49
+msgid "Owner"
+msgstr ""
+#: templates/modoboa_radicale/calendars.html:50
+msgid "Tags"
+msgstr "Теги"
+#: templates/modoboa_radicale/calendars.html:51
+msgid "Actions"
+msgstr "Действие"
+#: templatetags/radicale_tags.py:26
+#, fuzzy
+msgid "Add calendar"
+msgstr "Добавить синоним"
+#: templatetags/radicale_tags.py:35
+msgid "Add shared calendar"
+msgstr ""
+#: templatetags/radicale_tags.py:52
+msgid "View calendar detail"
+msgstr ""
+#: templatetags/radicale_tags.py:70
+#, python-format
+msgid "Edit %s"
+msgstr ""
+#: templatetags/radicale_tags.py:74
+#, python-format
+msgid "Delete %s?"
+msgstr "Удалить %s?"
+#: views.py:106 views.py:165
+#, fuzzy
+msgid "Calendar removed"
+msgstr "Фильтр удален"
+#: views.py:141
+msgid "New shared calendar"
+msgstr ""
+#: views.py:144 views.py:181
+msgid "Submit"
+msgstr ""
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy

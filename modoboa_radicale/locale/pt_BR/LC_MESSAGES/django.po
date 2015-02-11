@@ -1,0 +1,137 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+# csmk, 2014
+# Paulino Michelazzo <paulino@michelazzo.com.br>, 2014
+# Rafael Barretto Alves <ch3yd@hotmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: Modoboa\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-02-11 13:00+0100\n"
+"PO-Revision-Date: 2014-12-13 09:10+0000\n"
+"Last-Translator: Paulino Michelazzo <paulino@michelazzo.com.br>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/"
+"modoboa/language/pt_BR/)\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#: app_settings.py:12
+msgid "Server settings"
+msgstr "Configurações do servidor"
+#: app_settings.py:16
+msgid "Server URL"
+msgstr "URL do Servidor"
+#: app_settings.py:18
+msgid ""
+"The URL of your Radicale server. It will be used to construct calendar URLs."
+msgstr ""
+"A URL de seu servidor Radicale. Ela será usada para construir URL's de "
+"calendários."
+#: app_settings.py:25
+msgid "Rights management"
+msgstr "Gerenciamento de direitos"
+#: app_settings.py:28
+msgid "Rights file's path"
+msgstr "Caminho do arquivo de direitos"
+#: app_settings.py:31
+msgid "Path to the file that contains rights definition"
+msgstr "Caminho para o arquivo que contém as definições de direitos"
+#: app_settings.py:37
+msgid "Allow calendars administration"
+msgstr "Permitir administração de calendários"
+#: app_settings.py:40
+msgid "Allow domain administrators to manage user calendars (read and write)"
+msgstr ""
+"Permite a administradores de domínio gerenciar calendários de usuários "
+"(leitura e escrita)"
+#: forms.py:77
+msgid "Username"
+msgstr "Nome de usuário"
+#: forms.py:81 templates/modoboa_radicale/accessrule.html:6
+msgid "Read"
+msgstr "Ler"
+#: forms.py:84 templates/modoboa_radicale/accessrule.html:7
+msgid "Write"
+msgstr "Escrever"
+#: forms.py:136
+#, python-format
+msgid "Mailbox %s does not exist"
+msgstr "A caixa de correio '%s não existe"
+#: forms.py:157 forms.py:187
+msgid "General"
+msgstr "Geral"
+#: forms.py:159 forms.py:194
+msgid "Rights"
+msgstr "Permissões"
+#: forms.py:164
+msgid "New calendar"
+msgstr "Novo calendário"
+#: forms.py:176 views.py:133
+msgid "Calendar created"
+msgstr "Calendário criado"
+#: forms.py:215 views.py:170
+msgid "Calendar updated"
+msgstr "Calendário atualizado"
+#: general_callbacks.py:36
+msgid "Calendars"
+msgstr "Calendários"
+#: models.py:95
+msgid "User"
+msgstr "Usuário"
+#: models.py:140
+msgid "Shared"
+msgstr "Compartilhado"
+#: modo_extension.py:17
+msgid "Radicale management"
+msgstr "Gerenciamento do Radicale"
+#: modo_extension.py:21
+msgid "Management frontend for Radicale, a simple calendar and contact server."
+msgstr ""
+"Gerenciador de frontend para Radicale, um servidor simples de calendário e "
+"contato."
+#: templates/modoboa_radicale/calendar_detail.html:6
+msgid "To access this calendar, use the following address:"
+msgstr "Para acessar este calendário, use o seguinte endereço:"
+#: templates/modoboa_radicale/calendars.html:48
+msgid "Name"
+msgstr "Nome"
+#: templates/modoboa_radicale/calendars.html:49
+msgid "Owner"
+msgstr "Proprietário"
+#: templates/modoboa_radicale/calendars.html:50
+msgid "Tags"
+msgstr "Tags"
+#: templates/modoboa_radicale/calendars.html:51
+msgid "Actions"
+msgstr "Ações"
+#: templatetags/radicale_tags.py:26
+msgid "Add calendar"
+msgstr "Adicionar calendário"
+#: templatetags/radicale_tags.py:35
+msgid "Add shared calendar"
+msgstr "Adicionar calendário compartilhado"
+#: templatetags/radicale_tags.py:52
+msgid "View calendar detail"
+msgstr "Ver detalhes do calendário"
+#: templatetags/radicale_tags.py:70
+#, python-format
+msgid "Edit %s"
+msgstr "Editar %s"
+#: templatetags/radicale_tags.py:74
+#, python-format
+msgid "Delete %s?"
+msgstr "Remover %s?"
+#: views.py:106 views.py:165
+msgid "Calendar removed"
+msgstr "Calendário removido"
+#: views.py:141
+msgid "New shared calendar"
+msgstr "Novo calendário compartilhado"
+#: views.py:144 views.py:181
+msgid "Submit"
+msgstr "Enviar"
