@@ -204,7 +204,7 @@ def username_list(request):
     """Get the list of username the current user can see."""
     result = []
     qset = Mailbox.objects.select_related("user")
-    if request.user.has_perm("admin.add_mailbox"):
+    if request.user.has_perm("modoboa_admin.add_mailbox"):
         qset = qset.filter(
             domain__in=Domain.objects.get_for_admin(request.user)
         )
