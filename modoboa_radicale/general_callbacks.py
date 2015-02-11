@@ -8,12 +8,12 @@ from django.utils.translation import ugettext as _
 from modoboa.lib import events
 
 PERMISSIONS = [
-    ("radicale", "usercalendar", "add_usercalendar"),
-    ("radicale", "usercalendar", "change_usercalendar"),
-    ("radicale", "usercalendar", "delete_usercalendar"),
-    ("radicale", "sharedcalendar", "add_sharedcalendar"),
-    ("radicale", "sharedcalendar", "change_sharedcalendar"),
-    ("radicale", "sharedcalendar", "delete_sharedcalendar")
+    ("modoboa_radicale", "usercalendar", "add_usercalendar"),
+    ("modoboa_radicale", "usercalendar", "change_usercalendar"),
+    ("modoboa_radicale", "usercalendar", "delete_usercalendar"),
+    ("modoboa_radicale", "sharedcalendar", "add_sharedcalendar"),
+    ("modoboa_radicale", "sharedcalendar", "change_sharedcalendar"),
+    ("modoboa_radicale", "sharedcalendar", "delete_sharedcalendar")
 ]
 
 ROLES_PERMISSIONS = {

@@ -123,7 +123,7 @@ def user_calendar_detail(request, pk):
 
 
 @login_required
-@permission_required("radicale.add_sharedcalendar")
+@permission_required("modoboa_radicale.add_sharedcalendar")
 def new_shared_calendar(request):
     """Shared calendar creation view."""
     if request.method == "POST":
@@ -147,8 +147,8 @@ def new_shared_calendar(request):
 
 @login_required
 @user_passes_test(
-    lambda u: u.has_perm("radicale.change_sharedcalendar")
-    or u.has_perm("radicale.delete_sharedcalendar")
+    lambda u: u.has_perm("modoboa_radicale.change_sharedcalendar")
+    or u.has_perm("modoboa_radicale.delete_sharedcalendar")
 )
 def shared_calendar(request, pk):
     """Edit or remove a shared calendar."""
@@ -184,7 +184,7 @@ def shared_calendar(request, pk):
 
 @login_required
 @user_passes_test(
-    lambda u: u.has_perm("radicale.change_sharedcalendar")
+    lambda u: u.has_perm("modoboa_radicale.change_sharedcalendar")
 )
 def shared_calendar_detail(request, pk):
     """Display shared calendar's detail."""
