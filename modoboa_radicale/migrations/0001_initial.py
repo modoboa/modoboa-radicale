@@ -20,6 +20,7 @@ class Migration(migrations.Migration):
                 ('last_update', models.DateTimeField(auto_now=True)),
             ],
             options={
+                'db_table': 'radicale_accessrule',
             },
             bases=(models.Model,),
         ),
@@ -32,6 +33,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'abstract': False,
+                'db_table': 'radicale_sharedcalendar',
             },
             bases=(models.Model,),
         ),
@@ -44,13 +46,14 @@ class Migration(migrations.Migration):
             ],
             options={
                 'abstract': False,
+                'db_table': 'radicale_usercalendar',
             },
             bases=(models.Model,),
         ),
         migrations.AddField(
             model_name='accessrule',
             name='calendar',
-            field=models.ForeignKey(related_name='rules', to='radicale.UserCalendar'),
+            field=models.ForeignKey(related_name='rules', to='modoboa_radicale.UserCalendar'),
             preserve_default=True,
         ),
         migrations.AddField(
