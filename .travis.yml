@@ -1,0 +1,18 @@
+language: python
+python:
+  - "2.7"
+
+env:
+  - DJANGO=1.7
+
+install:
+  - pip install -q Django==$DJANGO
+  - pip install -e git+https://github.com/tonioo/modoboa.git@split_applications#egg=modoboa
+  - python setup.py -q develop
+  - pip install -q psycopg2
+
+before_script:
+  - psql -c 'create database modoboa_test;' -U postgres
+
+script: 
+  - python -m unittest tests

@@ -1,6 +1,8 @@
 modoboa-radicale
 ================
 
+|travis| |landscape|
+
 The `Radicale <http://radicale.org/>`_ frontend of Modoboa.
 
 Installation
@@ -33,3 +35,8 @@ Run the following commands to setup the database tables::
 Finally, restart the python process running modoboa (uwsgi, gunicorn,
 apache, whatever).
 
+.. |landscape| image:: https://landscape.io/github/modoboa/modoboa-radicale/master/landscape.svg?style=flat
+   :target: https://landscape.io/github/modoboa/modoboa-radicale/master
+   :alt: Code Health
+.. |travis| image:: https://travis-ci.org/modoboa/modoboa-radicale.png?branch=master
+   :target: https://travis-ci.org/modoboa/modoboa-radicale
