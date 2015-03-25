@@ -1,3 +1,5 @@
+"""Management command to handle file generation."""
+
 import os
 import datetime
 from optparse import make_option
@@ -11,9 +13,13 @@ from modoboa.lib import parameters
 from modoboa_admin.models import Domain
 
 from ...models import AccessRule
+from ...modo_extension import Radicale
 
 
 class Command(BaseCommand, CloseConnectionMixin):
+
+    """Management command to handle file generation."""
+
     help = "Generate Radicale rights file"
 
     option_list = BaseCommand.option_list + (
@@ -24,8 +30,7 @@ class Command(BaseCommand, CloseConnectionMixin):
     )
 
     def _generate_acr(self, name, user, collection, perm="rw", comment=None):
-        """Write a new access control rule to the config file.
-        """
+        """Write a new access control rule to the config file."""
         if comment is not None:
             self._cfgfile.write("\n# %s" % comment)
         self._cfgfile.write("""
@@ -37,8 +42,7 @@ permission = %s
         )
 
     def _user_access_rules(self):
-        """Create user access rules.
-        """
+        """Create user access rules."""
         for acr in AccessRule.objects.select_related().all():
             section = "%s-to-%s-acr" % (
                 acr.mailbox, acr.calendar
@@ -54,8 +58,7 @@ permission = %s
             )
 
     def _super_admin_rules(self):
-        """Generate access rules for super administrators.
-        """
+        """Generate access rules for super administrators."""
         for sa in User.objects.filter(is_superuser=True):
             section = "sa-%s-acr" % sa.username
             self._generate_acr(
@@ -63,8 +66,7 @@ permission = %s
             )
 
     def _domain_admin_rules(self):
-        """Generate access rules for domain adminstrators.
-        """
+        """Generate access rules for domain adminstrators."""
         for da in User.objects.filter(groups__name="DomainAdmins"):
             for domain in Domain.objects.get_for_admin(da):
                 section = "da-%s-to-%s-acr" % (da.email, domain.name)
@@ -102,6 +104,7 @@ permission = %s
 
     def handle(self, *args, **options):
         """Command entry point."""
+        Radicale.load()
         path = parameters.get_admin("RIGHTS_FILE_PATH", app="radicale")
         if not options["force"]:
             try:
