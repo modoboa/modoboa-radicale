@@ -225,8 +225,7 @@ class AccessRuleTestCase(ModoTestCase):
         management.call_command("generate_rights", verbosity=False)
 
         cfg = SafeConfigParser()
-        with open(self.rights_file_path) as fpo:
-            cfg.readfp(fpo)
+        cfg.read([self.rights_file_path])
 
         # Check mandatory rules
         self.assertTrue(cfg.has_section("domain-shared-calendars"))
