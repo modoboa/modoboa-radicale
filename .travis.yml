@@ -8,6 +8,7 @@ env:
 install:
   - pip install -q Django==$DJANGO
   - pip install -e git+https://github.com/tonioo/modoboa.git#egg=modoboa
+  - pip install -q modoboa-admin
   - python setup.py -q develop
   - pip install -q psycopg2
 
