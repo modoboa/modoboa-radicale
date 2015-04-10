@@ -226,8 +226,6 @@ class AccessRuleTestCase(ModoTestCase):
 
         cfg = SafeConfigParser()
         with open(self.rights_file_path) as fpo:
-            print fpo.read()
-            fpo.seek(0)
             cfg.readfp(fpo)
 
         # Check mandatory rules
@@ -235,12 +233,12 @@ class AccessRuleTestCase(ModoTestCase):
         self.assertTrue(cfg.has_section("owners-access"))
 
         # Check user-defined rules
-        section = "user@test.com-to-User calendar 1-acr"
+        section = "user@test.com-to-User calendar 0-acr"
         self.assertTrue(cfg.has_section(section))
         self.assertEqual(cfg.get(section, "user"), "user@test.com")
         self.assertEqual(
             cfg.get(section, "collection"),
-            "test.com/user/admin/User calendar 1"
+            "test.com/user/admin/User calendar 0"
         )
         self.assertEqual(cfg.get(section, "permission"), "r")
 
