@@ -85,7 +85,7 @@ permission = %s
         """ % datetime.datetime.today())
 
         allow_calendars_administration = parameters.get_admin(
-            "ALLOW_CALENDARS_ADMINISTRATION", app="radicale")
+            "ALLOW_CALENDARS_ADMINISTRATION", app="modoboa_radicale")
         if allow_calendars_administration == "yes":
             self._super_admin_rules()
             self._domain_admin_rules()
@@ -105,7 +105,7 @@ permission = %s
     def handle(self, *args, **options):
         """Command entry point."""
         Radicale().load()
-        path = parameters.get_admin("RIGHTS_FILE_PATH", app="radicale")
+        path = parameters.get_admin("RIGHTS_FILE_PATH", app="modoboa_radicale")
         if not options["force"]:
             try:
                 mtime = datetime.datetime.fromtimestamp(

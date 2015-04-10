@@ -209,7 +209,7 @@ class AccessRuleTestCase(ModoTestCase):
         populate_database()
         self.rights_file_path = tempfile.mktemp()
         parameters.save_admin(
-            "RIGHTS_FILE_PATH", self.rights_file_path, app="radicale")
+            "RIGHTS_FILE_PATH", self.rights_file_path, app="modoboa_radicale")
 
     def tearDown(self):
         os.unlink(self.rights_file_path)
@@ -244,7 +244,7 @@ class AccessRuleTestCase(ModoTestCase):
 
     def test_rights_file_generation_with_admin(self):
         parameters.save_admin(
-            "ALLOW_CALENDARS_ADMINISTRATION", "yes", app="radicale")
+            "ALLOW_CALENDARS_ADMINISTRATION", "yes", app="modoboa_radicale")
         management.call_command("generate_rights", verbosity=False)
         cfg = SafeConfigParser()
         with open(self.rights_file_path) as fpo:
