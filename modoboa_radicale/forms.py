@@ -10,7 +10,9 @@ from django.utils.translation import ugettext as _, ugettext_lazy
 
 from modoboa.lib.email_utils import split_mailbox
 from modoboa.lib.exceptions import BadRequest
-from modoboa.lib.form_utils import WizardForm, TabForms, DynamicForm
+from modoboa.lib.form_utils import (
+    WizardForm, TabForms, DynamicForm, WizardStep
+)
 from modoboa.lib.web_utils import render_to_json_response
 
 from modoboa_admin.models import Domain, Mailbox
@@ -154,9 +156,17 @@ class UserCalendarWizard(WizardForm):
 
     def __init__(self, request):
         super(UserCalendarWizard, self).__init__(request)
-        self.add_step(UserCalendarForm, _("General"), new_args=[request.user])
         self.add_step(
-            RightsForm, _("Rights"), formtpl="modoboa_radicale/rightsform.html",
+            WizardStep(
+                "general", UserCalendarForm, _("General"),
+                new_args=[request.user]
+            )
+        )
+        self.add_step(
+            WizardStep(
+                "rights", RightsForm, _("Rights"),
+                formtpl="modoboa_radicale/rightsform.html"
+            )
         )
 
     def extra_context(self, context):
@@ -203,12 +213,13 @@ class UserCalendarEditionForm(TabForms):
         context.update({
             "title": self.instances["general"].name,
             "formid": "ucal_form",
-            "action": reverse("modoboa_radicale:user_calendar", args=[calendar.id])
+            "action": reverse(
+                "modoboa_radicale:user_calendar", args=[calendar.id])
         })
 
     def save(self):
         """Custom save method."""
-        calendar = self.forms[0]["instance"].save()
+        self.forms[0]["instance"].save()
         self.forms[1]["instance"].save()
 
     def done(self):
