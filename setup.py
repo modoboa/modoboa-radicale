@@ -57,7 +57,7 @@ def read(fname):
 
 setup(
     name="modoboa-radicale",
-    version='1.0.1',
+    version='1.0.2',
     url='http://modoboa.org/',
     license='MIT',
     description="The Radicale frontend of Modoboa",
