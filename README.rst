@@ -1,7 +1,7 @@
 modoboa-radicale
 ================
 
-|travis| |landscape|
+|travis| |codecov| |landscape|
 
 The `Radicale <http://radicale.org/>`_ frontend of Modoboa.
 
@@ -40,3 +40,5 @@ apache, whatever).
    :alt: Code Health
 .. |travis| image:: https://travis-ci.org/modoboa/modoboa-radicale.png?branch=master
    :target: https://travis-ci.org/modoboa/modoboa-radicale
+.. |codecov| image:: http://codecov.io/github/modoboa/modoboa-radicale/coverage.svg?branch=master
+   :target: http://codecov.io/github/modoboa/modoboa-radicale?branch=master
