@@ -40,7 +40,7 @@ def get_calendar_page(request, page_id=None):
     searchquery = request.GET.get("searchquery", None)
     page_id = request.GET.get("page", 1)
     if request.user.group == "SimpleUsers":
-        mbox = request.user.mailbox_set.all()[0]
+        mbox = request.user.mailbox
         cals = UserCalendar.objects.filter(mailbox=mbox)
         if searchquery is not None:
             cals = cals.filter(name__icontains=searchquery)
@@ -209,7 +209,7 @@ def username_list(request):
             domain__in=Domain.objects.get_for_admin(request.user)
         )
     else:
-        user_domain = request.user.mailbox_set.all()[0].domain
+        user_domain = request.user.mailbox.domain
         qset = qset.filter(domain=user_domain)
     for mbox in qset:
         result.append(mbox.user.username)

@@ -179,7 +179,7 @@ class UserCalendarWizard(WizardForm):
     def done(self):
         calendar = self.first_step.form.save(commit=False)
         if self.request.user.group == 'SimpleUsers':
-            calendar.mailbox = self.request.user.mailbox_set.all()[0]
+            calendar.mailbox = self.request.user.mailbox
         calendar.save()
         self.steps[1].form.calendar = calendar
         self.steps[1].form.save()
