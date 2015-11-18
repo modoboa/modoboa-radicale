@@ -9,6 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.core import management
 
+from modoboa.lib import exceptions as lib_exceptions
 from modoboa.lib import parameters
 from modoboa.lib.tests import ModoTestCase
 
@@ -23,6 +24,7 @@ from .factories import (
     UserCalendarFactory, SharedCalendarFactory, AccessRuleFactory
 )
 from .models import UserCalendar, SharedCalendar, AccessRule
+from .modo_extension import Radicale
 
 
 class UserCalendarTestCase(ModoTestCase):
@@ -39,6 +41,19 @@ class UserCalendarTestCase(ModoTestCase):
             calendar__name=calname)
         self.assertEqual(acr.read, read)
         self.assertEqual(acr.write, write)
+
+    def test_model(self):
+        """Check few things about the model."""
+        Radicale().load()
+        mbox = Mailbox.objects.get(address="admin", domain__name="test.com")
+        cal = UserCalendarFactory(name="MyCal", mailbox=mbox)
+        with self.assertRaises(lib_exceptions.InternalError) as cm:
+            url = cal.url
+        self.assertEqual(
+            str(cm.exception), "Server location is not set, please fix it.")
+        parameters.save_admin(
+            "SERVER_LOCATION", "http://localhost", app="modoboa_radicale")
+        self.assertEqual(cal.url, "http://localhost/test.com/user/admin/MyCal")
 
     def test_add_calendar(self):
         MailboxFactory(
