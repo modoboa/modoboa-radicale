@@ -1,1 +1,1 @@
-modoboa-admin>=1.1.2
+modoboa

@@ -12,10 +12,10 @@ from django.core import management
 from modoboa.lib import parameters
 from modoboa.lib.tests import ModoTestCase
 
-from modoboa_admin.factories import (
+from modoboa.admin.factories import (
     MailboxFactory, populate_database
 )
-from modoboa_admin.models import (
+from modoboa.admin.models import (
     Domain, Mailbox
 )
 

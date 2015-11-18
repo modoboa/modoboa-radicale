@@ -6,17 +6,15 @@ from optparse import make_option
 
 from django.core.management.base import BaseCommand
 
-from modoboa.core.management.commands import CloseConnectionMixin
+from modoboa.admin.models import Domain
 from modoboa.core.models import User
 from modoboa.lib import parameters
-
-from modoboa_admin.models import Domain
 
 from ...models import AccessRule
 from ...modo_extension import Radicale
 
 
-class Command(BaseCommand, CloseConnectionMixin):
+class Command(BaseCommand):
 
     """Management command to handle file generation."""
 

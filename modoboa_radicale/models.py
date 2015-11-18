@@ -9,8 +9,9 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible, smart_text
 from django.utils.translation import ugettext as _
 
-from modoboa_admin.models import Domain, Mailbox
+from modoboa.admin.models import Domain, Mailbox
 
+from modoboa.lib import exceptions as lib_exceptions
 from modoboa.lib import parameters
 
 
@@ -36,10 +37,11 @@ class Calendar(models.Model):
     def url(self):
         """Return the calendar URL."""
         if not hasattr(self, "_url"):
-            self._url = os.path.join(
-                parameters.get_admin("SERVER_LOCATION"),
-                self.path
-            )
+            server_location = parameters.get_admin("SERVER_LOCATION")
+            if not server_location:
+                raise lib_exceptions.InternalError(
+                    _("Server location is not set, please fix it."))
+            self._url = os.path.join(server_location, self.path)
         return self._url
 
     @property
@@ -63,7 +65,7 @@ class UserCalendarManager(models.Manager):
         :param ``core.User`` admin: administrator
         """
         domains = Domain.objects.get_for_admin(admin)
-        return self.get_query_set().filter(mailbox__domain__in=domains)
+        return self.get_queryset().filter(mailbox__domain__in=domains)
 
 
 class UserCalendar(Calendar):
@@ -112,7 +114,7 @@ class SharedCalendarManager(models.Manager):
         :param ``core.User`` admin: administrator
         """
         domains = Domain.objects.get_for_admin(admin)
-        return self.get_query_set().filter(domain__in=domains)
+        return self.get_queryset().filter(domain__in=domains)
 
 
 class SharedCalendar(Calendar):
