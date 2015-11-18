@@ -27,8 +27,10 @@ from .models import UserCalendar, SharedCalendar, AccessRule
 
 class UserCalendarTestCase(ModoTestCase):
 
-    def setUp(self):
-        super(UserCalendarTestCase, self).setUp()
+    @classmethod
+    def setUpTestData(cls):
+        """Create test data."""
+        super(UserCalendarTestCase, cls).setUpTestData()
         populate_database()
 
     def assertRuleEqual(self, calname, username, read=False, write=False):
@@ -120,7 +122,8 @@ class UserCalendarTestCase(ModoTestCase):
         self.clt.logout()
         self.clt.login(username="admin@test.com", password="toto")
         self.ajax_delete(
-            reverse("modoboa_radicale:user_calendar", args=[cal.pk]), status=403
+            reverse("modoboa_radicale:user_calendar", args=[cal.pk]),
+            status=403
         )
 
     def test_add_calendar_denied(self):
@@ -138,8 +141,10 @@ class UserCalendarTestCase(ModoTestCase):
 
 class SharedCalendarTestCase(ModoTestCase):
 
-    def setUp(self):
-        super(SharedCalendarTestCase, self).setUp()
+    @classmethod
+    def setUpTestData(cls):
+        """Create test data."""
+        super(SharedCalendarTestCase, cls).setUpTestData()
         populate_database()
 
     def test_add_calendar(self):
@@ -171,7 +176,8 @@ class SharedCalendarTestCase(ModoTestCase):
             "domain": Domain.objects.get(name="test2.com")
         }
         self.ajax_post(
-            reverse("modoboa_radicale:shared_calendar_add"), values, status=400)
+            reverse("modoboa_radicale:shared_calendar_add"), values,
+            status=400)
 
     def test_edit_calendar(self):
         cal = SharedCalendarFactory(
@@ -198,15 +204,22 @@ class SharedCalendarTestCase(ModoTestCase):
         self.clt.logout()
         self.clt.login(username="admin@test.com", password="toto")
         self.ajax_delete(
-            reverse("modoboa_radicale:shared_calendar", args=[cal.pk]), status=403
+            reverse("modoboa_radicale:shared_calendar", args=[cal.pk]),
+            status=403
         )
 
 
 class AccessRuleTestCase(ModoTestCase):
 
-    def setUp(self):
-        super(AccessRuleTestCase, self).setUp()
+    @classmethod
+    def setUpTestData(cls):
+        """Create test data."""
+        super(AccessRuleTestCase, cls).setUpTestData()
         populate_database()
+
+    def setUp(self):
+        """Initialize tests."""
+        super(AccessRuleTestCase, self).setUp()
         self.rights_file_path = tempfile.mktemp()
         parameters.save_admin(
             "RIGHTS_FILE_PATH", self.rights_file_path, app="modoboa_radicale")
