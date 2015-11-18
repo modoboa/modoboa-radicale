@@ -3,7 +3,7 @@ Fixtures factories.
 """
 import factory
 
-from modoboa_admin.factories import (
+from modoboa.admin.factories import (
     DomainFactory, MailboxFactory
 )
 

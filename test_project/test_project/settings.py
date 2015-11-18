@@ -55,8 +55,10 @@ MODOBOA_APPS = (
     'modoboa',
     'modoboa.core',
     'modoboa.lib',
+    'modoboa.admin',
+    'modoboa.relaydomains',
+    'modoboa.limits',
     # Modoboa extensions here.
-    'modoboa_admin',
     'modoboa_radicale',
 
 )

@@ -8,14 +8,13 @@ from django import forms
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _, ugettext_lazy
 
+from modoboa.admin.models import Domain, Mailbox
 from modoboa.lib.email_utils import split_mailbox
 from modoboa.lib.exceptions import BadRequest
 from modoboa.lib.form_utils import (
     WizardForm, TabForms, DynamicForm, WizardStep
 )
 from modoboa.lib.web_utils import render_to_json_response
-
-from modoboa_admin.models import Domain, Mailbox
 
 from .models import UserCalendar, SharedCalendar, AccessRule
 
@@ -54,6 +53,7 @@ class SharedCalendarForm(forms.ModelForm):
 
     class Meta:
         model = SharedCalendar
+        fields = ("name", "domain", )
         widgets = {
             "name": forms.TextInput(attrs={"class": "form-control"}),
             "domain": forms.widgets.Select(

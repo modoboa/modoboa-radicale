@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('modoboa_admin', '0001_initial'),
+        ('admin', '0001_initial'),
     ]
 
     operations = [
@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=200)),
-                ('domain', models.ForeignKey(to='modoboa_admin.Domain')),
+                ('domain', models.ForeignKey(to='admin.Domain')),
             ],
             options={
                 'abstract': False,
@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=200)),
-                ('mailbox', models.ForeignKey(to='modoboa_admin.Mailbox')),
+                ('mailbox', models.ForeignKey(to='admin.Mailbox')),
             ],
             options={
                 'abstract': False,
@@ -59,7 +59,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='accessrule',
             name='mailbox',
-            field=models.ForeignKey(to='modoboa_admin.Mailbox'),
+            field=models.ForeignKey(to='admin.Mailbox'),
             preserve_default=True,
         ),
         migrations.AlterUniqueTogether(
