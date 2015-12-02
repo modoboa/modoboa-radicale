@@ -31,7 +31,7 @@ Edit the settings.py file of your modoboa instance and add
 Run the following commands to setup the database tables::
 
   $ cd <modoboa_instance_dir>
-  $ python manage.py migrate modoboa_admin
+  $ python manage.py migrate
   $ python manage.py load_initial_data
     
 Finally, restart the python process running modoboa (uwsgi, gunicorn,
