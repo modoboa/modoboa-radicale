@@ -71,11 +71,11 @@ class UserCalendarTestCase(ModoTestCase):
         }
         self.ajax_post(
             reverse("modoboa_radicale:user_calendar_add"), values)
-        self.clt.logout()
+        self.client.logout()
         self.assertRuleEqual("Test calendar", "admin@test.com", read=True)
 
         # As a domain administrator
-        self.clt.login(username="admin@test.com", password="toto")
+        self.client.login(username="admin@test.com", password="toto")
         values = {
             "name": "Test calendar 2",
             "mailbox": mbox.pk,
@@ -86,13 +86,13 @@ class UserCalendarTestCase(ModoTestCase):
         }
         self.ajax_post(
             reverse("modoboa_radicale:user_calendar_add"), values)
-        self.clt.logout()
+        self.client.logout()
         self.assertRuleEqual(
             "Test calendar 2", "admin@test.com", read=True, write=True
         )
 
         # As a user
-        self.clt.login(username="user@test.com", password="toto")
+        self.client.login(username="user@test.com", password="toto")
         values = {
             "name": "My calendar",
             "username": "admin@test.com",
@@ -134,16 +134,16 @@ class UserCalendarTestCase(ModoTestCase):
         cal = UserCalendarFactory(
             mailbox__user__username='test@modoboa.org',
             mailbox__address='test', mailbox__domain__name='modoboa.org')
-        self.clt.logout()
-        self.clt.login(username="admin@test.com", password="toto")
+        self.client.logout()
+        self.client.login(username="admin@test.com", password="toto")
         self.ajax_delete(
             reverse("modoboa_radicale:user_calendar", args=[cal.pk]),
             status=403
         )
 
     def test_add_calendar_denied(self):
-        self.clt.logout()
-        self.clt.login(username="admin@test.com", password="toto")
+        self.client.logout()
+        self.client.login(username="admin@test.com", password="toto")
         values = {
             "name": "Test calendar",
             "mailbox": Mailbox.objects.get(
@@ -171,21 +171,21 @@ class SharedCalendarTestCase(ModoTestCase):
         }
         self.ajax_post(
             reverse("modoboa_radicale:shared_calendar_add"), values)
-        self.clt.logout()
+        self.client.logout()
 
         # As a domain administrator
-        self.clt.login(username="admin@test.com", password="toto")
+        self.client.login(username="admin@test.com", password="toto")
         values = {
             "name": "Test calendar 2",
             "domain": domain.pk
         }
         self.ajax_post(
             reverse("modoboa_radicale:shared_calendar_add"), values)
-        self.clt.logout()
+        self.client.logout()
 
     def test_add_calendar_denied(self):
-        self.clt.logout()
-        self.clt.login(username="admin@test.com", password="toto")
+        self.client.logout()
+        self.client.login(username="admin@test.com", password="toto")
         values = {
             "name": "Test calendar",
             "domain": Domain.objects.get(name="test2.com")
@@ -216,8 +216,8 @@ class SharedCalendarTestCase(ModoTestCase):
 
     def test_del_calendar_denied(self):
         cal = SharedCalendarFactory(domain__name='modoboa.org')
-        self.clt.logout()
-        self.clt.login(username="admin@test.com", password="toto")
+        self.client.logout()
+        self.client.login(username="admin@test.com", password="toto")
         self.ajax_delete(
             reverse("modoboa_radicale:shared_calendar", args=[cal.pk]),
             status=403
