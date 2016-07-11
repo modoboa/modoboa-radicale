@@ -4,6 +4,7 @@ Custom template tags.
 from django import template
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
 from modoboa.lib.templatetags.lib_tags import render_link
@@ -110,4 +111,4 @@ def render_rule_fields(form):
                 form, form.fields[wfieldname], wfieldname)
         })
         cpt += 1
-    return result
+    return mark_safe(result)
