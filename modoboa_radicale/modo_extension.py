@@ -8,6 +8,8 @@ from django.utils.translation import ugettext_lazy
 from modoboa.core.extensions import ModoExtension, exts_pool
 from modoboa.lib import parameters
 
+from . import __version__
+
 
 class Radicale(ModoExtension):
 
@@ -15,7 +17,7 @@ class Radicale(ModoExtension):
 
     name = "modoboa_radicale"
     label = ugettext_lazy("Radicale management")
-    version = "1.0.4"
+    version = __version__
     url = "calendars"
     description = ugettext_lazy(
         "Management frontend for Radicale, a simple calendar and contact "
