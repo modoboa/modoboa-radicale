@@ -68,11 +68,11 @@ def calendar_actions(calendar):
     """Render per-calendar actions."""
     actions = [
         {"name": "editcalendar",
-         "title": _("Edit %s" % calendar),
+         "title": _(u"Edit %s" % calendar),
          "modal": True,
          "img": "fa fa-edit"},
         {"name": "delcalendar",
-         "title": _("Delete %s?" % calendar),
+         "title": _(u"Delete %s?" % calendar),
          "img": "fa fa-trash"}
     ]
     if calendar.__class__.__name__ == 'UserCalendar':
