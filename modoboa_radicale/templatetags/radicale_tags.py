@@ -30,7 +30,7 @@ def radicale_left_menu(user):
          "modalcb": "radicale.add_calendar_cb",
          "url": reverse("modoboa_radicale:user_calendar_add")},
     ]
-    if user.group != "SimpleUsers":
+    if user.role != "SimpleUsers":
         entries += [
             {"name": "newsharedcalendar",
              "label": _("Add shared calendar"),

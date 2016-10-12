@@ -29,7 +29,7 @@ def index(request):
     """Calendar list entry point."""
     return render(request, "modoboa_radicale/calendars.html", {
         "selection": "radicale",
-        "with_owner": request.user.group != "SimpleUsers"
+        "with_owner": request.user.role != "SimpleUsers"
     })
 
 
@@ -39,7 +39,7 @@ def get_calendar_page(request, page_id=None):
     calfilter = request.GET.get("calfilter", None)
     searchquery = request.GET.get("searchquery", None)
     page_id = request.GET.get("page", 1)
-    if request.user.group == "SimpleUsers":
+    if request.user.role == "SimpleUsers":
         mbox = request.user.mailbox
         cals = UserCalendar.objects.filter(mailbox=mbox)
         if searchquery is not None:
@@ -76,7 +76,7 @@ def calendars_page(request, tplname="modoboa_radicale/calendars_page.html"):
         context = {
             "rows": _render_to_string(request, tplname, {
                 "calendars": page.object_list,
-                "with_owner": request.user.group != "SimpleUsers"
+                "with_owner": request.user.role != "SimpleUsers"
             }),
             "page": page.number
         }

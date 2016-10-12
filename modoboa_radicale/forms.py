@@ -40,7 +40,7 @@ class UserCalendarForm(forms.ModelForm):
         We need the current user to filter the mailbox list.
         """
         super(UserCalendarForm, self).__init__(*args, **kwargs)
-        if user.group == 'SimpleUsers':
+        if user.role == 'SimpleUsers':
             del self.fields['mailbox']
         else:
             self.fields['mailbox'].queryset = \
@@ -178,7 +178,7 @@ class UserCalendarWizard(WizardForm):
 
     def done(self):
         calendar = self.first_step.form.save(commit=False)
-        if self.request.user.group == 'SimpleUsers':
+        if self.request.user.role == 'SimpleUsers':
             calendar.mailbox = self.request.user.mailbox
         calendar.save()
         self.steps[1].form.calendar = calendar
