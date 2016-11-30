@@ -1,11 +1,10 @@
-"""
-General callbacks.
-"""
+"""Radicale signals handlers."""
 
 from django.core.urlresolvers import reverse
+from django.dispatch import receiver
 from django.utils.translation import ugettext as _
 
-from modoboa.lib import events
+from modoboa.core import signals as core_signals
 
 PERMISSIONS = [
     ("modoboa_radicale", "usercalendar", "add_usercalendar"),
@@ -22,15 +21,16 @@ ROLES_PERMISSIONS = {
 }
 
 
-@events.observe("GetExtraRolePermissions")
-def extra_permissions(rolename):
+@receiver(core_signals.extra_role_permissions)
+def extra_permissions(sender, rolename, **kwargs):
     """Extra permissions."""
     return ROLES_PERMISSIONS.get(rolename, [])
 
 
-@events.observe("UserMenuDisplay")
-def top_menu(target, user):
-    if target == "top_menu":
+@receiver(core_signals.extra_user_menu_entries)
+def top_menu(sender, location, user, **kwargs):
+    """Add extra menu entries."""
+    if location == "top_menu":
         return [
             {"name": "radicale",
              "label": _("Calendars"),

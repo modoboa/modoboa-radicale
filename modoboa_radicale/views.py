@@ -147,8 +147,8 @@ def new_shared_calendar(request):
 
 @login_required
 @user_passes_test(
-    lambda u: u.has_perm("modoboa_radicale.change_sharedcalendar")
-    or u.has_perm("modoboa_radicale.delete_sharedcalendar")
+    lambda u: u.has_perm("modoboa_radicale.change_sharedcalendar") or
+    u.has_perm("modoboa_radicale.delete_sharedcalendar")
 )
 def shared_calendar(request, pk):
     """Edit or remove a shared calendar."""
