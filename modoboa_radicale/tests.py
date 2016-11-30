@@ -10,7 +10,6 @@ from django.core.urlresolvers import reverse
 from django.core import management
 
 from modoboa.lib import exceptions as lib_exceptions
-from modoboa.lib import parameters
 from modoboa.lib.tests import ModoTestCase
 
 from modoboa.admin.factories import (
@@ -51,8 +50,8 @@ class UserCalendarTestCase(ModoTestCase):
             url = cal.url
         self.assertEqual(
             str(cm.exception), "Server location is not set, please fix it.")
-        parameters.save_admin(
-            "SERVER_LOCATION", "http://localhost", app="modoboa_radicale")
+        self.set_global_parameter(
+            "server_location", "http://localhost", app="modoboa_radicale")
         self.assertEqual(cal.url, "http://localhost/test.com/user/admin/MyCal")
 
     def test_add_calendar(self):
@@ -236,8 +235,8 @@ class AccessRuleTestCase(ModoTestCase):
         """Initialize tests."""
         super(AccessRuleTestCase, self).setUp()
         self.rights_file_path = tempfile.mktemp()
-        parameters.save_admin(
-            "RIGHTS_FILE_PATH", self.rights_file_path, app="modoboa_radicale")
+        self.set_global_parameter(
+            "rights_file_path", self.rights_file_path, app="modoboa_radicale")
 
     def tearDown(self):
         os.unlink(self.rights_file_path)
@@ -271,8 +270,8 @@ class AccessRuleTestCase(ModoTestCase):
         self.assertEqual(cfg.get(section, "permission"), "r")
 
     def test_rights_file_generation_with_admin(self):
-        parameters.save_admin(
-            "ALLOW_CALENDARS_ADMINISTRATION", "yes", app="modoboa_radicale")
+        self.set_global_parameter(
+            "allow_calendars_administration", True, app="modoboa_radicale")
         management.call_command("generate_rights", verbosity=False)
         cfg = SafeConfigParser()
         with open(self.rights_file_path) as fpo:

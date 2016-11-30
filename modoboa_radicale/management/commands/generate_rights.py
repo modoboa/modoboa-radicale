@@ -83,7 +83,7 @@ permission = %s
 
         allow_calendars_administration = param_tools.get_global_parameter(
             "allow_calendars_administration", app="modoboa_radicale")
-        if allow_calendars_administration == "yes":
+        if allow_calendars_administration:
             self._super_admin_rules()
             self._domain_admin_rules()
 

@@ -22,9 +22,9 @@ ROLES_PERMISSIONS = {
 
 
 @receiver(core_signals.extra_role_permissions)
-def extra_permissions(sender, rolename, **kwargs):
+def extra_permissions(sender, role, **kwargs):
     """Extra permissions."""
-    return ROLES_PERMISSIONS.get(rolename, [])
+    return ROLES_PERMISSIONS.get(role, [])
 
 
 @receiver(core_signals.extra_user_menu_entries)
