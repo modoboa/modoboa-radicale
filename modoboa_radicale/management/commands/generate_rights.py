@@ -2,7 +2,6 @@
 
 import os
 import datetime
-from optparse import make_option
 
 from django.core.management.base import BaseCommand
 
@@ -19,12 +18,11 @@ class Command(BaseCommand):
 
     help = "Generate Radicale rights file"
 
-    option_list = BaseCommand.option_list + (
-        make_option('--force',
-                    action='store_true',
-                    default=False,
-                    help='Force generation of rights file'),
-    )
+    def add_arguments(self, parser):
+        """Add extra arguments to command line."""
+        parser.add_argument(
+            "--force", action="store_true", default=False,
+            help="Force generation of rights file")
 
     def _generate_acr(self, name, user, collection, perm="rw", comment=None):
         """Write a new access control rule to the config file."""

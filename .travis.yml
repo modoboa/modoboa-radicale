@@ -14,7 +14,7 @@ before_install:
   - pip install codecov
 
 install:
-  - pip install -e git+https://github.com/tonioo/modoboa.git@refactor/replace_events#egg=modoboa
+  - pip install -e git+https://github.com/tonioo/modoboa.git#egg=modoboa
   - pip install -q factory-boy testfixtures
   - pip install -q psycopg2 mysqlclient
   - python setup.py -q develop
