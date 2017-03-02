@@ -60,6 +60,7 @@ MODOBOA_APPS = (
     'modoboa.admin',
     'modoboa.relaydomains',
     'modoboa.limits',
+    'modoboa.parameters',
     # Modoboa extensions here.
     'modoboa_radicale',
 
@@ -84,7 +85,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 AUTHENTICATION_BACKENDS = (
-    'modoboa.lib.authbackends.SimpleBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + [
@@ -116,7 +117,7 @@ USE_TZ = True
 STATIC_URL = '/sitestatic/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'sitestatic')
 STATICFILES_DIRS = (
-    '/home/tonio/.pythonenvs/modoboa/lib/python2.7/site-packages/modoboa-1.3.3-py2.7.egg/modoboa/bower_components',
+
 )
 
 MEDIA_URL = '/media/'

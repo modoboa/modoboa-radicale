@@ -1,6 +1,4 @@
-"""
-Radicale extension forms.
-"""
+"""Radicale extension forms."""
 
 import re
 
@@ -11,16 +9,14 @@ from django.utils.translation import ugettext as _, ugettext_lazy
 from modoboa.admin.models import Domain, Mailbox
 from modoboa.lib.email_utils import split_mailbox
 from modoboa.lib.exceptions import BadRequest
-from modoboa.lib.form_utils import (
-    WizardForm, TabForms, DynamicForm, WizardStep
-)
+from modoboa.lib import form_utils
 from modoboa.lib.web_utils import render_to_json_response
+from modoboa.parameters import forms as param_forms
 
 from .models import UserCalendar, SharedCalendar, AccessRule
 
 
 class UserCalendarForm(forms.ModelForm):
-
     """User calendar form."""
 
     class Meta:
@@ -48,7 +44,6 @@ class UserCalendarForm(forms.ModelForm):
 
 
 class SharedCalendarForm(forms.ModelForm):
-
     """Shared calendar form."""
 
     class Meta:
@@ -70,8 +65,7 @@ class SharedCalendarForm(forms.ModelForm):
         self.fields["domain"].queryset = Domain.objects.get_for_admin(user)
 
 
-class RightsForm(forms.Form, DynamicForm):
-
+class RightsForm(forms.Form, form_utils.DynamicForm):
     """Rights definition form."""
 
     username = forms.CharField(
@@ -150,20 +144,19 @@ class RightsForm(forms.Form, DynamicForm):
             acr.save()
 
 
-class UserCalendarWizard(WizardForm):
-
+class UserCalendarWizard(form_utils.WizardForm):
     """Calendar creation wizard."""
 
     def __init__(self, request):
         super(UserCalendarWizard, self).__init__(request)
         self.add_step(
-            WizardStep(
+            form_utils.WizardStep(
                 "general", UserCalendarForm, _("General"),
                 new_args=[request.user]
             )
         )
         self.add_step(
-            WizardStep(
+            form_utils.WizardStep(
                 "rights", RightsForm, _("Rights"),
                 formtpl="modoboa_radicale/rightsform.html"
             )
@@ -186,8 +179,7 @@ class UserCalendarWizard(WizardForm):
         return render_to_json_response(_("Calendar created"))
 
 
-class UserCalendarEditionForm(TabForms):
-
+class UserCalendarEditionForm(form_utils.TabForms):
     """User calendar edition form."""
 
     def __init__(self, request, *args, **kwargs):
@@ -224,3 +216,43 @@ class UserCalendarEditionForm(TabForms):
 
     def done(self):
         return render_to_json_response(_("Calendar updated"))
+
+
+class ParametersForm(param_forms.AdminParametersForm):
+    """Global parameters."""
+
+    app = "modoboa_radicale"
+
+    server_settings = form_utils.SeparatorField(
+        label=ugettext_lazy("Server settings")
+    )
+
+    server_location = forms.CharField(
+        label=ugettext_lazy("Server URL"),
+        help_text=ugettext_lazy(
+            "The URL of your Radicale server. "
+            "It will be used to construct calendar URLs."
+        ),
+        widget=forms.TextInput(attrs={"class": "form-control"})
+    )
+
+    rights_management_sep = form_utils.SeparatorField(
+        label=ugettext_lazy("Rights management"))
+
+    rights_file_path = forms.CharField(
+        label=ugettext_lazy("Rights file's path"),
+        initial="/etc/modoboa_radicale/rights",
+        help_text=ugettext_lazy(
+            "Path to the file that contains rights definition"
+        ),
+        widget=forms.TextInput(attrs={"class": "form-control"})
+    )
+
+    allow_calendars_administration = form_utils.YesNoField(
+        label=ugettext_lazy("Allow calendars administration"),
+        initial=False,
+        help_text=ugettext_lazy(
+            "Allow domain administrators to manage user calendars "
+            "(read and write)"
+        )
+    )

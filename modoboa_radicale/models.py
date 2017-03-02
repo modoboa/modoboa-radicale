@@ -12,7 +12,7 @@ from django.utils.translation import ugettext as _
 from modoboa.admin.models import Domain, Mailbox
 
 from modoboa.lib import exceptions as lib_exceptions
-from modoboa.lib import parameters
+from modoboa.parameters import tools as param_tools
 
 
 @python_2_unicode_compatible
@@ -37,7 +37,8 @@ class Calendar(models.Model):
     def url(self):
         """Return the calendar URL."""
         if not hasattr(self, "_url"):
-            server_location = parameters.get_admin("SERVER_LOCATION")
+            server_location = param_tools.get_global_parameter(
+                "server_location")
             if not server_location:
                 raise lib_exceptions.InternalError(
                     _("Server location is not set, please fix it."))

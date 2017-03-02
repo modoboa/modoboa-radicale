@@ -5,15 +5,15 @@ from itertools import chain
 
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
+from django.template.loader import render_to_string
+from django.utils.translation import ugettext as _
+
 from django.contrib.auth.decorators import (
     login_required, permission_required, user_passes_test
 )
-from django.utils.translation import ugettext as _
 
 from modoboa.lib.listing import get_sort_order, get_listing_page
-from modoboa.lib.web_utils import (
-    _render_to_string, render_to_json_response
-)
+from modoboa.lib.web_utils import render_to_json_response
 from modoboa.lib.exceptions import NotFound, PermDeniedException
 
 from modoboa.admin.models import Domain, Mailbox
@@ -74,10 +74,10 @@ def calendars_page(request, tplname="modoboa_radicale/calendars_page.html"):
         context = {"length": 0}
     else:
         context = {
-            "rows": _render_to_string(request, tplname, {
+            "rows": render_to_string(tplname, {
                 "calendars": page.object_list,
                 "with_owner": request.user.role != "SimpleUsers"
-            }),
+            }, request),
             "page": page.number
         }
     return render_to_json_response(context)
@@ -147,8 +147,8 @@ def new_shared_calendar(request):
 
 @login_required
 @user_passes_test(
-    lambda u: u.has_perm("modoboa_radicale.change_sharedcalendar")
-    or u.has_perm("modoboa_radicale.delete_sharedcalendar")
+    lambda u: u.has_perm("modoboa_radicale.change_sharedcalendar") or
+    u.has_perm("modoboa_radicale.delete_sharedcalendar")
 )
 def shared_calendar(request, pk):
     """Edit or remove a shared calendar."""
