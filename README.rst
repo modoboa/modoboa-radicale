@@ -23,6 +23,7 @@ Edit the settings.py file of your modoboa instance and add
       'modoboa.admin',
       'modoboa.relaydomains',
       'modoboa.limits',
+      'modoboa.parameters',
       # Extensions here
       # ...
       'modoboa_radicale',
