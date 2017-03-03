@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Giancarlo Gaifas <lallo@artiemestieri.tn.it>, 2013
 # Rocco <mors10@hotmail.com>, 2015
@@ -9,95 +9,104 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Modoboa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-11 13:00+0100\n"
+"POT-Creation-Date: 2017-03-03 09:31+0100\n"
 "PO-Revision-Date: 2015-10-11 12:04+0000\n"
 "Last-Translator: Rocco <mors10@hotmail.com>\n"
-"Language-Team: Italian (http://www.transifex.com/tonio/modoboa/language/it/)\n"
+"Language-Team: Italian (http://www.transifex.com/tonio/modoboa/language/"
+"it/)\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app_settings.py:12
-msgid "Server settings"
-msgstr "Impostazioni del Server"
-
-#: app_settings.py:16
-msgid "Server URL"
-msgstr "Indirizzo del Server"
-
-#: app_settings.py:18
-msgid ""
-"The URL of your Radicale server. It will be used to construct calendar URLs."
-msgstr "L'URL del Server. Sarà utilizzato per la costrizione degli URLs del calendario."
-
-#: app_settings.py:25
-msgid "Rights management"
-msgstr "Gestione permessi"
-
-#: app_settings.py:28
-msgid "Rights file's path"
-msgstr "Percorso permessi del file"
-
-#: app_settings.py:31
-msgid "Path to the file that contains rights definition"
-msgstr "Percorso del file che contiene le definizioni dei permessi"
-
-#: app_settings.py:37
-msgid "Allow calendars administration"
-msgstr "Permetti amministrazione dei Calendari"
-
-#: app_settings.py:40
-msgid "Allow domain administrators to manage user calendars (read and write)"
-msgstr "Permetti agli aministratori di dominio di aministrare i Calendari utenti (lettura e scrittura)"
-
-#: forms.py:77
+#: forms.py:73
 msgid "Username"
 msgstr "Nome utente"
 
-#: forms.py:81 templates/modoboa_radicale/accessrule.html:6
+#: forms.py:77 templates/modoboa_radicale/accessrule.html:6
 msgid "Read"
 msgstr "Leggi"
 
-#: forms.py:84 templates/modoboa_radicale/accessrule.html:7
+#: forms.py:80 templates/modoboa_radicale/accessrule.html:7
 msgid "Write"
 msgstr "Scrivi"
 
-#: forms.py:136
+#: forms.py:132
 #, python-format
 msgid "Mailbox %s does not exist"
 msgstr "La casella di posta elettronica %s non esiste"
 
-#: forms.py:157 forms.py:187
+#: forms.py:154 forms.py:189
 msgid "General"
 msgstr "Generale"
 
-#: forms.py:159 forms.py:194
+#: forms.py:160 forms.py:196
 msgid "Rights"
 msgstr "Permessi"
 
-#: forms.py:164
+#: forms.py:167
 msgid "New calendar"
 msgstr "Nuovo Calendario"
 
-#: forms.py:176 views.py:133
+#: forms.py:179 views.py:133
 msgid "Calendar created"
 msgstr "Calendario Creato"
 
-#: forms.py:215 views.py:170
+#: forms.py:218 views.py:170
 msgid "Calendar updated"
 msgstr "Calendario Aggiornato"
 
-#: general_callbacks.py:36
+#: forms.py:227
+msgid "Server settings"
+msgstr "Impostazioni del Server"
+
+#: forms.py:231
+msgid "Server URL"
+msgstr "Indirizzo del Server"
+
+#: forms.py:233
+msgid ""
+"The URL of your Radicale server. It will be used to construct calendar URLs."
+msgstr ""
+"L'URL del Server. Sarà utilizzato per la costrizione degli URLs del "
+"calendario."
+
+#: forms.py:240
+msgid "Rights management"
+msgstr "Gestione permessi"
+
+#: forms.py:243
+msgid "Rights file's path"
+msgstr "Percorso permessi del file"
+
+#: forms.py:246
+msgid "Path to the file that contains rights definition"
+msgstr "Percorso del file che contiene le definizioni dei permessi"
+
+#: forms.py:252
+msgid "Allow calendars administration"
+msgstr "Permetti amministrazione dei Calendari"
+
+#: forms.py:255
+msgid "Allow domain administrators to manage user calendars (read and write)"
+msgstr ""
+"Permetti agli aministratori di dominio di aministrare i Calendari utenti "
+"(lettura e scrittura)"
+
+#: handlers.py:36
 msgid "Calendars"
 msgstr "Calendari"
 
-#: models.py:95
+#: models.py:44
+msgid "Server location is not set, please fix it."
+msgstr ""
+
+#: models.py:101
 msgid "User"
 msgstr "Utente"
 
-#: models.py:140
+#: models.py:149
 msgid "Shared"
 msgstr "Condiviso"
 
@@ -105,10 +114,11 @@ msgstr "Condiviso"
 msgid "Radicale management"
 msgstr "Amministrazione Radicale"
 
-#: modo_extension.py:21
-msgid ""
-"Management frontend for Radicale, a simple calendar and contact server."
-msgstr "Gestione frontend per Radicale , un semplice server di calendario e contatti ."
+#: modo_extension.py:22
+msgid "Management frontend for Radicale, a simple calendar and contact server."
+msgstr ""
+"Gestione frontend per Radicale , un semplice server di calendario e "
+"contatti ."
 
 #: templates/modoboa_radicale/calendar_detail.html:6
 msgid "To access this calendar, use the following address:"
@@ -130,24 +140,24 @@ msgstr "Tag"
 msgid "Actions"
 msgstr "Azioni"
 
-#: templatetags/radicale_tags.py:26
+#: templatetags/radicale_tags.py:27
 msgid "Add calendar"
 msgstr "Aggiungi Calendario"
 
-#: templatetags/radicale_tags.py:35
+#: templatetags/radicale_tags.py:36
 msgid "Add shared calendar"
 msgstr "Aggiungi Calendario condiviso"
 
-#: templatetags/radicale_tags.py:52
+#: templatetags/radicale_tags.py:53
 msgid "View calendar detail"
 msgstr "Dettagli del Calendario"
 
-#: templatetags/radicale_tags.py:70
+#: templatetags/radicale_tags.py:71
 #, python-format
 msgid "Edit %s"
 msgstr "Modifica %s"
 
-#: templatetags/radicale_tags.py:74
+#: templatetags/radicale_tags.py:75
 #, python-format
 msgid "Delete %s?"
 msgstr "Eliminare %s?"
