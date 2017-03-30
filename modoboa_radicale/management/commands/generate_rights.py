@@ -4,6 +4,7 @@ import os
 import datetime
 
 from django.core.management.base import BaseCommand
+from django.utils import timezone
 
 from modoboa.admin.models import Domain
 from modoboa.core.models import User
@@ -110,7 +111,9 @@ permission = %s
             except OSError:
                 pass
             else:
-                qset = AccessRule.objects.filter(last_update__gt=mtime)
+                tz = timezone.get_current_timezone()
+                qset = AccessRule.objects.filter(
+                    last_update__gt=tz.localize(mtime))
                 if not qset.exists():
                     return
         self._generate_file(path)
