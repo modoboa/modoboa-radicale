@@ -269,6 +269,9 @@ class AccessRuleTestCase(ModoTestCase):
         )
         self.assertEqual(cfg.get(section, "permission"), "r")
 
+        # Call a second time
+        management.call_command("generate_rights", verbosity=False)
+
     def test_rights_file_generation_with_admin(self):
         self.set_global_parameter(
             "allow_calendars_administration", True, app="modoboa_radicale")
