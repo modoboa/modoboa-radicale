@@ -7,7 +7,9 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _
+from django.views import generic
 
+from django.contrib.auth import mixins as auth_mixins
 from django.contrib.auth.decorators import (
     login_required, permission_required, user_passes_test
 )
@@ -22,6 +24,18 @@ from .forms import (
     UserCalendarWizard, SharedCalendarForm, UserCalendarEditionForm
 )
 from .models import UserCalendar, SharedCalendar
+
+
+class CalendarDetailView(auth_mixins.LoginRequiredMixin, generic.TemplateView):
+    """Calendar detail view."""
+
+    template_name = "modoboa_radicale/calendar_display.html"
+
+    def get_context_data(self, **kwargs):
+        """Include extra information."""
+        context = super(CalendarDetailView, self).get_context_data(**kwargs)
+        context.update({"selection": "radicale"})
+        return context
 
 
 @login_required

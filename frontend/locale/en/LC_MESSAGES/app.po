@@ -1,0 +1,124 @@
+# English translations for modoboa-contacts package.
+# Copyright (C) 2017 THE modoboa-contacts'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the modoboa-contacts package.
+# Automatically generated, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: modoboa-contacts 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-20 17:05+0200\n"
+"PO-Revision-Date: 2017-04-14 09:09+0200\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/components/ContactList.vue:9
+msgid "Add"
+msgstr "Add"
+
+#: src/App.vue:14 src/components/CategoryForm.vue:4
+msgid "Add category"
+msgstr "Add category"
+
+#: src/components/ContactDetail.vue:51 src/components/ContactForm.vue:150
+msgid "Address"
+msgstr "Address"
+
+#: src/components/ContactDetail.vue:23
+msgid "at"
+msgstr "at"
+
+#: src/App.vue:8 src/components/ContactCategoriesForm.vue:4
+msgid "Categories"
+msgstr "Categories"
+
+#: src/components/CategoryForm.vue:16
+#: src/components/ContactCategoriesForm.vue:20
+#: src/components/ContactForm.vue:96
+msgid "Close"
+msgstr "Close"
+
+#: src/App.vue:6
+msgid "Contacts"
+msgstr "Contacts"
+
+#: src/components/ContactList.vue:16 src/components/ContactForm.vue:138
+msgid "Display name"
+msgstr "Display name"
+
+#: src/components/ContactForm.vue:5
+msgid "Edit contact"
+msgstr "Edit contact"
+
+#: src/components/ContactList.vue:17
+msgid "Email"
+msgstr "Email"
+
+#: src/components/ContactForm.vue:94
+msgid "More"
+msgstr "More"
+
+#: src/components/ContactForm.vue:7
+msgid "New contact"
+msgstr "New contact"
+
+#: src/components/ContactDetail.vue:65 src/components/ContactForm.vue:165
+msgid "Note"
+msgstr "Note"
+
+#: src/components/ContactList.vue:18
+msgid "Phone"
+msgstr "Phone"
+
+#: src/components/ContactDetail.vue:17
+msgid "Summary"
+msgstr "Summary"
+
+#: src/components/CategoryForm.vue:40
+msgid "Name"
+msgstr "Name"
+
+#: src/components/SearchForm.vue:23
+msgid "Search"
+msgstr "Search"
+
+#: src/components/ContactForm.vue:132
+msgid "First name"
+msgstr "First name"
+
+#: src/components/ContactForm.vue:135
+msgid "Last name"
+msgstr "Last name"
+
+#: src/components/ContactForm.vue:141
+msgid "Company"
+msgstr "Company"
+
+#: src/components/ContactForm.vue:144
+msgid "Position"
+msgstr "Position"
+
+#: src/components/ContactForm.vue:147
+msgid "Birth date"
+msgstr ""
+
+#: src/components/ContactForm.vue:153
+msgid "Zip Code"
+msgstr "Zip Code"
+
+#: src/components/ContactForm.vue:156
+msgid "City"
+msgstr "City"
+
+#: src/components/ContactForm.vue:159
+msgid "Country"
+msgstr "Country"
+
+#: src/components/ContactForm.vue:162
+msgid "State/Province"
+msgstr "State/Province"

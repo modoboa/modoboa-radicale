@@ -43,6 +43,7 @@ coverage.xml
 # Translations
 *.mo
 *.pot
+*.po~
 
 # Django stuff:
 *.log
@@ -52,3 +53,9 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# JS stuff:
+node_modules
+/static/dist
+/frontend/webpack-stats.json
+coverage

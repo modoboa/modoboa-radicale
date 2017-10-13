@@ -21,6 +21,7 @@ class Calendar(models.Model):
     """Abstract calendar definition."""
 
     name = models.CharField(max_length=200)
+    color = models.CharField(max_length=7, default="#3a87ad")
 
     class Meta:
         abstract = True
@@ -88,11 +89,11 @@ class UserCalendar(Calendar):
     def path(self):
         """Return the calendar path.
 
-        <domain>/user/<localpart>/<name>
+        <email>/<name>
         """
         if not hasattr(self, "_path"):
-            self._path = "%s/user/%s/%s" % (
-                self.mailbox.domain.name, self.mailbox.address, self.name
+            self._path = "{}/{}".format(
+                self.mailbox.full_address, self.name
             )
         return self._path
 

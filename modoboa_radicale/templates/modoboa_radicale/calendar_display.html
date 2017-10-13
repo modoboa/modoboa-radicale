@@ -1,0 +1,27 @@
+{% extends "fluid.html" %}
+
+{% load i18n lib_tags static %}
+{% load render_bundle from webpack_loader %}
+
+{% block pagetitle %}{% trans "Calendar" %}{% endblock %}
+
+{% block extra_css %}
+  {% render_bundle 'app' 'css' 'CALENDAR' %}
+{% endblock %}
+
+{% block extra_js %}
+  {% if not debug %}
+    {% render_bundle 'manifest' 'js' 'CALENDAR' %}
+    {% render_bundle 'vendor' 'js' 'CALENDAR' %}
+    {% render_bundle 'app' 'js' 'CALENDAR' %}
+  {% else %}
+    {% render_bundle 'app' 'js' 'CALENDAR' %}
+  {% endif %}
+{% endblock %}
+
+{% block container_content %}
+
+  <div id="app">
+  </div>
+
+{% endblock %}

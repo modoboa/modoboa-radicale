@@ -34,6 +34,6 @@ def top_menu(sender, location, user, **kwargs):
         return [
             {"name": "radicale",
              "label": _("Calendars"),
-             "url": reverse('modoboa_radicale:index')}
+             "url": reverse("modoboa_radicale:calendar_detail_view")}
         ]
     return []
