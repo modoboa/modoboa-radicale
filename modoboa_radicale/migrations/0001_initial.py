@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=200)),
-                ('domain', models.ForeignKey(to='admin.Domain')),
+                ('domain', models.ForeignKey(to='admin.Domain', on_delete=models.CASCADE)),
             ],
             options={
                 'abstract': False,
@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=200)),
-                ('mailbox', models.ForeignKey(to='admin.Mailbox')),
+                ('mailbox', models.ForeignKey(to='admin.Mailbox', on_delete=models.CASCADE)),
             ],
             options={
                 'abstract': False,
@@ -53,13 +53,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='accessrule',
             name='calendar',
-            field=models.ForeignKey(related_name='rules', to='modoboa_radicale.UserCalendar'),
+            field=models.ForeignKey(related_name='rules', to='modoboa_radicale.UserCalendar', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='accessrule',
             name='mailbox',
-            field=models.ForeignKey(to='admin.Mailbox'),
+            field=models.ForeignKey(to='admin.Mailbox', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AlterUniqueTogether(

@@ -77,7 +77,7 @@ class UserCalendar(Calendar):
     the related domain.
 
     """
-    mailbox = models.ForeignKey(Mailbox)
+    mailbox = models.ForeignKey(Mailbox, on_delete=models.CASCADE)
 
     objects = UserCalendarManager()
 
@@ -127,7 +127,7 @@ class SharedCalendar(Calendar):
 
     """
 
-    domain = models.ForeignKey(Domain)
+    domain = models.ForeignKey(Domain, on_delete=models.CASCADE)
 
     objects = SharedCalendarManager()
 
@@ -159,10 +159,11 @@ class AccessRule(models.Model):
 
     """Access rules to user calendars."""
 
-    mailbox = models.ForeignKey(Mailbox)
+    mailbox = models.ForeignKey(Mailbox, on_delete=models.CASCADE)
     read = models.BooleanField(default=False)
     write = models.BooleanField(default=False)
-    calendar = models.ForeignKey(UserCalendar, related_name="rules")
+    calendar = models.ForeignKey(UserCalendar, related_name="rules",
+                                 on_delete=models.CASCADE)
     last_update = models.DateTimeField(auto_now=True)
 
     class Meta:

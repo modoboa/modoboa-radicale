@@ -11,7 +11,7 @@ except ImportError:
     from ConfigParser import SafeConfigParser as ConfigParser
 
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils import six
 from django.core import management
 
