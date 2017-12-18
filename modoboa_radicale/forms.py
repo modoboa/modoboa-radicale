@@ -113,7 +113,7 @@ class RightsForm(forms.Form, form_utils.DynamicForm):
     def save(self):
         """Custom save method."""
         usernames = {}
-        for name, value in self.cleaned_data.iteritems():
+        for name, value in self.cleaned_data.items():
             if not name.startswith("username") or not value:
                 continue
             res = re.match(r"[^_]+_(\d+)$", name)
@@ -122,7 +122,7 @@ class RightsForm(forms.Form, form_utils.DynamicForm):
         for rule in self.calendar.rules.select_related().all():
             if rule.mailbox.full_address not in usernames:
                 rule.delete()
-        for username, pos in usernames.iteritems():
+        for username, pos in usernames.items():
             local_part, domname = split_mailbox(username)
             try:
                 mbox = Mailbox.objects.get(
