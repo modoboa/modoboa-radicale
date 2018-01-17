@@ -3,10 +3,16 @@ Radicale extension unit tests.
 """
 import os
 import tempfile
-from ConfigParser import SafeConfigParser
+
+try:
+    from configparser import ConfigParser
+except ImportError:
+    # SafeConfigParser (py2) == ConfigParser (py3)
+    from ConfigParser import SafeConfigParser as ConfigParser
 
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.urlresolvers import reverse
+from django.urls import reverse
+from django.utils import six
 from django.core import management
 
 from modoboa.lib import exceptions as lib_exceptions
@@ -251,9 +257,12 @@ class AccessRuleTestCase(ModoTestCase):
             calendar=cal, read=True)
         management.call_command("generate_rights", verbosity=False)
 
-        cfg = SafeConfigParser()
+        cfg = ConfigParser()
         with open(self.rights_file_path) as fpo:
-            cfg.readfp(fpo)
+            if six.PY3:
+                cfg.read_file(fpo)
+            else:
+                cfg.readfp(fpo)
 
         # Check mandatory rules
         self.assertTrue(cfg.has_section("domain-shared-calendars"))
@@ -276,9 +285,12 @@ class AccessRuleTestCase(ModoTestCase):
         self.set_global_parameter(
             "allow_calendars_administration", True, app="modoboa_radicale")
         management.call_command("generate_rights", verbosity=False)
-        cfg = SafeConfigParser()
+        cfg = ConfigParser()
         with open(self.rights_file_path) as fpo:
-            cfg.readfp(fpo)
+            if six.PY3:
+                cfg.read_file(fpo)
+            else:
+                cfg.readfp(fpo)
 
         # Check mandatory rules
         self.assertTrue(cfg.has_section("domain-shared-calendars"))

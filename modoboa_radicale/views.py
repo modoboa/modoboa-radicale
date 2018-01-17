@@ -4,7 +4,7 @@ Radicale extension views.
 from itertools import chain
 
 from django.shortcuts import render
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _
 
