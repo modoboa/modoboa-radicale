@@ -1,9 +1,9 @@
 language: python
 python:
-  - "2.7"
-  - "3.4"
-  - "3.5"
-  - "3.6"
+  - '2.7'
+  - '3.4'
+  - '3.5'
+  - '3.6'
 
 env:
   global:
@@ -17,8 +17,8 @@ sudo: false
 cache: pip
 
 addons:
-  postgresql: "9.3"
-  mysql: "5.5"
+  postgresql: '9.3'
+  mysql: '5.5'
 
 before_install:
   - pip install codecov
@@ -35,3 +35,20 @@ script:
 
 after_success:
   - codecov
+
+before_deploy:
+  - cd ../modoboa_radicale
+  - django-admin compilemessages
+  - cd ..
+
+deploy:
+  provider: pypi
+  user: tonio
+  password:
+    secure: HvFy7qHGFLRzHZzGQYb8miW7RD9hubkzT1P20Gd3U//BCS3Db9e3REiA2Y8ecnUfAHXRXFa1J8Wyq/ThbVTMo6UIIdkow9STDF88Bm/H8uPY9F/4qWefjelFA1C2Faxh1JDAEPmm1nkzVlGxBLQ25fvJPZflRt1jYBRY9ZSqaXg=
+  skip_cleanup: true
+  distributions: sdist bdist_wheel
+  on:
+    tags: true
+    python: '3.6'
+    condition: "$DB = POSTGRESQL"
