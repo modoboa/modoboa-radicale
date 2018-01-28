@@ -233,7 +233,8 @@ class ParametersForm(param_forms.AdminParametersForm):
             "The URL of your Radicale server. "
             "It will be used to construct calendar URLs."
         ),
-        widget=forms.TextInput(attrs={"class": "form-control"})
+        widget=forms.TextInput(attrs={"class": "form-control"}),
+        required=False
     )
 
     rights_management_sep = form_utils.SeparatorField(
