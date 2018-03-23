@@ -1,14 +1,14 @@
-# French translations for modoboa-contacts package.
-# Copyright (C) 2017 THE modoboa-contacts'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the modoboa-contacts package.
-# Automatically generated, 2017.
+# French translations for modoboa-calendar package.
+# Copyright (C) 2018 THE modoboa-calendar'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the modoboa-calendar package.
+# Automatically generated, 2018.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: modoboa-contacts 1.0.0\n"
+"Project-Id-Version: modoboa-calendar 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-20 17:05+0200\n"
-"PO-Revision-Date: 2017-04-14 09:09+0200\n"
+"POT-Creation-Date: 2018-03-23 12:09+0100\n"
+"PO-Revision-Date: 2018-03-23 12:09+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -17,108 +17,142 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/components/ContactList.vue:9
-msgid "Add"
-msgstr "Ajouter"
+#: src/App.vue:16
+msgid "Access rules"
+msgstr "Règles d'accès"
 
-#: src/App.vue:14 src/components/CategoryForm.vue:4
-msgid "Add category"
-msgstr "Ajouter une catégorie"
+#: src/components/CalendarAccessRulesForm.vue:26
+msgid "Account"
+msgstr "Compte"
 
-#: src/components/ContactDetail.vue:51 src/components/ContactForm.vue:150
-msgid "Address"
-msgstr "Adresse"
+#: src/components/EventForm.vue:25
+msgid "All day"
+msgstr "Toute la journée"
 
-#: src/components/ContactDetail.vue:23
-msgid "at"
-msgstr "chez"
+#: src/components/EventForm.vue:44
+msgid "Attendees"
+msgstr "Invités"
 
-#: src/App.vue:8 src/components/ContactCategoriesForm.vue:4
-msgid "Categories"
-msgstr "Catégories"
+#: src/components/CalendarAccessRulesForm.vue:3
+msgid "Calendar sharing"
+msgstr "Partage de calendrier"
 
-#: src/components/CategoryForm.vue:16
-#: src/components/ContactCategoriesForm.vue:20
-#: src/components/ContactForm.vue:96
+#: src/components/CalendarAccessRulesForm.vue:52
+#: src/components/CalendarForm.vue:21 src/components/CreateEventForm.vue:34
+#: src/components/EventForm.vue:51
 msgid "Close"
 msgstr "Fermer"
 
-#: src/App.vue:6
-msgid "Contacts"
-msgstr "Contacts"
+#: src/components/CalendarForm.vue:17 src/components/CalendarForm.vue:58
+msgid "Color"
+msgstr "Couleur"
 
-#: src/components/ContactList.vue:16 src/components/ContactForm.vue:138
-msgid "Display name"
-msgstr "Nom complet"
+#: src/App.vue:21 src/components/EventForm.vue:52
+msgid "Delete"
+msgstr "Supprimer"
 
-#: src/components/ContactForm.vue:5
-msgid "Edit contact"
-msgstr "Editer le contact"
+#: src/components/EventForm.vue:39
+msgid "Detail"
+msgstr "Détail"
 
-#: src/components/ContactList.vue:17
-msgid "Email"
-msgstr "E-mail"
+#: src/App.vue:11
+msgid "Edit"
+msgstr "Modifier"
 
-#: src/components/ContactForm.vue:94
-msgid "More"
-msgstr "Plus"
+#: src/components/CalendarForm.vue:3
+msgid "Edit calendar"
+msgstr "Modifier le calendrier"
 
-#: src/components/ContactForm.vue:7
-msgid "New contact"
-msgstr "Nouveau contact"
+#: src/components/EventForm.vue:2
+msgid "Edit event"
+msgstr "Modifier l'évènement"
 
-#: src/components/ContactDetail.vue:65 src/components/ContactForm.vue:165
-msgid "Note"
-msgstr "Note"
+#: src/App.vue:4
+msgid "My calendars"
+msgstr "Mes calendriers"
 
-#: src/components/ContactList.vue:18
-msgid "Phone"
-msgstr "Téléphone"
+#: src/App.vue:5 src/components/CalendarForm.vue:4
+msgid "New calendar"
+msgstr "Nouveau calendrier"
 
-#: src/components/ContactDetail.vue:17
-msgid "Summary"
-msgstr "Résumé"
+#: src/components/CreateEventForm.vue:3
+msgid "New event"
+msgstr "Nouvel évènement"
 
-#: src/components/CategoryForm.vue:40
+#: src/components/AccessRuleField.vue:7
+#: src/components/CalendarAccessRulesForm.vue:14
+#: src/components/CalendarAccessRulesForm.vue:27
+msgid "Read"
+msgstr "Lecture"
+
+#: src/components/AccessRuleField.vue:8
+#: src/components/CalendarAccessRulesForm.vue:15
+#: src/components/CalendarAccessRulesForm.vue:28
+msgid "Write"
+msgstr "Ecriture"
+
+#: src/components/EventForm.vue:84
+msgid "Description"
+msgstr "Description"
+
+#: src/components/EventForm.vue:87 src/components/CreateEventForm.vue:81
+msgid "Title"
+msgstr "Titre"
+
+#: src/components/EventForm.vue:90 src/components/CreateEventForm.vue:84
+msgid "Save"
+msgstr "Enregistrer"
+
+#: src/components/EventForm.vue:116 src/components/CreateEventForm.vue:98
+msgid "A calendar is required."
+msgstr "Un calendrier est requis."
+
+#: src/components/EventForm.vue:124 src/components/EventForm.vue:137
+#: src/components/CalendarForm.vue:94 src/components/Calendar.vue:124
+#: src/App.vue:85
+msgid "Success"
+msgstr "Succès"
+
+#: src/components/EventForm.vue:126 src/components/Calendar.vue:126
+msgid "Event updated"
+msgstr "Evènement mis à jour"
+
+#: src/components/EventForm.vue:131
+msgid "Are you sure you want to remove this event?"
+msgstr "Etes vous certain de vouloir supprimer cet évènement ?"
+
+#: src/components/EventForm.vue:139
+msgid "Event deleted"
+msgstr "Evènement supprimé"
+
+#: src/components/CalendarForm.vue:61
 msgid "Name"
 msgstr "Nom"
 
+#: src/components/CalendarForm.vue:65
+msgid "Update"
+msgstr "Mettre à jour"
+
+#: src/components/CalendarForm.vue:67
+msgid "Create"
+msgstr "Créer"
+
+#: src/components/CalendarForm.vue:82
+msgid "Calendar updated"
+msgstr "Calendrier mis à jour"
+
+#: src/components/CalendarForm.vue:85
+msgid "Calendar created"
+msgstr "Calendrier créé"
+
 #: src/components/SearchForm.vue:23
 msgid "Search"
-msgstr "Chercher"
+msgstr "Rechercher"
 
-#: src/components/ContactForm.vue:132
-msgid "First name"
-msgstr "Prénom"
+#: src/App.vue:79
+msgid "Are you sure you want to delete this calendar?"
+msgstr "Etes vous certain de vouloir supprimer ce calendrier ?"
 
-#: src/components/ContactForm.vue:135
-msgid "Last name"
-msgstr "Nom"
-
-#: src/components/ContactForm.vue:141
-msgid "Company"
-msgstr "Société"
-
-#: src/components/ContactForm.vue:144
-msgid "Position"
-msgstr "Fonction"
-
-#: src/components/ContactForm.vue:147
-msgid "Birth date"
-msgstr "Date de naissance"
-
-#: src/components/ContactForm.vue:153
-msgid "Zip Code"
-msgstr "Code postal"
-
-#: src/components/ContactForm.vue:156
-msgid "City"
-msgstr "Ville"
-
-#: src/components/ContactForm.vue:159
-msgid "Country"
-msgstr "Pays"
-
-#: src/components/ContactForm.vue:162
-msgid "State/Province"
-msgstr "Etat/Région"
+#: src/App.vue:87
+msgid "Calendar deleted"
+msgstr "Calendrier supprimé"

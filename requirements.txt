@@ -1,1 +1,2 @@
 modoboa>=1.10.0
+drf-nested-routers

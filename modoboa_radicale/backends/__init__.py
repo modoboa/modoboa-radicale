@@ -8,7 +8,7 @@ from modoboa.lib.cryptutils import decrypt
 class CalendarBackend(object):
     """Base backend class."""
 
-    def __init__(self, calendar):
+    def __init__(self, calendar=None):
         """Default constructor."""
         self.calendar = calendar
 
@@ -36,9 +36,8 @@ def get_backend(name, *args, **kwargs):
         module, "{}Backend".format(name.capitalize()))(*args, **kwargs)
 
 
-def get_backend_from_request(name, request, *args, **kwargs):
+def get_backend_from_request(name, request, calendar=None):
     """Return a backend instance from a request."""
-    calendar = request.user.mailbox.usercalendar_set.first()
     password = decrypt(request.session["password"])
     return get_backend(
-        name, calendar, request.user.email, password)
+        name, request.user.email, password, calendar=calendar)

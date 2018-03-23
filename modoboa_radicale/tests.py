@@ -15,8 +15,11 @@ from django.urls import reverse
 from django.utils import six
 from django.core import management
 
+from rest_framework.authtoken.models import Token
+
+from modoboa.core import models as core_models
 from modoboa.lib import exceptions as lib_exceptions
-from modoboa.lib.tests import ModoTestCase
+from modoboa.lib.tests import ModoTestCase, ModoAPITestCase
 
 from modoboa.admin.factories import (
     MailboxFactory, populate_database
@@ -304,3 +307,31 @@ class AccessRuleTestCase(ModoTestCase):
         for section in ["da-admin@test.com-to-test.com-acr",
                         "da-admin@test2.com-to-test2.com-acr"]:
             self.assertTrue(cfg.has_section(section))
+
+
+class AccessRuleViewSetTestCase(ModoAPITestCase):
+    """AccessRule viewset tests."""
+
+    @classmethod
+    def setUpTestData(cls):
+        super(AccessRuleViewSetTestCase, cls).setUpTestData()
+        populate_database()
+        cls.account = core_models.User.objects.get(username="user@test.com")
+        cls.token = Token.objects.create(user=cls.account)
+        cls.calendar = UserCalendarFactory(
+            name="MyCal", mailbox=cls.account.mailbox)
+
+    def test_create_accessrule(self):
+        admin_mb = (
+            core_models.User.objects.get(username="admin@test.com").mailbox)
+        data = {
+            "mailbox": {
+                "pk": admin_mb.pk,
+                "full_address": admin_mb.full_address
+            },
+            "read": True,
+            "calendar": self.calendar.pk
+        }
+        url = reverse("modoboa_radicale:access-rule-list")
+        response = self.client.post(url, data=data, format="json")
+        self.assertEqual(response.status_code, 201)

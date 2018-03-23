@@ -17,14 +17,14 @@
 </template>
 
 <script>
- export default {
-     props: {
-         showFooter: {
-             type: Boolean,
-             default: false
-         }
-     }
- }
+export default {
+    props: {
+        showFooter: {
+            type: Boolean,
+            default: false
+        }
+    }
+}
 </script>
 
 <style scoped>

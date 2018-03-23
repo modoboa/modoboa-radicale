@@ -17,11 +17,15 @@ def apply(settings):
     DEBUG = settings['DEBUG']
     if "webpack_loader" not in settings["INSTALLED_APPS"]:
         settings["INSTALLED_APPS"] += ("webpack_loader", )
-    settings["WEBPACK_LOADER"] = {
-        'CALENDAR': {
-            'CACHE': not DEBUG,
-            'BUNDLE_DIR_NAME': 'modoboa_radicale/',
-            'STATS_FILE': CALENDAR_STATS_FILES.get("dev" if DEBUG else "prod"),
-            'IGNORE': ['.+\.hot-update.js', '.+\.map']
+    wpl_config = {
+        "CALENDAR": {
+            "CACHE": not DEBUG,
+            "BUNDLE_DIR_NAME": "modoboa_radicale/",
+            "STATS_FILE": CALENDAR_STATS_FILES.get("dev" if DEBUG else "prod"),
+            "IGNORE": [".+\.hot-update.js", ".+\.map"]
         }
     }
+    if "WEBPACK_LOADER" in settings:
+        settings["WEBPACK_LOADER"].update(wpl_config)
+    else:
+        settings["WEBPACK_LOADER"] = wpl_config
