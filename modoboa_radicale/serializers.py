@@ -20,6 +20,12 @@ class CalDAVCalendarMixin(object):
         backend = backends.get_backend_from_request("caldav_", request)
         backend.create_calendar(calendar.url)
 
+    def rename_remote_calendar(self, calendar, old_path):
+        """Rename caldav calendar."""
+        request = self.context["request"]
+        backend = backends.get_backend_from_request("caldav_", request)
+        backend.rename_calendar(old_path, calendar.name)
+
 
 class UserCalendarSerializer(CalDAVCalendarMixin, serializers.ModelSerializer):
     """User calendar serializer."""
@@ -33,7 +39,8 @@ class UserCalendarSerializer(CalDAVCalendarMixin, serializers.ModelSerializer):
         """Use current user."""
         user = self.context["request"].user
         calendar = models.UserCalendar.objects.create(
-            mailbox=user.mailbox, **validated_data)
+            mailbox=user.mailbox, _internal_name=validated_data["name"],
+            **validated_data)
         self.create_remote_calendar(calendar)
         return calendar
 
@@ -65,6 +72,7 @@ class SharedCalendarSerializer(
         """Create shared calendar."""
         domain = validated_data.pop("domain")
         calendar = models.SharedCalendar(**validated_data)
+        calendar._internal_name = validated_data["name"]
         calendar.domain_id = domain["pk"]
         calendar.save()
         self.create_remote_calendar(calendar)
@@ -73,10 +81,13 @@ class SharedCalendarSerializer(
     def update(self, instance, validated_data):
         """Update calendar."""
         domain = validated_data.pop("domain")
+        old_path = instance.path
         for key, value in validated_data.items():
             setattr(instance, key, value)
         instance.domain_id = domain["pk"]
         instance.save()
+        if old_path != instance.path:
+            self.rename_remote_calendar(instance, old_path)
         return instance
 
 

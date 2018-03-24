@@ -26,7 +26,9 @@
         </li>
         <li class="nav-header"><translate>Shared calendars</translate></li>
         <li v-for="calendar in sharedCalendars" :key="calendar.pk" class="dropdown-submenu">
-          <a href="#" @click="toggleSubmenu"><span class="square" v-bind:style="{ 'background-color': calendar.color }"></span> {{ calendar.name }}</a>
+          <a href="#" @click="toggleSharedCalendarMenu">
+            <span class="square" v-bind:style="{ 'background-color': calendar.color }"></span> {{ calendar.name }}
+          </a>
           <ul v-can="'modoboa_radicale.add_sharedcalendar'" class="dropdown-menu">
             <li v-can="'modoboa_radicale.change_sharedcalendar'">
               <a href="#" @click="editCalendar(calendar, $event)">
@@ -128,6 +130,12 @@ export default {
             }
             this.currentMenu = newMenu
             this.currentMenu.toggle()
+        },
+        toggleSharedCalendarMenu (e) {
+            if (!this.$can('modoboa_radicale.add_sharedcalendar')) {
+                return
+            }
+            this.toggleSubmenu(e)
         }
     }
 }

@@ -35,11 +35,13 @@ export default {
     },
     created () {
         this.$bus.$on('calendarColorChanged', (calendar) => {
-            var url = this.getEventSourceUrl(calendar.pk)
+            var calType = (calendar.domain) ? 'shared' : 'user'
+            var url = this.getEventSourceUrl(calendar.pk, calType)
             this.cal.fullCalendar('refetchEventSources', url)
         })
-        this.$bus.$on('calendarDeleted', (pk) => {
-            var url = this.getEventSourceUrl(pk)
+        this.$bus.$on('calendarDeleted', (calendar) => {
+            var calType = (calendar.domain) ? 'shared' : 'user'
+            var url = this.getEventSourceUrl(calendar.pk, calType)
             this.cal.fullCalendar('removeEventSource', url)
         })
     },
