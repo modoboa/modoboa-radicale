@@ -10,6 +10,7 @@ import flatPickr from 'vue-flatpickr-component'
 import 'flatpickr/dist/flatpickr.css'
 import VuejsDialog from 'vuejs-dialog'
 import Notifications from 'vue-notification'
+import Acl from './tools/permissions'
 
 import App from './App.vue'
 import router from './router'
@@ -32,6 +33,7 @@ Vue.use(VueRouter)
 Vue.use(flatPickr)
 Vue.use(VuejsDialog)
 Vue.use(Notifications)
+Vue.use(Acl)
 
 Vue.component('calendar', Calendar)
 Vue.component('multiselect', Multiselect)

@@ -30,7 +30,7 @@
           <span class="fa fa-calendar fa-2x"></span>
         </div>
         <div class="col-sm-6">
-          <multiselect label="name" :options="calendars" v-model="event.calendar"></multiselect>
+          <multiselect label="name" :options="allCalendars" v-model="event.calendar"></multiselect>
           <span v-if="formErrors['calendar']" class="help-block has-error">{{ formErrors['calendar'] }}</span>
         </div>
       </div>
@@ -91,14 +91,17 @@ export default {
         },
         ...mapGetters([
             'calendars',
+            'sharedCalendars',
             'attendees'
-        ])
+        ]),
+        allCalendars () {
+            return this.calendars.concat(this.sharedCalendars)
+        }
     },
     mounted () {
-        var params = [this.$route.params.calendar_pk, this.$route.params.pk]
-        api.getEvent(params).then(response => {
+        var params = this.$route.params
+        api.getEvent(params.calendar_pk, params.calendar_type, params.pk).then(response => {
             this.event = response.data
-            this.originalCalendarPk = this.event.calendar.pk
         })
         this.$store.dispatch('getAttendees')
     },
@@ -116,8 +119,11 @@ export default {
                 this.$set(this.formErrors, 'calendar', this.$gettext('A calendar is required.'))
                 return
             }
-            event.calendar = event.calendar.pk
-            api.updateEvent(this.originalCalendarPk, event.id, event).then(response => {
+            var originalCalendar = {
+                pk: this.$route.params.calendar_pk,
+                type: this.$route.params.calendar_type
+            }
+            api.updateEvent(originalCalendar, event.id, event).then(response => {
                 this.close()
                 this.$notify({
                     group: 'default',
@@ -130,7 +136,7 @@ export default {
         deleteEvent () {
             var msg = this.$gettext('Are you sure you want to remove this event?')
             this.$dialog.confirm(msg).then(() => {
-                api.deleteEvent(this.event.calendar.pk, this.event.id).then(response => {
+                api.deleteEvent(this.event.calendar, this.event.id).then(response => {
                     this.close()
                     this.$notify({
                         group: 'default',

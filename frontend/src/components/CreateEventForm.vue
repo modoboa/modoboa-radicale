@@ -26,7 +26,7 @@
         <div class="row">
           <div class="col-sm-2"><span class="fa fa-calendar fa-2x"></span></div>
           <div class="col-sm-10">
-            <multiselect label="name" :options="calendars" v-model="event.calendar"></multiselect>
+            <multiselect label="name" :options="allCalendars" v-model="event.calendar"></multiselect>
             <span v-if="formErrors['calendar']" class="help-block">{{ formErrors['calendar'] }}</span>
           </div>
         </div>
@@ -84,8 +84,12 @@ export default {
             return this.$gettext('Save')
         },
         ...mapGetters([
-            'calendars'
-        ])
+            'calendars',
+            'sharedCalendars'
+        ]),
+        allCalendars () {
+            return this.calendars.concat(this.sharedCalendars)
+        }
     },
     methods: {
         close () {
@@ -98,8 +102,9 @@ export default {
                 this.$set(this.formErrors, 'calendar', this.$gettext('A calendar is required.'))
                 return
             }
+            var calendar = event.calendar
             event.calendar = event.calendar.pk
-            api.createEvent(event.calendar, event).then(response => {
+            api.createEvent(calendar, event).then(response => {
                 this.close()
                 this.$emit('eventCreated', response.data)
             })

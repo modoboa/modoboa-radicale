@@ -11,7 +11,17 @@ from . import backends
 from . import models
 
 
-class UserCalendarSerializer(serializers.ModelSerializer):
+class CalDAVCalendarMixin(object):
+    """Mixin for calendar serializers."""
+
+    def create_remote_calendar(self, calendar):
+        """Create caldav calendar."""
+        request = self.context["request"]
+        backend = backends.get_backend_from_request("caldav_", request)
+        backend.create_calendar(calendar.url)
+
+
+class UserCalendarSerializer(CalDAVCalendarMixin, serializers.ModelSerializer):
     """User calendar serializer."""
 
     class Meta:
@@ -21,13 +31,53 @@ class UserCalendarSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """Use current user."""
-        request = self.context["request"]
+        user = self.context["request"].user
         calendar = models.UserCalendar.objects.create(
-            mailbox=request.user.mailbox, **validated_data)
-        backend = backends.get_backend_from_request(
-            "caldav_", request)
-        backend.create_calendar(calendar.url)
+            mailbox=user.mailbox, **validated_data)
+        self.create_remote_calendar(calendar)
         return calendar
+
+
+class DomainSerializer(serializers.ModelSerializer):
+    """Domain serializer."""
+
+    pk = serializers.IntegerField()
+    name = serializers.CharField()
+
+    class Meta:
+        model = admin_models.Domain
+        fields = ("pk", "name")
+        read_only_fields = ("pk", "name", )
+
+
+class SharedCalendarSerializer(
+        CalDAVCalendarMixin, serializers.ModelSerializer):
+    """Shared calendar serializer."""
+
+    domain = DomainSerializer()
+
+    class Meta:
+        model = models.SharedCalendar
+        fields = ("pk", "name", "color", "path", "domain")
+        read_only_fields = ("pk", "path", )
+
+    def create(self, validated_data):
+        """Create shared calendar."""
+        domain = validated_data.pop("domain")
+        calendar = models.SharedCalendar(**validated_data)
+        calendar.domain_id = domain["pk"]
+        calendar.save()
+        self.create_remote_calendar(calendar)
+        return calendar
+
+    def update(self, instance, validated_data):
+        """Update calendar."""
+        domain = validated_data.pop("domain")
+        for key, value in validated_data.items():
+            setattr(instance, key, value)
+        instance.domain_id = domain["pk"]
+        instance.save()
+        return instance
 
 
 class AttendeeSerializer(serializers.Serializer):
@@ -54,7 +104,14 @@ class EventSerializer(serializers.Serializer):
 class ROEventSerializer(EventSerializer):
     """Event serializer for read operations."""
 
-    calendar = UserCalendarSerializer()
+    def __init__(self, *args, **kwargs):
+        """Set calendar field based on type."""
+        calendar_type = kwargs.pop("calendar_type")
+        super(ROEventSerializer, self).__init__(*args, **kwargs)
+        self.fields["calendar"] = (
+            UserCalendarSerializer() if calendar_type == "user"
+            else SharedCalendarSerializer()
+        )
 
 
 class WritableEventSerializer(EventSerializer):
@@ -62,6 +119,26 @@ class WritableEventSerializer(EventSerializer):
 
     calendar = serializers.PrimaryKeyRelatedField(
         queryset=models.UserCalendar.objects.none())
+    new_calendar_type = serializers.CharField(required=False)
+
+    def __init__(self, *args, **kwargs):
+        """Set calendar list."""
+        calendar_type = kwargs.pop("calendar_type")
+        super(EventSerializer, self).__init__(*args, **kwargs)
+        self.update_calendar_field(calendar_type)
+
+    def update_calendar_field(self, calendar_type):
+        """Update field based on given type."""
+        if calendar_type == "user":
+            self.fields["calendar"].queryset = (
+                models.UserCalendar.objects.filter(
+                    mailbox__user=self.context["request"].user)
+            )
+        else:
+            self.fields["calendar"].queryset = (
+                models.SharedCalendar.objects.filter(
+                    domain=self.context["request"].user.mailbox.domain)
+            )
 
     def validate(self, data):
         """Make sure dates are present with allDay flag."""
@@ -74,14 +151,6 @@ class WritableEventSerializer(EventSerializer):
         if errors:
             raise serializers.ValidationError(errors)
         return data
-
-    def __init__(self, *args, **kwargs):
-        """Set calendar list."""
-        super(EventSerializer, self).__init__(*args, **kwargs)
-        self.fields["calendar"].queryset = (
-            models.UserCalendar.objects.filter(
-                mailbox__user=self.context["request"].user)
-        )
 
 
 class MailboxSerializer(serializers.ModelSerializer):

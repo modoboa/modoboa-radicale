@@ -60,12 +60,10 @@
 <script>
 import Vue from 'vue'
 import * as api from '@/api'
-import AccessRuleField from './AccessRuleField.vue'
 import Modal from './Modal.vue'
 
 export default {
     components: {
-        'accessrule-field': AccessRuleField,
         'modal': Modal
     },
     props: {

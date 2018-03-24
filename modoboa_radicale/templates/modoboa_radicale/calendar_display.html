@@ -17,6 +17,13 @@
   {% else %}
     {% render_bundle 'app' 'js' 'CALENDAR' %}
   {% endif %}
+
+  <script>
+  window.userProfile = {
+      isSuperUser: {% if user.is_superuser %}true{% else %}false{% endif %},
+      permissions: [{% for perm in permissions %}'{{ perm }}'{% if not forloop.last %},{% endif %}{% endfor %}]
+  };
+  </script>
 {% endblock %}
 
 {% block container_content %}

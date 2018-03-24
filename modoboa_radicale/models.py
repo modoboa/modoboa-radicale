@@ -117,7 +117,7 @@ class SharedCalendarManager(models.Manager):
         """
         domains = Domain.objects.get_for_admin(admin)
         return self.get_queryset().filter(domain__in=domains)
-
+    
 
 class SharedCalendar(Calendar):
 

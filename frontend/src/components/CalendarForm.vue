@@ -15,6 +15,16 @@
             <span v-if="formErrors['name']" class="help-block">{{ formErrors['name'][0] }}</span>
           </div>
         </div>
+        <div v-can="'modoboa_radicale.add_sharedcalendar'" class="row">
+          <div v-if="!calendar.pk" class="col-sm-3">
+            <div class="checkbox">
+              <label><input type="checkbox" v-model="shared"><translate>Shared?</translate></label>
+            </div>
+          </div>
+          <div class="col-sm-9">
+            <multiselect v-if="shared" :options="domains" label="name" v-model="calendar.domain" :placeholder="domainPlaceHolder"></multiselect>
+          </div>
+        </div>
         <h4><small><translate>Color</translate></small></h4>
         <compact-picker v-model="calendar.color" />
         <hr>
@@ -30,6 +40,7 @@
 
 <script>
 import { Compact } from 'vue-color'
+import * as api from '@/api'
 import Modal from './Modal.vue'
 
 export default {
@@ -47,9 +58,16 @@ export default {
         'compact-picker': Compact,
         'modal': Modal
     },
+    created () {
+        api.getDomains().then(response => {
+            this.domains = response.data
+        })
+    },
     data () {
         return {
             calendar: JSON.parse(JSON.stringify(this.initialCalendar)),
+            shared: this.initialCalendar.domain !== undefined,
+            domains: [],
             formErrors: {}
         }
     },
@@ -60,6 +78,9 @@ export default {
         namePlaceHolder () {
             return this.$gettext('Name')
         },
+        domainPlaceHolder () {
+            return this.$gettext('Choose a domain')
+        },
         submitLabel () {
             if (this.calendar.pk) {
                 return this.$gettext('Update')
@@ -69,6 +90,9 @@ export default {
     },
     methods: {
         close () {
+            this.calendar = {}
+            this.shared = false
+            this.formErrors = {}
             this.$emit('update:show', false)
         },
         saveCalendar () {
@@ -78,10 +102,10 @@ export default {
 
             data.color = data.color.hex
             if (this.calendar.pk) {
-                action = 'updateCalendar'
+                action = (this.shared) ? 'updateSharedCalendar' : 'updateCalendar'
                 msg = this.$gettext('Calendar updated')
             } else {
-                action = 'createCalendar'
+                action = (this.shared) ? 'createSharedCalendar' : 'createCalendar'
                 msg = this.$gettext('Calendar created')
             }
             this.$store.dispatch(action, data).then(() => {
@@ -100,3 +124,5 @@ export default {
     }
 }
 </script>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>

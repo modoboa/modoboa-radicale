@@ -6,6 +6,7 @@ from django.utils.translation import ugettext as _
 
 from modoboa.core import signals as core_signals
 
+
 PERMISSIONS = [
     ("modoboa_radicale", "usercalendar", "add_usercalendar"),
     ("modoboa_radicale", "usercalendar", "change_usercalendar"),

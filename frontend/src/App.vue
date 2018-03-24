@@ -2,8 +2,8 @@
   <div id="app">
     <div id="leftcol" class="sidebar collapse navbar-collapse">
       <ul class="nav nav-sidebar" role="menu">
+        <li><a href="#" @click="openCreateCalendarForm"><span class="fa fa-plus"></span> <translate>New calendar</translate></a></li>
         <li class="nav-header"><translate>My calendars</translate></li>
-        <li><a href="#" @click="showCalendarForm = true"><span class="fa fa-plus"></span> <translate>New calendar</translate></a></li>
         <li v-for="calendar in calendars" :key="calendar.pk" class="dropdown-submenu">
           <a href="#" @click="toggleSubmenu"><span class="square" v-bind:style="{ 'background-color': calendar.color }"></span> {{ calendar.name }}</a>
           <ul class="dropdown-menu">
@@ -18,7 +18,23 @@
               </a>
             </li>
             <li>
-              <a href="#" @click="deleteCalendar(calendar.pk, $event)">
+              <a href="#" @click="deleteCalendar(calendar, $event)">
+                <span class="fa fa-trash"></span> <translate>Delete</translate>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-header"><translate>Shared calendars</translate></li>
+        <li v-for="calendar in sharedCalendars" :key="calendar.pk" class="dropdown-submenu">
+          <a href="#" @click="toggleSubmenu"><span class="square" v-bind:style="{ 'background-color': calendar.color }"></span> {{ calendar.name }}</a>
+          <ul v-can="'modoboa_radicale.add_sharedcalendar'" class="dropdown-menu">
+            <li v-can="'modoboa_radicale.change_sharedcalendar'">
+              <a href="#" @click="editCalendar(calendar, $event)">
+                <span class="fa fa-edit"></span> <translate>Edit</translate>
+              </a>
+            </li>
+            <li v-can="'modoboa_radicale.delete_sharedcalendar'">
+              <a href="#" @click="deleteCalendar(calendar, $event)">
                 <span class="fa fa-trash"></span> <translate>Delete</translate>
               </a>
             </li>
@@ -50,7 +66,8 @@ export default {
         'calendar-accessrules-form': CalendarAccessRulesForm
     },
     computed: mapGetters([
-        'calendars'
+        'calendars',
+        'sharedCalendars'
     ]),
     data () {
         return {
@@ -62,8 +79,13 @@ export default {
     },
     created () {
         this.$store.dispatch('getCalendars')
+        this.$store.dispatch('getSharedCalendars')
     },
     methods: {
+        openCreateCalendarForm () {
+            this.currentCalendar = undefined
+            this.showCalendarForm = true
+        },
         editCalendar (calendar, event) {
             this.closeMenu(event)
             this.currentCalendar = calendar
@@ -74,12 +96,14 @@ export default {
             this.currentCalendarPk = pk
             this.showAccessRulesForm = true
         },
-        deleteCalendar (pk, event) {
+        deleteCalendar (calendar, event) {
             this.closeMenu(event)
+            var calType = (calendar.domain) ? 'shared' : 'user'
+            var action = (calType === 'shared') ? 'deleteSharedCalendar' : 'deleteCalendar'
             var msg = this.$gettext('Are you sure you want to delete this calendar?')
             this.$dialog.confirm(msg).then(() => {
-                this.$store.dispatch('deleteCalendar', pk).then(() => {
-                    this.$bus.$emit('calendarDeleted', pk)
+                this.$store.dispatch(action, calendar.pk).then(() => {
+                    this.$bus.$emit('calendarDeleted', calendar)
                     this.$notify({
                         group: 'default',
                         title: this.$gettext('Success'),
@@ -94,10 +118,15 @@ export default {
             this.currentMenu = null
         },
         toggleSubmenu (e) {
+            var newMenu = $(e.target).next('ul')
             if (this.currentMenu) {
                 this.currentMenu.toggle()
+                if (this.currentMenu.is(newMenu)) {
+                    this.currentMenu = undefined
+                    return
+                }
             }
-            this.currentMenu = $(e.target).next('ul')
+            this.currentMenu = newMenu
             this.currentMenu.toggle()
         }
     }

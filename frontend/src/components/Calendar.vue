@@ -21,7 +21,8 @@ export default {
         'event-form': EventForm
     },
     computed: mapGetters([
-        'calendars'
+        'calendars',
+        'sharedCalendars'
     ]),
     data () {
         return {
@@ -65,20 +66,25 @@ export default {
         }
         this.cal.fullCalendar(args)
         this.addEventSources(this.calendars)
+        this.addEventSources(this.sharedCalendars)
     },
     watch: {
         calendars: function (value) {
             this.addEventSources(value)
+        },
+        sharedCalendars: function (value) {
+            this.addEventSources(value)
         }
     },
     methods: {
-        getEventSourceUrl (calendarPk) {
-            return '/api/v1/user-calendars/' + calendarPk + '/events/'
+        getEventSourceUrl (calendarPk, type) {
+            return '/api/v1/' + type + '-calendars/' + calendarPk + '/events/'
         },
         addEventSources (calendars) {
             var currentSources = this.cal.fullCalendar('getEventSources')
             for (var calendar of calendars) {
-                var url = this.getEventSourceUrl(calendar.pk)
+                var calType = (calendar.domain) ? 'shared' : 'user'
+                var url = this.getEventSourceUrl(calendar.pk, calType)
                 var present = false
                 for (var source of currentSources) {
                     if (source.url === url) present = true
@@ -101,9 +107,14 @@ export default {
             this.cal.fullCalendar('renderEvent', event, true)
         },
         eventClickCallback (calEvent, jsEvent, view) {
+            var calType = (calEvent.calendar.domain) ? 'shared' : 'user'
             this.$router.push({
                 name: 'EditEvent',
-                params: {calendar_pk: calEvent.calendar.pk, pk: calEvent.id}
+                params: {
+                    calendar_type: calType,
+                    calendar_pk: calEvent.calendar.pk,
+                    pk: calEvent.id
+                }
             })
         },
         updateEventDates (calEvent) {
@@ -118,7 +129,7 @@ export default {
                 data.end = end
                 data.allDay = calEvent.allDay
             }
-            api.patchEvent(calEvent.calendar.pk, calEvent.id, data).then(response => {
+            api.patchEvent(calEvent.calendar, calEvent.id, data).then(response => {
                 this.$notify({
                     group: 'default',
                     title: this.$gettext('Success'),

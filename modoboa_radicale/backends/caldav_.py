@@ -4,7 +4,6 @@ import datetime
 import uuid
 
 import caldav
-from caldav.objects import Event
 import icalendar
 
 from django.utils import timezone
@@ -32,7 +31,7 @@ class Caldav_Backend(CalendarBackend):
         """Convert a vevent to a dictionary."""
         vevent = event.instance.walk("vevent")[0]
         result = {
-            "id": event.instance["uid"],
+            "id": vevent["uid"],
             "title": vevent["summary"],
             "color": self.calendar.color,
             "description": vevent.get("description", ""),
@@ -74,10 +73,9 @@ class Caldav_Backend(CalendarBackend):
     def create_event(self, data):
         """Create a new event."""
         uid = uuid.uuid4()
-        url = "{}/{}.ics".format(self.remote_cal.url.geturl(), uid)
         cal = icalendar.Calendar()
-        cal.add("uid", uid)
         evt = icalendar.Event()
+        evt.add("uid", uid)
         evt.add("summary", data["title"])
         if not data["allDay"]:
             evt.add("dtstart", data["start"])
@@ -86,13 +84,7 @@ class Caldav_Backend(CalendarBackend):
             evt.add("dtstart", data["start"].date())
             evt.add("dtend", data["end"].date())
         cal.add_component(evt)
-        # FIXME
-        Event(
-            self.remote_cal.client,
-            url=url,
-            data=cal.to_ical(),
-            parent=self.remote_cal
-        ).save()
+        self.remote_cal.add_event(cal)
         return uid
 
     def update_event(self, uid, original_data):
@@ -124,19 +116,14 @@ class Caldav_Backend(CalendarBackend):
             orig_evt.add("attendee", attendee, encode=0)
         cal.instance.subcomponents = []
         cal.instance.add_component(orig_evt)
-        if self.calendar.pk != data["calendar"].pk:
+        if "calendar" in data and self.calendar.pk != data["calendar"].pk:
             # Calendar has been changed, remove old event first.
             self.remote_cal.client.delete(url)
             remote_cal = self.client.calendar(data["calendar"].path)
             url = "{}/{}.ics".format(remote_cal.url.geturl(), uid)
         else:
             remote_cal = self.remote_cal
-        Event(
-            remote_cal.client,
-            url=url,
-            data=cal.instance.to_ical(),
-            parent=remote_cal
-        ).save()
+        remote_cal.add_event(cal.instance)
         return uid
 
     def get_event(self, uid):

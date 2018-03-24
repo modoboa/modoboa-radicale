@@ -4,12 +4,14 @@ import * as types from '../mutation-types'
 
 // initial state
 const state = {
-    calendars: []
+    calendars: [],
+    sharedCalendars: []
 }
 
 // getters
 const getters = {
-    calendars: state => state.calendars
+    calendars: state => state.calendars,
+    sharedCalendars: state => state.sharedCalendars
 }
 
 // actions
@@ -33,6 +35,26 @@ const actions = {
         return api.deleteUserCalendar(pk).then(response => {
             commit(types.DELETE_CALENDAR, { pk: pk })
         })
+    },
+    getSharedCalendars ({ commit }) {
+        return api.getSharedCalendars().then(response => {
+            commit(types.SET_SHARED_CALENDARS, { calendars: response.data })
+        })
+    },
+    createSharedCalendar ({ commit }, data) {
+        return api.createSharedCalendar(data).then(response => {
+            commit(types.ADD_SHARED_CALENDAR, { calendar: response.data })
+        })
+    },
+    updateSharedCalendar ({ commit }, data) {
+        return api.updateSharedCalendar(data.pk, data).then(response => {
+            commit(types.UPDATE_SHARED_CALENDAR, { calendar: response.data })
+        })
+    },
+    deleteSharedCalendar ({ commit }, pk) {
+        return api.deleteSharedCalendar(pk).then(response => {
+            commit(types.DELETE_SHARED_CALENDAR, { pk: pk })
+        })
     }
 }
 
@@ -53,6 +75,24 @@ const mutations = {
     },
     [types.DELETE_CALENDAR] (state, { pk }) {
         state.calendars = state.calendars.filter(function (calendar) {
+            return calendar.pk !== pk
+        })
+    },
+    [types.SET_SHARED_CALENDARS] (state, { calendars }) {
+        state.sharedCalendars = calendars
+    },
+    [types.ADD_SHARED_CALENDAR] (state, { calendar }) {
+        state.sharedCalendars.push(calendar)
+    },
+    [types.UPDATE_SHARED_CALENDAR] (state, { calendar }) {
+        state.sharedCalendars.filter(function (item, pos) {
+            if (item.pk === calendar.pk) {
+                Vue.set(state.sharedCalendars, pos, calendar)
+            }
+        })
+    },
+    [types.DELETE_SHARED_CALENDAR] (state, { pk }) {
+        state.sharedCalendars = state.sharedCalendars.filter(function (calendar) {
             return calendar.pk !== pk
         })
     }
