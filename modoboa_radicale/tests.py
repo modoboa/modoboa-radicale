@@ -14,11 +14,11 @@ from django.urls import reverse
 from django.utils import six
 from django.core import management
 
+from modoboa.admin import models as admin_models
 from modoboa.core import models as core_models
 from modoboa.lib.tests import ModoTestCase, ModoAPITestCase
 
 from modoboa.admin.factories import populate_database
-from modoboa.admin.models import Mailbox
 
 from . import factories
 from . import models
@@ -44,11 +44,12 @@ class AccessRuleTestCase(ModoTestCase):
         os.unlink(self.rights_file_path)
 
     def test_rights_file_generation(self):
-        mbox = Mailbox.objects.get(address="admin", domain__name="test.com")
+        mbox = admin_models.Mailbox.objects.get(
+            address="admin", domain__name="test.com")
         cal = factories.UserCalendarFactory(mailbox=mbox)
 
         factories.AccessRuleFactory(
-            mailbox=Mailbox.objects.get(
+            mailbox=admin_models.Mailbox.objects.get(
                 address="user", domain__name="test.com"),
             calendar=cal, read=True)
         management.call_command("generate_rights", verbosity=False)
@@ -165,6 +166,83 @@ class UserCalendarViewSetTestCase(ModoAPITestCase):
         response = self.client.delete(url)
         self.assertEqual(response.status_code, 204)
         with self.assertRaises(models.UserCalendar.DoesNotExist):
+            self.calendar.refresh_from_db()
+
+
+class SharedCalendarViewSetTestCase(ModoAPITestCase):
+    """SharedCalendar viewset tests."""
+
+    @classmethod
+    def setUpTestData(cls):
+        super(SharedCalendarViewSetTestCase, cls).setUpTestData()
+        populate_database()
+        cls.account = core_models.User.objects.get(username="admin@test.com")
+        cls.domain = admin_models.Domain.objects.get(name="test.com")
+        cls.calendar = factories.SharedCalendarFactory(
+            domain=cls.domain)
+        cls.domain2 = admin_models.Domain.objects.get(name="test2.com")
+        cls.calendar2 = factories.SharedCalendarFactory(
+            domain=cls.domain2)
+
+    def setUp(self):
+        """Initiate test context."""
+        self.client.force_login(self.account)
+        self.set_global_parameter("server_location", "http://localhost:5232")
+
+    def test_get_calendars(self):
+        """List or retrieve calendars."""
+        url = reverse("api:shared-calendar-list")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()), 1)
+
+        url = reverse("api:shared-calendar-detail", args=[self.calendar.pk])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    @mock.patch("caldav.DAVClient")
+    def test_create_calendar(self, client_mock):
+        """Create a new calendar."""
+        client_mock.return_value = mocks.DAVClientMock()
+        data = {"username": "admin@test.com", "password": "toto"}
+        response = self.client.post(reverse("core:login"), data)
+
+        data = {
+            "name": "Shared calendar",
+            "color": "#ffffff",
+            "domain": {
+                "pk": self.domain.pk,
+                "name": "test.com"
+            }
+        }
+        url = reverse("api:shared-calendar-list")
+        response = self.client.post(url, data, format="json")
+        self.assertEqual(response.status_code, 201)
+
+    def test_update_calendar(self):
+        """Update existing calendar."""
+        data = {
+            "name": "Modified calendar",
+            "color": "#ffffff",
+            "domain": {
+                "pk": self.domain.pk,
+                "name": "test.com"
+            }
+        }
+        url = reverse("api:shared-calendar-detail", args=[self.calendar.pk])
+        response = self.client.put(url, data, format="json")
+        self.assertEqual(response.status_code, 200)
+        oldpath = self.calendar.path
+        self.calendar.refresh_from_db()
+        self.assertEqual(self.calendar.name, data["name"])
+        self.assertEqual(self.calendar.path, oldpath)
+
+    def test_delete_calendar(self):
+        """Delete existing calendar."""
+        url = reverse("api:shared-calendar-detail", args=[self.calendar.pk])
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, 204)
+        with self.assertRaises(models.SharedCalendar.DoesNotExist):
             self.calendar.refresh_from_db()
 
 
