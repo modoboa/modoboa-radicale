@@ -13,19 +13,14 @@ from django.urls import reverse
 from django.utils import six
 from django.core import management
 
-from rest_framework.authtoken.models import Token
-
 from modoboa.core import models as core_models
 from modoboa.lib.tests import ModoTestCase, ModoAPITestCase
 
 from modoboa.admin.factories import populate_database
 from modoboa.admin.models import Mailbox
 
-from .factories import (
-    UserCalendarFactory, SharedCalendarFactory, AccessRuleFactory
-)
-from .models import UserCalendar, SharedCalendar, AccessRule
-from .modo_extension import Radicale
+from . import factories
+from . import models
 
 
 class AccessRuleTestCase(ModoTestCase):
@@ -48,9 +43,9 @@ class AccessRuleTestCase(ModoTestCase):
 
     def test_rights_file_generation(self):
         mbox = Mailbox.objects.get(address="admin", domain__name="test.com")
-        cal = UserCalendarFactory(mailbox=mbox)
+        cal = factories.UserCalendarFactory(mailbox=mbox)
 
-        AccessRuleFactory(
+        factories.AccessRuleFactory(
             mailbox=Mailbox.objects.get(
                 address="user", domain__name="test.com"),
             calendar=cal, read=True)
@@ -73,7 +68,7 @@ class AccessRuleTestCase(ModoTestCase):
         self.assertEqual(cfg.get(section, "user"), "user@test.com")
         self.assertEqual(
             cfg.get(section, "collection"),
-            "test.com/user/admin/User calendar 0"
+            "admin@test.com/User calendar 0"
         )
         self.assertEqual(cfg.get(section, "permission"), "r")
 
@@ -105,6 +100,34 @@ class AccessRuleTestCase(ModoTestCase):
             self.assertTrue(cfg.has_section(section))
 
 
+class UserCalendarViewSetTestCase(ModoAPITestCase):
+    """UserCalendar viewset tests."""
+
+    @classmethod
+    def setUpTestData(cls):
+        super(UserCalendarViewSetTestCase, cls).setUpTestData()
+        populate_database()
+        cls.account = core_models.User.objects.get(username="user@test.com")
+        cls.calendar = factories.UserCalendarFactory(
+            name="MyCal", mailbox=cls.account.mailbox)
+
+    def setUp(self):
+        """Initiate test context."""
+        self.client.force_login(self.account)
+
+    def test_get_calendars(self):
+        """List or retrieve calendars."""
+        self.client.force_login(self.account)
+        url = reverse("api:user-calendar-list")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()), 1)
+
+        url = reverse("api:user-calendar-detail", args=[self.calendar.pk])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+
 class AccessRuleViewSetTestCase(ModoAPITestCase):
     """AccessRule viewset tests."""
 
@@ -113,9 +136,12 @@ class AccessRuleViewSetTestCase(ModoAPITestCase):
         super(AccessRuleViewSetTestCase, cls).setUpTestData()
         populate_database()
         cls.account = core_models.User.objects.get(username="user@test.com")
-        cls.token = Token.objects.create(user=cls.account)
-        cls.calendar = UserCalendarFactory(
+        cls.calendar = factories.UserCalendarFactory(
             name="MyCal", mailbox=cls.account.mailbox)
+
+    def setUp(self):
+        """Initiate test context."""
+        self.client.force_login(self.account)
 
     def test_create_accessrule(self):
         admin_mb = (
@@ -128,6 +154,6 @@ class AccessRuleViewSetTestCase(ModoAPITestCase):
             "read": True,
             "calendar": self.calendar.pk
         }
-        url = reverse("modoboa_radicale:access-rule-list")
+        url = reverse("api:access-rule-list")
         response = self.client.post(url, data=data, format="json")
         self.assertEqual(response.status_code, 201)

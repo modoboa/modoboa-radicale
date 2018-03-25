@@ -268,3 +268,6 @@ LOGGING = {
 }
 
 # Load settings from extensions
+from modoboa_radicale import settings as modoboa_radicale_settings
+
+modoboa_radicale_settings.apply(globals())

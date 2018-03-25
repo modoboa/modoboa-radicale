@@ -20,7 +20,10 @@ def parse_date_from_iso(value):
 class UserCalendarViewSet(viewsets.ModelViewSet):
     """Calendar viewset."""
 
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = (
+        permissions.IsAuthenticated,
+        permissions.DjangoModelPermissions
+    )
     serializer_class = serializers.UserCalendarSerializer
 
     def get_queryset(self):
