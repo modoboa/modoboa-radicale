@@ -1,5 +1,6 @@
 """Radicale extension unit tests."""
 
+import mock
 import os
 import tempfile
 
@@ -21,6 +22,7 @@ from modoboa.admin.models import Mailbox
 
 from . import factories
 from . import models
+from . import mocks
 
 
 class AccessRuleTestCase(ModoTestCase):
@@ -109,15 +111,19 @@ class UserCalendarViewSetTestCase(ModoAPITestCase):
         populate_database()
         cls.account = core_models.User.objects.get(username="user@test.com")
         cls.calendar = factories.UserCalendarFactory(
-            name="MyCal", mailbox=cls.account.mailbox)
+            mailbox=cls.account.mailbox)
+        cls.admin_account = core_models.User.objects.get(
+            username="admin@test.com")
+        cls.calendar2 = factories.UserCalendarFactory(
+            mailbox=cls.admin_account.mailbox)
 
     def setUp(self):
         """Initiate test context."""
         self.client.force_login(self.account)
+        self.set_global_parameter("server_location", "http://localhost:5232")
 
     def test_get_calendars(self):
         """List or retrieve calendars."""
-        self.client.force_login(self.account)
         url = reverse("api:user-calendar-list")
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -126,6 +132,40 @@ class UserCalendarViewSetTestCase(ModoAPITestCase):
         url = reverse("api:user-calendar-detail", args=[self.calendar.pk])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
+
+    @mock.patch("caldav.DAVClient")
+    def test_create_calendar(self, client_mock):
+        """Create a new calendar."""
+        client_mock.return_value = mocks.DAVClientMock()
+        data = {"username": "user@test.com", "password": "toto"}
+        response = self.client.post(reverse("core:login"), data)
+
+        data = {
+            "name": "Test calendar",
+            "color": "#ffffff"
+        }
+        url = reverse("api:user-calendar-list")
+        response = self.client.post(url, data, format="json")
+        self.assertEqual(response.status_code, 201)
+
+    def test_update_calendar(self):
+        """Update existing calendar."""
+        data = {"name": "Modified calendar", "color": "#ffffff"}
+        url = reverse("api:user-calendar-detail", args=[self.calendar.pk])
+        response = self.client.put(url, data, format="json")
+        self.assertEqual(response.status_code, 200)
+        oldpath = self.calendar.path
+        self.calendar.refresh_from_db()
+        self.assertEqual(self.calendar.name, data["name"])
+        self.assertEqual(self.calendar.path, oldpath)
+
+    def test_delete_calendar(self):
+        """Delete existing calendar."""
+        url = reverse("api:user-calendar-detail", args=[self.calendar.pk])
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, 204)
+        with self.assertRaises(models.UserCalendar.DoesNotExist):
+            self.calendar.refresh_from_db()
 
 
 class AccessRuleViewSetTestCase(ModoAPITestCase):

@@ -39,8 +39,7 @@ class UserCalendarSerializer(CalDAVCalendarMixin, serializers.ModelSerializer):
         """Use current user."""
         user = self.context["request"].user
         calendar = models.UserCalendar.objects.create(
-            mailbox=user.mailbox, _internal_name=validated_data["name"],
-            **validated_data)
+            mailbox=user.mailbox, **validated_data)
         self.create_remote_calendar(calendar)
         return calendar
 
@@ -72,7 +71,6 @@ class SharedCalendarSerializer(
         """Create shared calendar."""
         domain = validated_data.pop("domain")
         calendar = models.SharedCalendar(**validated_data)
-        calendar._internal_name = validated_data["name"]
         calendar.domain_id = domain["pk"]
         calendar.save()
         self.create_remote_calendar(calendar)

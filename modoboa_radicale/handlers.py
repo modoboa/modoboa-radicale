@@ -21,7 +21,12 @@ PERMISSIONS = [
 
 ROLES_PERMISSIONS = {
     "DomainAdmins": PERMISSIONS,
-    "Resellers": PERMISSIONS
+    "Resellers": PERMISSIONS,
+    "SimpleUsers": [
+        ("modoboa_radicale", "usercalendar", "add_usercalendar"),
+        ("modoboa_radicale", "usercalendar", "change_usercalendar"),
+        ("modoboa_radicale", "usercalendar", "delete_usercalendar"),
+    ]
 }
 
 
