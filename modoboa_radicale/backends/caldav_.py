@@ -71,10 +71,10 @@ class Caldav_Backend(CalendarBackend):
         """Create a new calendar."""
         self.client.mkcalendar(url)
 
-    def rename_calendar(self, path, new_name):
+    def rename_calendar(self, calendar):
         """Rename an existing calendar."""
-        remote_cal = self.client.calendar(path)
-        remote_cal.set_properties([dav.DisplayName(new_name)])
+        remote_cal = self.client.calendar(calendar.path)
+        remote_cal.set_properties([dav.DisplayName(calendar.name)])
 
     def create_event(self, data):
         """Create a new event."""

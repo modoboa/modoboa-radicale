@@ -14,7 +14,9 @@ from django.urls import reverse
 from django.utils import six
 from django.core import management
 
+from modoboa.admin import factories as admin_factories
 from modoboa.admin import models as admin_models
+from modoboa.core import factories as core_factories
 from modoboa.core import models as core_models
 from modoboa.lib.tests import ModoTestCase, ModoAPITestCase
 
@@ -23,6 +25,52 @@ from modoboa.admin.factories import populate_database
 from . import factories
 from . import models
 from . import mocks
+
+
+class TestDataMixin(object):
+    """Create some data."""
+
+    @classmethod
+    def setUpTestData(cls):
+        """Create test data."""
+        super(TestDataMixin, cls).setUpTestData()
+        admin_factories.populate_database()
+        cls.account = core_models.User.objects.get(username="user@test.com")
+        cls.calendar = factories.UserCalendarFactory(
+            mailbox=cls.account.mailbox)
+        cls.admin_account = core_models.User.objects.get(
+            username="admin@test.com")
+        cls.calendar2 = factories.UserCalendarFactory(
+            mailbox=cls.admin_account.mailbox)
+        cls.acr1 = factories.AccessRuleFactory(
+            calendar=cls.calendar, mailbox=cls.admin_account.mailbox,
+            read=True, write=True)
+        cls.account2 = core_factories.UserFactory(
+            username="user2@test.com", groups=("SimpleUsers",),
+        )
+        admin_factories.MailboxFactory.create(
+            address="user2", domain=cls.account.mailbox.domain,
+            user=cls.account2)
+        cls.domain = admin_models.Domain.objects.get(name="test.com")
+        cls.scalendar = factories.SharedCalendarFactory(
+            domain=cls.domain)
+        cls.domain2 = admin_models.Domain.objects.get(name="test2.com")
+        cls.scalendar2 = factories.SharedCalendarFactory(
+            domain=cls.domain2)
+
+
+class ViewsTestCase(TestDataMixin, ModoTestCase):
+    """Check views."""
+
+    def setUp(self):
+        """Initiate test context."""
+        self.client.force_login(self.account)
+
+    def test_index(self):
+        """Test index view."""
+        url = reverse("modoboa_radicale:calendar_detail_view")
+        response = self.client.get(url)
+        self.assertContains(response, '<div id="app">')
 
 
 class AccessRuleTestCase(ModoTestCase):
@@ -103,20 +151,8 @@ class AccessRuleTestCase(ModoTestCase):
             self.assertTrue(cfg.has_section(section))
 
 
-class UserCalendarViewSetTestCase(ModoAPITestCase):
+class UserCalendarViewSetTestCase(TestDataMixin, ModoAPITestCase):
     """UserCalendar viewset tests."""
-
-    @classmethod
-    def setUpTestData(cls):
-        super(UserCalendarViewSetTestCase, cls).setUpTestData()
-        populate_database()
-        cls.account = core_models.User.objects.get(username="user@test.com")
-        cls.calendar = factories.UserCalendarFactory(
-            mailbox=cls.account.mailbox)
-        cls.admin_account = core_models.User.objects.get(
-            username="admin@test.com")
-        cls.calendar2 = factories.UserCalendarFactory(
-            mailbox=cls.admin_account.mailbox)
 
     def setUp(self):
         """Initiate test context."""
@@ -149,8 +185,13 @@ class UserCalendarViewSetTestCase(ModoAPITestCase):
         response = self.client.post(url, data, format="json")
         self.assertEqual(response.status_code, 201)
 
-    def test_update_calendar(self):
+    @mock.patch("caldav.DAVClient")
+    def test_update_calendar(self, client_mock):
         """Update existing calendar."""
+        client_mock.return_value = mocks.DAVClientMock()
+        data = {"username": "user@test.com", "password": "toto"}
+        self.client.post(reverse("core:login"), data)
+
         data = {"name": "Modified calendar", "color": "#ffffff"}
         url = reverse("api:user-calendar-detail", args=[self.calendar.pk])
         response = self.client.put(url, data, format="json")
@@ -169,24 +210,12 @@ class UserCalendarViewSetTestCase(ModoAPITestCase):
             self.calendar.refresh_from_db()
 
 
-class SharedCalendarViewSetTestCase(ModoAPITestCase):
+class SharedCalendarViewSetTestCase(TestDataMixin, ModoAPITestCase):
     """SharedCalendar viewset tests."""
-
-    @classmethod
-    def setUpTestData(cls):
-        super(SharedCalendarViewSetTestCase, cls).setUpTestData()
-        populate_database()
-        cls.account = core_models.User.objects.get(username="admin@test.com")
-        cls.domain = admin_models.Domain.objects.get(name="test.com")
-        cls.calendar = factories.SharedCalendarFactory(
-            domain=cls.domain)
-        cls.domain2 = admin_models.Domain.objects.get(name="test2.com")
-        cls.calendar2 = factories.SharedCalendarFactory(
-            domain=cls.domain2)
 
     def setUp(self):
         """Initiate test context."""
-        self.client.force_login(self.account)
+        self.client.force_login(self.admin_account)
         self.set_global_parameter("server_location", "http://localhost:5232")
 
     def test_get_calendars(self):
@@ -196,9 +225,16 @@ class SharedCalendarViewSetTestCase(ModoAPITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json()), 1)
 
-        url = reverse("api:shared-calendar-detail", args=[self.calendar.pk])
+        url = reverse("api:shared-calendar-detail", args=[self.scalendar.pk])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
+
+        account = core_models.User.objects.get(username="user@test.com")
+        self.client.force_login(account)
+        url = reverse("api:shared-calendar-list")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()), 1)
 
     @mock.patch("caldav.DAVClient")
     def test_create_calendar(self, client_mock):
@@ -219,8 +255,13 @@ class SharedCalendarViewSetTestCase(ModoAPITestCase):
         response = self.client.post(url, data, format="json")
         self.assertEqual(response.status_code, 201)
 
-    def test_update_calendar(self):
+    @mock.patch("caldav.DAVClient")
+    def test_update_calendar(self, client_mock):
         """Update existing calendar."""
+        client_mock.return_value = mocks.DAVClientMock()
+        data = {"username": "admin@test.com", "password": "toto"}
+        self.client.post(reverse("core:login"), data)
+
         data = {
             "name": "Modified calendar",
             "color": "#ffffff",
@@ -229,45 +270,42 @@ class SharedCalendarViewSetTestCase(ModoAPITestCase):
                 "name": "test.com"
             }
         }
-        url = reverse("api:shared-calendar-detail", args=[self.calendar.pk])
+        url = reverse("api:shared-calendar-detail", args=[self.scalendar.pk])
         response = self.client.put(url, data, format="json")
         self.assertEqual(response.status_code, 200)
-        oldpath = self.calendar.path
-        self.calendar.refresh_from_db()
-        self.assertEqual(self.calendar.name, data["name"])
-        self.assertEqual(self.calendar.path, oldpath)
+        oldpath = self.scalendar.path
+        self.scalendar.refresh_from_db()
+        self.assertEqual(self.scalendar.name, data["name"])
+        self.assertEqual(self.scalendar.path, oldpath)
 
     def test_delete_calendar(self):
         """Delete existing calendar."""
-        url = reverse("api:shared-calendar-detail", args=[self.calendar.pk])
+        url = reverse("api:shared-calendar-detail", args=[self.scalendar.pk])
         response = self.client.delete(url)
         self.assertEqual(response.status_code, 204)
         with self.assertRaises(models.SharedCalendar.DoesNotExist):
-            self.calendar.refresh_from_db()
+            self.scalendar.refresh_from_db()
 
 
-class AccessRuleViewSetTestCase(ModoAPITestCase):
+class AccessRuleViewSetTestCase(TestDataMixin, ModoAPITestCase):
     """AccessRule viewset tests."""
-
-    @classmethod
-    def setUpTestData(cls):
-        super(AccessRuleViewSetTestCase, cls).setUpTestData()
-        populate_database()
-        cls.account = core_models.User.objects.get(username="user@test.com")
-        cls.calendar = factories.UserCalendarFactory(
-            name="MyCal", mailbox=cls.account.mailbox)
 
     def setUp(self):
         """Initiate test context."""
         self.client.force_login(self.account)
 
+    def test_get_accessrules(self):
+        """Test access rule retrieval."""
+        url = reverse("api:access-rule-list")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()), 1)
+
     def test_create_accessrule(self):
-        admin_mb = (
-            core_models.User.objects.get(username="admin@test.com").mailbox)
         data = {
             "mailbox": {
-                "pk": admin_mb.pk,
-                "full_address": admin_mb.full_address
+                "pk": self.account2.mailbox.pk,
+                "full_address": self.account2.mailbox.full_address
             },
             "read": True,
             "calendar": self.calendar.pk
@@ -275,3 +313,240 @@ class AccessRuleViewSetTestCase(ModoAPITestCase):
         url = reverse("api:access-rule-list")
         response = self.client.post(url, data=data, format="json")
         self.assertEqual(response.status_code, 201)
+
+    def test_update_accessrule(self):
+        """Test access rule modification."""
+        data = {
+            "mailbox": {
+                "pk": self.admin_account.pk,
+                "full_address": self.admin_account.email
+            },
+            "calendar": self.calendar.pk,
+            "read": False,
+            "write": True
+        }
+        url = reverse("api:access-rule-detail", args=[self.acr1.pk])
+        response = self.client.put(url, data=data, format="json")
+        self.assertEqual(response.status_code, 200)
+        self.acr1.refresh_from_db()
+        self.assertFalse(self.acr1.read)
+
+    def test_update_accessrule_permission(self):
+        """Try to modify an access rule the user does not own."""
+        calendar = factories.UserCalendarFactory(
+            mailbox=self.admin_account.mailbox)
+        acr = factories.AccessRuleFactory(
+            calendar=calendar, mailbox=self.account.mailbox,
+            read=True, write=True)
+        data = {
+            "mailbox": self.account.pk,
+            "calendar": calendar.pk,
+            "read": False,
+            "write": True
+        }
+        url = reverse("api:access-rule-detail", args=[acr.pk])
+        response = self.client.put(url, data=data, format="json")
+        self.assertEqual(response.status_code, 404)
+
+    def test_delete_accessrule(self):
+        """Test access rule removal."""
+        url = reverse("api:access-rule-detail", args=[self.acr1.pk])
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, 204)
+        with self.assertRaises(models.AccessRule.DoesNotExist):
+            self.acr1.refresh_from_db()
+
+
+class EventViewSetTestCase(TestDataMixin, ModoAPITestCase):
+    """Event viewset tests."""
+
+    def setUp(self):
+        """Initiate test context."""
+        patcher = mock.patch("caldav.DAVClient")
+        self.client_mock = patcher.start()
+        self.client_mock.return_value = mocks.DAVClientMock()
+        self.addCleanup(patcher.stop)
+        self.client.force_login(self.account)
+
+    def test_get_user_events(self):
+        """Test event(s) retrieval."""
+        data = {"username": "user@test.com", "password": "toto"}
+        self.client.post(reverse("core:login"), data)
+
+        # FIXME: drf nested routers does not handle reverse() properly
+        url = "/api/v1/user-calendars/{}/events/{}/".format(
+            self.calendar.pk, 1234)
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.json()["title"].startswith("Bastille"))
+
+        url = "/api/v1/user-calendars/{}/events/".format(self.calendar.pk)
+        url = "{}?start={}&end={}".format(
+            url, "20060712T182145Z", "20070712T182145Z"
+        )
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()), 2)
+
+    def test_get_shared_events(self):
+        """Test event(s) retrieval."""
+        data = {"username": "user@test.com", "password": "toto"}
+        self.client.post(reverse("core:login"), data)
+
+        # FIXME: drf nested routers does not handle reverse() properly
+        url = "/api/v1/shared-calendars/{}/events/{}/".format(
+            self.scalendar.pk, 1234)
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.json()["title"].startswith("Bastille"))
+
+        url = "/api/v1/shared-calendars/{}/events/".format(self.scalendar.pk)
+        url = "{}?start={}&end={}".format(
+            url, "20060712T182145Z", "20070712T182145Z"
+        )
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()), 2)
+
+    def test_create_event(self):
+        """Test event creation."""
+        data = {"username": "user@test.com", "password": "toto"}
+        self.client.post(reverse("core:login"), data)
+
+        url = "/api/v1/user-calendars/{}/events/".format(self.calendar.pk)
+        data = {
+            "title": "Test event",
+            "start": "2018-03-27T00:00:00Z",
+            "end": "2018-03-28T00:00:00Z",
+            "allDay": True,
+            "color": "#ffdddd",
+            "description": "Description",
+            "calendar": self.calendar.pk
+        }
+        response = self.client.post(url, data=data, format="json")
+        self.assertEqual(response.status_code, 201)
+        self.assertIn("id", response.json())
+
+        url = "/api/v1/shared-calendars/{}/events/".format(self.scalendar.pk)
+        data = {
+            "title": "Test event 2",
+            "start": "2018-03-27T00:00:00Z",
+            "end": "2018-03-28T00:00:00Z",
+            "allDay": False,
+            "color": "#ffdddd",
+            "description": "Description",
+            "calendar": self.scalendar.pk
+        }
+        response = self.client.post(url, data=data, format="json")
+        self.assertEqual(response.status_code, 201)
+        self.assertIn("id", response.json())
+
+    def test_update_event(self):
+        """Test event update."""
+        data = {"username": "user@test.com", "password": "toto"}
+        self.client.post(reverse("core:login"), data)
+
+        url = "/api/v1/user-calendars/{}/events/1234/".format(
+            self.calendar.pk)
+        data = {
+            "title": "Test event",
+            "start": "2018-03-27T00:00:00Z",
+            "end": "2018-03-28T00:00:00Z",
+            "allDay": True,
+            "color": "#ffdddd",
+            "description": "Description",
+            "calendar": self.calendar.pk,
+            # "attendees": [{
+            #     "display_name": "Test User",
+            #     "email": "user@domain.test",
+            # }]
+        }
+        response = self.client.put(url, data=data, format="json")
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("id", response.json())
+
+    def test_patch_event(self):
+        """Test event partial update."""
+        data = {"username": "user@test.com", "password": "toto"}
+        self.client.post(reverse("core:login"), data)
+
+        url = "/api/v1/user-calendars/{}/events/1234/".format(
+            self.calendar.pk)
+        data = {
+            "start": "2018-03-27T00:00:00Z",
+            "end": "2018-03-28T00:00:00Z",
+            "allDay": True,
+        }
+        response = self.client.patch(url, data=data, format="json")
+        self.assertEqual(response.status_code, 200)
+
+    def test_move_event_between_cals(self):
+        """Move an event."""
+        data = {"username": "user@test.com", "password": "toto"}
+        self.client.post(reverse("core:login"), data)
+        data = {
+            "title": "Test event",
+            "start": "2018-03-27T00:00:00Z",
+            "end": "2018-03-28T00:00:00Z",
+            "allDay": True,
+            "color": "#ffdddd",
+            "description": "Description",
+            "calendar": self.scalendar.pk,
+            "new_calendar_type": "shared"
+        }
+        url = "/api/v1/user-calendars/{}/events/1234/".format(
+            self.calendar.pk)
+        response = self.client.put(url, data=data, format="json")
+        self.assertEqual(response.status_code, 200)
+
+    def test_delete_event(self):
+        """Test event deletion."""
+        data = {"username": "user@test.com", "password": "toto"}
+        self.client.post(reverse("core:login"), data)
+
+        url = "/api/v1/shared-calendars/{}/events/1234/".format(
+            self.scalendar.pk)
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, 200)
+
+
+class AttendeeViewSetTestCase(ModoAPITestCase):
+    """Attendee viewset test case."""
+
+    @classmethod
+    def setUpTestData(cls):
+        super(AttendeeViewSetTestCase, cls).setUpTestData()
+        populate_database()
+        cls.account = core_models.User.objects.get(username="user@test.com")
+
+    def setUp(self):
+        """Initiate test context."""
+        self.client.force_login(self.account)
+
+    def test_get_attendees(self):
+        """Test attendees retrieval."""
+        url = reverse("api:attendee-list")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()), 1)
+
+
+class MailboxViewSetTestCase(ModoAPITestCase):
+    """Mailbox viewset test case."""
+
+    @classmethod
+    def setUpTestData(cls):
+        super(MailboxViewSetTestCase, cls).setUpTestData()
+        populate_database()
+        cls.account = core_models.User.objects.get(username="user@test.com")
+
+    def setUp(self):
+        """Initiate test context."""
+        self.client.force_login(self.account)
+
+    def test_get_mailboxes(self):
+        """Test mailbox retrieval."""
+        url = reverse("api:mailbox-list")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()), 1)

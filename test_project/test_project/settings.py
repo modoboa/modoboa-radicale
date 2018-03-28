@@ -271,3 +271,6 @@ LOGGING = {
 from modoboa_radicale import settings as modoboa_radicale_settings
 
 modoboa_radicale_settings.apply(globals())
+
+WEBPACK_LOADER["CALENDAR"]["STATS_FILE"] = os.path.join(
+    os.path.dirname(__file__), "webpack-stats.json")
