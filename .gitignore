@@ -8,7 +8,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
-build/
+./build/
 develop-eggs/
 dist/
 downloads/
@@ -21,6 +21,7 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+.eggs
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -43,6 +44,7 @@ coverage.xml
 # Translations
 *.mo
 *.pot
+*.po~
 
 # Django stuff:
 *.log
@@ -52,3 +54,13 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# JS stuff:
+node_modules
+/static/dist
+/frontend/webpack-stats.json
+coverage
+/modoboa_radicale/static
+
+# Dev stuff:
+.ropeproject

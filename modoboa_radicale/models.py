@@ -1,6 +1,5 @@
-"""
-Radicale extension models.
-"""
+"""Radicale extension models."""
+
 from __future__ import unicode_literals
 
 import os
@@ -17,10 +16,11 @@ from modoboa.parameters import tools as param_tools
 
 @python_2_unicode_compatible
 class Calendar(models.Model):
-
     """Abstract calendar definition."""
 
     name = models.CharField(max_length=200)
+    color = models.CharField(max_length=7, default="#3a87ad")
+    _path = models.TextField()
 
     class Meta:
         abstract = True
@@ -31,7 +31,7 @@ class Calendar(models.Model):
     @property
     def path(self):
         """Return the calendar path."""
-        raise NotImplementedError
+        return self._path
 
     @property
     def url(self):
@@ -42,7 +42,7 @@ class Calendar(models.Model):
             if not server_location:
                 raise lib_exceptions.InternalError(
                     _("Server location is not set, please fix it."))
-            self._url = os.path.join(server_location, self.path)
+            self._url = os.path.join(server_location, self._path)
         return self._url
 
     @property
@@ -57,7 +57,6 @@ class Calendar(models.Model):
 
 
 class UserCalendarManager(models.Manager):
-
     """Custom UserCalendar manager."""
 
     def get_for_admin(self, admin):
@@ -70,13 +69,13 @@ class UserCalendarManager(models.Manager):
 
 
 class UserCalendar(Calendar):
-
     """User calendar.
 
     We associate the calendar to a mailbox because we need to access
     the related domain.
 
     """
+
     mailbox = models.ForeignKey(Mailbox, on_delete=models.CASCADE)
 
     objects = UserCalendarManager()
@@ -85,28 +84,11 @@ class UserCalendar(Calendar):
         db_table = "radicale_usercalendar"
 
     @property
-    def path(self):
-        """Return the calendar path.
-
-        <domain>/user/<localpart>/<name>
-        """
-        if not hasattr(self, "_path"):
-            self._path = "%s/user/%s/%s" % (
-                self.mailbox.domain.name, self.mailbox.address, self.name
-            )
-        return self._path
-
-    @property
-    def tags(self):
-        return [{"name": "user", "label": _("User"), "type": "cal"}]
-
-    @property
     def owner(self):
         return self.mailbox.user
 
 
 class SharedCalendarManager(models.Manager):
-
     """Custom SharedCalendar manager."""
 
     def get_for_admin(self, admin):
@@ -119,7 +101,6 @@ class SharedCalendarManager(models.Manager):
 
 
 class SharedCalendar(Calendar):
-
     """Shared calendar.
 
     A shared calendar is associated to a domain and is readable and
@@ -135,20 +116,6 @@ class SharedCalendar(Calendar):
         db_table = "radicale_sharedcalendar"
 
     @property
-    def path(self):
-        """Return the calendar path.
-
-        <domain>/shared/<name>
-        """
-        if not hasattr(self, "_path"):
-            self._path = "%s/shared/%s" % (self.domain.name, self.name)
-        return self._path
-
-    @property
-    def tags(self):
-        return [{"name": "shared", "label": _("Shared"), "type": "cal"}]
-
-    @property
     def owner(self):
         """Return calendar owner."""
         return self.domain
@@ -156,7 +123,6 @@ class SharedCalendar(Calendar):
 
 @python_2_unicode_compatible
 class AccessRule(models.Model):
-
     """Access rules to user calendars."""
 
     mailbox = models.ForeignKey(Mailbox, on_delete=models.CASCADE)

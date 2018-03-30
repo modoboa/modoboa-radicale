@@ -14,7 +14,10 @@ env:
 
 sudo: false
 
-cache: pip
+cache:
+  pip: true
+  directories:
+    - frontend/node_modules
 
 addons:
   postgresql: '9.3'
@@ -22,11 +25,11 @@ addons:
 
 before_install:
   - pip install codecov
+  - pip install -r test-requirements.txt
   - pip install -e git+https://github.com/modoboa/modoboa.git#egg=modoboa
 
 install:
   - pip install -r requirements.txt
-  - pip install -r test-requirements.txt
   - python setup.py develop
 
 script:
@@ -39,7 +42,10 @@ after_success:
 before_deploy:
   - cd ../modoboa_radicale
   - django-admin compilemessages
-  - cd ..
+  - cd ../frontend
+  - nvm install 6.10
+  - npm install
+  - npm run build
 
 deploy:
   provider: pypi
