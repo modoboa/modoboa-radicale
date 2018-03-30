@@ -41,7 +41,6 @@
 <script>
 import { Compact } from 'vue-color'
 import * as api from '@/api'
-import Modal from './Modal.vue'
 
 export default {
     props: {
@@ -55,8 +54,7 @@ export default {
         }
     },
     components: {
-        'compact-picker': Compact,
-        'modal': Modal
+        'compact-picker': Compact
     },
     created () {
         api.getDomains().then(response => {

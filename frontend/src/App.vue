@@ -8,6 +8,11 @@
           <a href="#" @click="toggleSubmenu"><span class="square" v-bind:style="{ 'background-color': calendar.color }"></span> {{ calendar.name }}</a>
           <ul class="dropdown-menu">
             <li>
+              <a href="#" @click="displayCalendarInfo(calendar, $event)">
+                <span class="fa fa-info"></span> <translate>Information</translate>
+              </a>
+            </li>
+            <li>
               <a href="#" @click="editCalendar(calendar, $event)">
                 <span class="fa fa-edit"></span> <translate>Edit</translate>
               </a>
@@ -29,7 +34,12 @@
           <a href="#" @click="toggleSharedCalendarMenu">
             <span class="square" v-bind:style="{ 'background-color': calendar.color }"></span> {{ calendar.name }}
           </a>
-          <ul v-can="'modoboa_radicale.add_sharedcalendar'" class="dropdown-menu">
+          <ul class="dropdown-menu">
+            <li>
+              <a href="#" @click="displayCalendarInfo(calendar, $event)">
+                <span class="fa fa-info"></span> <translate>Information</translate>
+              </a>
+            </li>
             <li v-can="'modoboa_radicale.change_sharedcalendar'">
               <a href="#" @click="editCalendar(calendar, $event)">
                 <span class="fa fa-edit"></span> <translate>Edit</translate>
@@ -52,6 +62,8 @@
 
     <calendar-accessrules-form v-if="showAccessRulesForm" :show.sync="showAccessRulesForm" :calendarPk="currentCalendarPk"></calendar-accessrules-form>
 
+    <calendar-detail v-if="showCalendarDetail" :show.sync="showCalendarDetail" :calendar="currentCalendar"></calendar-detail>
+
     <notifications position="top right" group="default" />
   </div>
 </template>
@@ -61,11 +73,13 @@ import { mapGetters } from 'vuex'
 import $ from 'jquery'
 import CalendarForm from './components/CalendarForm.vue'
 import CalendarAccessRulesForm from './components/CalendarAccessRulesForm.vue'
+import CalendarDetail from './components/CalendarDetail.vue'
 
 export default {
     components: {
         'calendar-form': CalendarForm,
-        'calendar-accessrules-form': CalendarAccessRulesForm
+        'calendar-accessrules-form': CalendarAccessRulesForm,
+        'calendar-detail': CalendarDetail
     },
     computed: mapGetters([
         'calendars',
@@ -74,8 +88,10 @@ export default {
     data () {
         return {
             currentCalendarPk: undefined,
+            currentCalendar: undefined,
             showCalendarForm: false,
             showAccessRulesForm: false,
+            showCalendarDetail: false,
             currentMenu: null
         }
     },
@@ -87,6 +103,11 @@ export default {
         openCreateCalendarForm () {
             this.currentCalendar = undefined
             this.showCalendarForm = true
+        },
+        displayCalendarInfo (calendar, event) {
+            this.closeMenu(event)
+            this.showCalendarDetail = true
+            this.currentCalendar = calendar
         },
         editCalendar (calendar, event) {
             this.closeMenu(event)

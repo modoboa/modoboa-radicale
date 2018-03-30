@@ -14,7 +14,10 @@ env:
 
 sudo: false
 
-cache: pip
+cache:
+  pip: true
+  directories:
+    - frontend/node_modules
 
 addons:
   postgresql: '9.3'
@@ -39,7 +42,10 @@ after_success:
 before_deploy:
   - cd ../modoboa_radicale
   - django-admin compilemessages
-  - cd ..
+  - cd ../frontend
+  - nvm install 6.10
+  - npm install
+  - npm run build
 
 deploy:
   provider: pypi

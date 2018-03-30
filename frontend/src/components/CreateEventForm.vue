@@ -43,13 +43,9 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Modal from './Modal.vue'
-import * as api from '../api'
+import * as api from '@/api'
 
 export default {
-    components: {
-        'modal': Modal
-    },
     props: {
         start: [Date],
         end: [Date],
@@ -72,7 +68,7 @@ export default {
             formErrors: {},
             config: {
                 enableTime: true,
-                altInput: true
+                time_24hr: true
             }
         }
     },

@@ -9,7 +9,6 @@
 import { mapGetters } from 'vuex'
 import $ from 'jquery'
 import fullCalendar from 'fullcalendar' // eslint-disable-line no-unused-vars
-import 'fullcalendar/dist/locale/fr'
 import { DateTime } from 'luxon'
 import CreateEventForm from './CreateEventForm.vue'
 import EventForm from './EventForm.vue'
@@ -46,29 +45,32 @@ export default {
         })
     },
     mounted () {
-        this.cal = $(this.$el)
-        var args = {
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-            defaultView: 'agendaWeek',
-            locale: this.$language.current,
-            timezone: 'local',
-            selectable: true,
-            selectHelper: true,
-            editable: true,
-            eventLimit: true,
-            select: this.selectCallback,
-            eventClick: this.eventClickCallback,
-            eventDrop: this.eventDropCallback,
-            eventResize: this.eventResizeCallback,
-            themeSystem: 'bootstrap3'
-        }
-        this.cal.fullCalendar(args)
-        this.addEventSources(this.calendars)
-        this.addEventSources(this.sharedCalendars)
+        const locale = this.$language.current
+        import(`fullcalendar/dist/locale/${locale}.js`).then((utils) => {
+            this.cal = $(this.$el)
+            var args = {
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                defaultView: 'agendaWeek',
+                locale: this.$language.current,
+                timezone: 'local',
+                selectable: true,
+                selectHelper: true,
+                editable: true,
+                eventLimit: true,
+                select: this.selectCallback,
+                eventClick: this.eventClickCallback,
+                eventDrop: this.eventDropCallback,
+                eventResize: this.eventResizeCallback,
+                themeSystem: 'bootstrap3'
+            }
+            this.cal.fullCalendar(args)
+            this.addEventSources(this.calendars)
+            this.addEventSources(this.sharedCalendars)
+        })
     },
     watch: {
         calendars: function (value) {
@@ -83,6 +85,10 @@ export default {
             return '/api/v1/' + type + '-calendars/' + calendarPk + '/events/'
         },
         addEventSources (calendars) {
+            if (this.cal === undefined) {
+                // Not ready yet...
+                return
+            }
             var currentSources = this.cal.fullCalendar('getEventSources')
             for (var calendar of calendars) {
                 var calType = (calendar.domain) ? 'shared' : 'user'

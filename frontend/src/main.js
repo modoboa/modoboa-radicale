@@ -6,7 +6,8 @@ import moment from 'moment'
 
 import GetTextPlugin from 'vue-gettext'
 import Multiselect from 'vue-multiselect'
-import flatPickr from 'vue-flatpickr-component'
+import flatpickr from 'flatpickr'
+import VueFlatPickr from 'vue-flatpickr-component'
 import 'flatpickr/dist/flatpickr.css'
 import VuejsDialog from 'vuejs-dialog'
 import Notifications from 'vue-notification'
@@ -18,6 +19,7 @@ import store from './store'
 import translations from './translations.json'
 
 import Calendar from './components/Calendar.vue'
+import Modal from './components/Modal.vue'
 
 Vue.use(GetTextPlugin, {
     availableLanguages: {
@@ -30,12 +32,18 @@ Vue.use(GetTextPlugin, {
 Vue.config.language = userLang
 
 Vue.use(VueRouter)
-Vue.use(flatPickr)
 Vue.use(VuejsDialog)
 Vue.use(Notifications)
 Vue.use(Acl)
 
+/* Configure flatpick widget */
+import(`flatpickr/dist/l10n/${userLang}.js`).then((locale) => {
+    flatpickr.localize(locale.default[userLang])
+    Vue.use(VueFlatPickr)
+})
+
 Vue.component('calendar', Calendar)
+Vue.component('modal', Modal)
 Vue.component('multiselect', Multiselect)
 
 Vue.filter('formatDate', (value, format) => {

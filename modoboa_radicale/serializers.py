@@ -32,8 +32,8 @@ class UserCalendarSerializer(CalDAVCalendarMixin, serializers.ModelSerializer):
 
     class Meta:
         model = models.UserCalendar
-        fields = ("pk", "name", "color", "path")
-        read_only_fields = ("pk", "path", )
+        fields = ("pk", "name", "color", "path", "url")
+        read_only_fields = ("pk", "path", "url")
 
     def create(self, validated_data):
         """Use current user."""
@@ -74,8 +74,8 @@ class SharedCalendarSerializer(
 
     class Meta:
         model = models.SharedCalendar
-        fields = ("pk", "name", "color", "path", "domain")
-        read_only_fields = ("pk", "path", )
+        fields = ("pk", "name", "color", "path", "domain", "url")
+        read_only_fields = ("pk", "path", "url")
 
     def create(self, validated_data):
         """Create shared calendar."""

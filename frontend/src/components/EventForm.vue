@@ -60,7 +60,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { French } from 'flatpickr/dist/l10n/fr.js'
 import * as api from '@/api'
 
 export default {
@@ -73,9 +72,7 @@ export default {
             formErrors: {},
             config: {
                 enableTime: true,
-                time_24hr: true,
-                altInput: true,
-                locale: French
+                time_24hr: true
             }
         }
     },

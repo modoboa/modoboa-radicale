@@ -60,12 +60,8 @@
 <script>
 import Vue from 'vue'
 import * as api from '@/api'
-import Modal from './Modal.vue'
 
 export default {
-    components: {
-        'modal': Modal
-    },
     props: {
         calendarPk: Number
     },

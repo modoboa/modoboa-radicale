@@ -61,7 +61,7 @@ if __name__ == "__main__":
             "Topic :: Communications :: Email",
             "Topic :: Internet :: WWW/HTTP",
         ],
-        keywords="email radicale",
+        keywords="modoboa email radicale calendar caldav",
         packages=find_packages(exclude=["docs", "test_project"]),
         include_package_data=True,
         zip_safe=False,
