@@ -4,8 +4,12 @@ import os
 
 PLUGIN_BASE_DIR = os.path.dirname(__file__)
 
-CALENDAR_STATS_FILES = os.path.join(
-    PLUGIN_BASE_DIR, "../frontend/webpack-stats.json")
+CALENDAR_STATS_FILES = {
+    "dev": os.path.join(
+        PLUGIN_BASE_DIR, "../frontend/webpack-stats.json"),
+    "prod": os.path.join(
+        PLUGIN_BASE_DIR, "static/webpack-stats.json")
+}
 
 
 def apply(settings):
@@ -17,7 +21,7 @@ def apply(settings):
         "CALENDAR": {
             "CACHE": not DEBUG,
             "BUNDLE_DIR_NAME": "modoboa_radicale/",
-            "STATS_FILE": CALENDAR_STATS_FILES,
+            "STATS_FILE": CALENDAR_STATS_FILES.get("dev" if DEBUG else "prod"),
             "IGNORE": [".+\.hot-update.js", ".+\.map"]
         }
     }

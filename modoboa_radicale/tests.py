@@ -367,6 +367,7 @@ class EventViewSetTestCase(TestDataMixin, ModoAPITestCase):
         self.client_mock.return_value = mocks.DAVClientMock()
         self.addCleanup(patcher.stop)
         self.client.force_login(self.account)
+        self.set_global_parameter("server_location", "http://localhost")
 
     def test_get_user_events(self):
         """Test event(s) retrieval."""
