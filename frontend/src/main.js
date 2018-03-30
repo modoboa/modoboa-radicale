@@ -37,10 +37,12 @@ Vue.use(Notifications)
 Vue.use(Acl)
 
 /* Configure flatpick widget */
-import(`flatpickr/dist/l10n/${userLang}.js`).then((locale) => {
-    flatpickr.localize(locale.default[userLang])
-    Vue.use(VueFlatPickr)
-})
+if (userLang !== 'en') {
+    import(`flatpickr/dist/l10n/${userLang}.js`).then((locale) => {
+        flatpickr.localize(locale.default[userLang])
+    })
+}
+Vue.use(VueFlatPickr)
 
 Vue.component('calendar', Calendar)
 Vue.component('modal', Modal)

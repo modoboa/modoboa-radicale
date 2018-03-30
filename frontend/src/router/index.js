@@ -14,7 +14,7 @@ export default new Router({
             component: Calendar
         },
         {
-            path: '/:calendar_pk([0-9]+)/:calendar_type(shared|user)/events/:pk([a-z0-9\\-]+)/edit',
+            path: '/:calendar_pk([0-9]+)/:calendar_type(shared|user)/events/:pk([A-Za-z0-9\\-]+)/edit',
             name: 'EditEvent',
             component: EventForm
         }

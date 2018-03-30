@@ -46,7 +46,24 @@ export default {
     },
     mounted () {
         const locale = this.$language.current
-        import(`fullcalendar/dist/locale/${locale}.js`).then((utils) => {
+        if (locale !== 'en') {
+            import(`fullcalendar/dist/locale/${locale}.js`).then((utils) => {
+                this.loadFullCalendar()
+            })
+        } else {
+            this.loadFullCalendar()
+        }
+    },
+    watch: {
+        calendars: function (value) {
+            this.addEventSources(value)
+        },
+        sharedCalendars: function (value) {
+            this.addEventSources(value)
+        }
+    },
+    methods: {
+        loadFullCalendar () {
             this.cal = $(this.$el)
             var args = {
                 header: {
@@ -70,17 +87,7 @@ export default {
             this.cal.fullCalendar(args)
             this.addEventSources(this.calendars)
             this.addEventSources(this.sharedCalendars)
-        })
-    },
-    watch: {
-        calendars: function (value) {
-            this.addEventSources(value)
         },
-        sharedCalendars: function (value) {
-            this.addEventSources(value)
-        }
-    },
-    methods: {
         getEventSourceUrl (calendarPk, type) {
             return '/api/v1/' + type + '-calendars/' + calendarPk + '/events/'
         },
