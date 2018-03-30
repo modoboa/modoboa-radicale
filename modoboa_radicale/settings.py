@@ -8,7 +8,7 @@ CALENDAR_STATS_FILES = {
     "dev": os.path.join(
         PLUGIN_BASE_DIR, "../frontend/webpack-stats.json"),
     "prod": os.path.join(
-        PLUGIN_BASE_DIR, "static/webpack-stats.json")
+        PLUGIN_BASE_DIR, "static/modoboa_radicale/webpack-stats.json")
 }
 
 
