@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: modoboa-calendar 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-30 09:00+0200\n"
-"PO-Revision-Date: 2018-03-15 18:04+0100\n"
+"POT-Creation-Date: 2018-03-31 14:08+0200\n"
+"PO-Revision-Date: 2018-03-31 14:07+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: en\n"
@@ -23,20 +23,19 @@ msgstr "Access rules"
 
 #: src/components/CalendarAccessRulesForm.vue:26
 msgid "Account"
-msgstr ""
+msgstr "Account"
 
 #: src/components/EventForm.vue:25
 msgid "All day"
-msgstr ""
+msgstr "All day"
 
 #: src/components/EventForm.vue:44
 msgid "Attendees"
 msgstr "Attendees"
 
 #: src/components/CalendarDetail.vue:3
-#, fuzzy
 msgid "Calendar information"
-msgstr "Calendar sharing"
+msgstr "Calendar information"
 
 #: src/components/CalendarAccessRulesForm.vue:3
 msgid "Calendar sharing"
@@ -62,7 +61,7 @@ msgstr "Detail"
 
 #: src/App.vue:16 src/App.vue:44
 msgid "Edit"
-msgstr ""
+msgstr "Edit"
 
 #: src/components/CalendarForm.vue:3
 msgid "Edit calendar"
@@ -74,7 +73,7 @@ msgstr "Edit event"
 
 #: src/App.vue:11 src/App.vue:39
 msgid "Information"
-msgstr ""
+msgstr "Information"
 
 #: src/App.vue:5
 msgid "My calendars"
@@ -94,21 +93,20 @@ msgid "Read"
 msgstr "Read"
 
 #: src/App.vue:31
-#, fuzzy
 msgid "Shared calendars"
-msgstr "My calendars"
+msgstr "Shared calendars"
 
 #: src/components/CalendarForm.vue:20
 msgid "Shared?"
-msgstr ""
+msgstr "Shared?"
 
 #: src/components/CalendarDetail.vue:10
 msgid "The credentials are the same than the ones you use to access Modoboa."
-msgstr ""
+msgstr "The credentials are the same than the ones you use to access Modoboa."
 
 #: src/components/CalendarDetail.vue:6
 msgid "To access this calendar from the outside (such as Mozilla Thunderbird or your smartphone), use the following URL:"
-msgstr ""
+msgstr "To access this calendar from the outside (such as Mozilla Thunderbird or your smartphone), use the following URL:"
 
 #: src/components/CalendarAccessRulesForm.vue:15
 #: src/components/CalendarAccessRulesForm.vue:28
@@ -125,31 +123,29 @@ msgstr "Title"
 
 #: src/components/EventForm.vue:87 src/components/CreateEventForm.vue:80
 msgid "Save"
-msgstr ""
+msgstr "Save"
 
 #: src/components/EventForm.vue:116 src/components/CreateEventForm.vue:98
-#, fuzzy
 msgid "A calendar is required."
-msgstr "Calendar sharing"
+msgstr "A calendar is required."
 
 #: src/components/EventForm.vue:127 src/components/EventForm.vue:140
-#: src/components/CalendarForm.vue:116 src/components/Calendar.vue:143
+#: src/components/CalendarForm.vue:116 src/components/Calendar.vue:150
 #: src/App.vue:132
 msgid "Success"
-msgstr ""
+msgstr "Success"
 
-#: src/components/EventForm.vue:129 src/components/Calendar.vue:145
+#: src/components/EventForm.vue:129 src/components/Calendar.vue:152
 msgid "Event updated"
-msgstr ""
+msgstr "Event updated"
 
 #: src/components/EventForm.vue:134
 msgid "Are you sure you want to remove this event?"
-msgstr ""
+msgstr "Are you sure you want to remove this event?"
 
 #: src/components/EventForm.vue:142
-#, fuzzy
 msgid "Event deleted"
-msgstr "Calendar sharing"
+msgstr "Event deleted"
 
 #: src/components/CalendarForm.vue:77
 msgid "Name"
@@ -157,31 +153,28 @@ msgstr "Name"
 
 #: src/components/CalendarForm.vue:80
 msgid "Choose a domain"
-msgstr ""
+msgstr "Choose a domain"
 
 #: src/components/CalendarForm.vue:84
 msgid "Update"
-msgstr ""
+msgstr "Update"
 
 #: src/components/CalendarForm.vue:86
 msgid "Create"
-msgstr ""
+msgstr "Create"
 
 #: src/components/CalendarForm.vue:104
-#, fuzzy
 msgid "Calendar updated"
-msgstr "Calendar sharing"
+msgstr "Calendar updated"
 
 #: src/components/CalendarForm.vue:107
-#, fuzzy
 msgid "Calendar created"
-msgstr "Calendar sharing"
+msgstr "Calendar created"
 
 #: src/App.vue:126
 msgid "Are you sure you want to delete this calendar?"
-msgstr ""
+msgstr "Are you sure you want to delete this calendar?"
 
 #: src/App.vue:134
-#, fuzzy
 msgid "Calendar deleted"
-msgstr "Calendar sharing"
+msgstr "Calendar deleted"

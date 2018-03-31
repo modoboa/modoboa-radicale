@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: modoboa-calendar 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-30 09:00+0200\n"
+"POT-Creation-Date: 2018-03-31 14:08+0200\n"
 "PO-Revision-Date: 2018-03-30 09:02+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -130,12 +130,12 @@ msgid "A calendar is required."
 msgstr "Un calendrier est requis."
 
 #: src/components/EventForm.vue:127 src/components/EventForm.vue:140
-#: src/components/CalendarForm.vue:116 src/components/Calendar.vue:143
+#: src/components/CalendarForm.vue:116 src/components/Calendar.vue:150
 #: src/App.vue:132
 msgid "Success"
 msgstr "Succès"
 
-#: src/components/EventForm.vue:129 src/components/Calendar.vue:145
+#: src/components/EventForm.vue:129 src/components/Calendar.vue:152
 msgid "Event updated"
 msgstr "Evènement mis à jour"
 
