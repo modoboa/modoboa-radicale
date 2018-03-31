@@ -13,14 +13,16 @@ running the following command::
 
   $ pip install modoboa-radicale
 
-Edit the settings.py file of your modoboa instance and add
-``modoboa_radicale`` inside the ``MODOBOA_APPS`` variable like this::
+Edit the settings.py file of your modoboa instance and apply the following modifications:
+
+- add ``modoboa_radicale`` inside the ``MODOBOA_APPS`` variable like this::
 
     MODOBOA_APPS = (
       'modoboa',
       'modoboa.core',
       'modoboa.lib',
       'modoboa.admin',
+      'modoboa.transport',
       'modoboa.relaydomains',
       'modoboa.limits',
       'modoboa.parameters',
@@ -28,6 +30,11 @@ Edit the settings.py file of your modoboa instance and add
       # ...
       'modoboa_radicale',
     )
+
+- Add the following at the end of the file::
+
+    from modoboa_radicale import settings as modoboa_radicale_settings
+    modoboa_radicale_settings.apply(globals())
 
 Run the following commands to setup the database tables::
 
@@ -38,6 +45,22 @@ Run the following commands to setup the database tables::
     
 Finally, restart the python process running modoboa (uwsgi, gunicorn,
 apache, whatever).
+
+For developpers
+---------------
+
+The frontend part of this plugin is developed with `VueJS 2 <https://vuejs.org/>`_ and
+requires `nodejs <https://nodejs.org/en/>`_ and `webpack <https://webpack.js.org/>`_.
+
+Once nodejs is installed on your system, run the following commands::
+
+  $ cd frontend
+  $ npm install
+  $ npm run dev
+
+To update dist files (the ones that will be distributed with the plugin), run::
+
+  $ npm run build
 
 .. |landscape| image:: https://landscape.io/github/modoboa/modoboa-radicale/master/landscape.svg?style=flat
    :target: https://landscape.io/github/modoboa/modoboa-radicale/master

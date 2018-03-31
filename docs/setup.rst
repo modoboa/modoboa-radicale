@@ -4,10 +4,10 @@ Setup
 
 .. warning::
 
-   This plugin requires Radicale 0.9 or higher.
+   This plugin requires Radicale 2.0 or higher.
 
 Once `Radicale is installed
-<http://radicale.org/user_documentation/>`_ on your server, you must
+<http://radicale.org/documentation/>`_ on your server, you must
 tell Modoboa where it can find the file used to store rules.
 
 Go to the *Modoboa > Parameters > Radicale* panel and fill the

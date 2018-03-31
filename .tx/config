@@ -7,8 +7,8 @@ source_file = modoboa_radicale/locale/en/LC_MESSAGES/django.po
 source_lang = en
 type = PO
 
-[modoboa.modoboa-radicale-djangojspo]
-file_filter = modoboa_radicale/locale/<lang>/LC_MESSAGES/djangojs.po
-source_file = modoboa_radicale/locale/en/LC_MESSAGES/djangojs.po
+[modoboa.modoboa-radicale-frontend]
+file_filter = frontend/locale/<lang>/LC_MESSAGES/app.po
+source_file = frontend/locale/en/LC_MESSAGES/app.po
 source_lang = en
 type = PO

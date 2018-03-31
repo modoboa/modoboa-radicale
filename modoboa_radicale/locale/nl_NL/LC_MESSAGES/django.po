@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Modoboa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-03 09:31+0100\n"
+"POT-Creation-Date: 2018-03-31 14:08+0200\n"
 "PO-Revision-Date: 2014-12-31 11:37+0000\n"
 "Last-Translator: TuxBrother <vrijwilligerswerk@wij.rs>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/projects/p/"
@@ -20,95 +20,50 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: forms.py:73
-msgid "Username"
-msgstr "Gebruikersnaam"
-
-#: forms.py:77 templates/modoboa_radicale/accessrule.html:6
-msgid "Read"
-msgstr "Lezen"
-
-#: forms.py:80 templates/modoboa_radicale/accessrule.html:7
-msgid "Write"
-msgstr "Schrijven"
-
-#: forms.py:132
-#, python-format
-msgid "Mailbox %s does not exist"
-msgstr "Mailbox %s bestaat niet"
-
-#: forms.py:154 forms.py:189
-msgid "General"
-msgstr "Algemeen"
-
-#: forms.py:160 forms.py:196
-msgid "Rights"
-msgstr "Rechten"
-
-#: forms.py:167
-msgid "New calendar"
-msgstr "Nieuwe kalender"
-
-#: forms.py:179 views.py:133
-msgid "Calendar created"
-msgstr "Kalender aangemaakt"
-
-#: forms.py:218 views.py:170
-msgid "Calendar updated"
-msgstr "Kalender bijgewerkt"
-
-#: forms.py:227
+#: forms.py:16
 msgid "Server settings"
 msgstr "Server instellingen"
 
-#: forms.py:231
+#: forms.py:20
 msgid "Server URL"
 msgstr "Server URL"
 
-#: forms.py:233
+#: forms.py:22
 msgid ""
 "The URL of your Radicale server. It will be used to construct calendar URLs."
 msgstr ""
 "De URL van de Radicale server. Het zal gebruikt worden om kalender URL's "
 "samen te stellen."
 
-#: forms.py:240
+#: forms.py:29
 msgid "Rights management"
 msgstr "Rechten beheer"
 
-#: forms.py:243
+#: forms.py:32
 msgid "Rights file's path"
 msgstr "Locatie van het rechtenbestand"
 
-#: forms.py:246
+#: forms.py:35
 msgid "Path to the file that contains rights definition"
 msgstr "Locatie van het bestand dat de rechtendefinitie bevat"
 
-#: forms.py:252
+#: forms.py:41
 msgid "Allow calendars administration"
 msgstr "Sta het beheer van kalenders toe"
 
-#: forms.py:255
+#: forms.py:44
 msgid "Allow domain administrators to manage user calendars (read and write)"
 msgstr ""
 "Sta domein administrators toe om kalenders van gebruikers te beheren (lezen "
 "en schrijven)"
 
-#: handlers.py:36
+#: handlers.py:45
 msgid "Calendars"
 msgstr "Kalenders"
 
 #: models.py:44
 msgid "Server location is not set, please fix it."
 msgstr ""
-
-#: models.py:101
-msgid "User"
-msgstr "Gebruiker"
-
-#: models.py:149
-msgid "Shared"
-msgstr "Gedeeld"
 
 #: modo_extension.py:17
 msgid "Radicale management"
@@ -118,56 +73,84 @@ msgstr "Radicale beheer"
 msgid "Management frontend for Radicale, a simple calendar and contact server."
 msgstr "Beheermodule voor Radicale, een simpele server kalenders en contacten."
 
-#: templates/modoboa_radicale/calendar_detail.html:6
-msgid "To access this calendar, use the following address:"
-msgstr "Deze kalender heeft het volgende adres:"
+#: serializers.py:167 serializers.py:169
+msgid "This field is required."
+msgstr ""
 
-#: templates/modoboa_radicale/calendars.html:48
-msgid "Name"
-msgstr "Naam"
+#: templates/modoboa_radicale/calendar_display.html:6
+#, fuzzy
+#| msgid "Calendars"
+msgid "Calendar"
+msgstr "Kalenders"
 
-#: templates/modoboa_radicale/calendars.html:49
-msgid "Owner"
-msgstr "Eigenaar"
+#~ msgid "Username"
+#~ msgstr "Gebruikersnaam"
 
-#: templates/modoboa_radicale/calendars.html:50
-msgid "Tags"
-msgstr "Labels"
+#~ msgid "Read"
+#~ msgstr "Lezen"
 
-#: templates/modoboa_radicale/calendars.html:51
-msgid "Actions"
-msgstr "Acties"
+#~ msgid "Write"
+#~ msgstr "Schrijven"
 
-#: templatetags/radicale_tags.py:27
-msgid "Add calendar"
-msgstr "Kalender toevoegen"
+#~ msgid "Mailbox %s does not exist"
+#~ msgstr "Mailbox %s bestaat niet"
 
-#: templatetags/radicale_tags.py:36
-msgid "Add shared calendar"
-msgstr "Gedeelde kalender toevoegen"
+#~ msgid "General"
+#~ msgstr "Algemeen"
 
-#: templatetags/radicale_tags.py:53
-msgid "View calendar detail"
-msgstr "Laat de kalender details zien"
+#~ msgid "Rights"
+#~ msgstr "Rechten"
 
-#: templatetags/radicale_tags.py:71
-#, python-format
-msgid "Edit %s"
-msgstr "Bewerk %s"
+#~ msgid "New calendar"
+#~ msgstr "Nieuwe kalender"
 
-#: templatetags/radicale_tags.py:75
-#, python-format
-msgid "Delete %s?"
-msgstr "Verwijder %s?"
+#~ msgid "Calendar created"
+#~ msgstr "Kalender aangemaakt"
 
-#: views.py:106 views.py:165
-msgid "Calendar removed"
-msgstr "Kalender verwijderd"
+#~ msgid "Calendar updated"
+#~ msgstr "Kalender bijgewerkt"
 
-#: views.py:141
-msgid "New shared calendar"
-msgstr "Nieuwe gedeelde kalender"
+#~ msgid "User"
+#~ msgstr "Gebruiker"
 
-#: views.py:144 views.py:181
-msgid "Submit"
-msgstr "Versturen"
+#~ msgid "Shared"
+#~ msgstr "Gedeeld"
+
+#~ msgid "To access this calendar, use the following address:"
+#~ msgstr "Deze kalender heeft het volgende adres:"
+
+#~ msgid "Name"
+#~ msgstr "Naam"
+
+#~ msgid "Owner"
+#~ msgstr "Eigenaar"
+
+#~ msgid "Tags"
+#~ msgstr "Labels"
+
+#~ msgid "Actions"
+#~ msgstr "Acties"
+
+#~ msgid "Add calendar"
+#~ msgstr "Kalender toevoegen"
+
+#~ msgid "Add shared calendar"
+#~ msgstr "Gedeelde kalender toevoegen"
+
+#~ msgid "View calendar detail"
+#~ msgstr "Laat de kalender details zien"
+
+#~ msgid "Edit %s"
+#~ msgstr "Bewerk %s"
+
+#~ msgid "Delete %s?"
+#~ msgstr "Verwijder %s?"
+
+#~ msgid "Calendar removed"
+#~ msgstr "Kalender verwijderd"
+
+#~ msgid "New shared calendar"
+#~ msgstr "Nieuwe gedeelde kalender"
+
+#~ msgid "Submit"
+#~ msgstr "Versturen"

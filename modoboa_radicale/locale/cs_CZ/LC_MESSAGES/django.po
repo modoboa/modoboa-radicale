@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Modoboa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-03 09:31+0100\n"
+"POT-Creation-Date: 2018-03-31 14:08+0200\n"
 "PO-Revision-Date: 2015-01-06 10:05+0000\n"
 "Last-Translator: Miroslav Abrahám <miris@kunago.com>\n"
 "Language-Team: Czech (Czech Republic) (http://www.transifex.com/projects/p/"
@@ -19,93 +19,48 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: forms.py:73
-msgid "Username"
-msgstr "Uživatelské jméno"
-
-#: forms.py:77 templates/modoboa_radicale/accessrule.html:6
-msgid "Read"
-msgstr "Číst"
-
-#: forms.py:80 templates/modoboa_radicale/accessrule.html:7
-msgid "Write"
-msgstr "Psát"
-
-#: forms.py:132
-#, python-format
-msgid "Mailbox %s does not exist"
-msgstr "Schránka %s neexistuje"
-
-#: forms.py:154 forms.py:189
-msgid "General"
-msgstr "Obecné"
-
-#: forms.py:160 forms.py:196
-msgid "Rights"
-msgstr "Oprávnění"
-
-#: forms.py:167
-msgid "New calendar"
-msgstr "Nový kalendář"
-
-#: forms.py:179 views.py:133
-msgid "Calendar created"
-msgstr "Kalendář vytvořen"
-
-#: forms.py:218 views.py:170
-msgid "Calendar updated"
-msgstr "Kalendář aktualizován"
-
-#: forms.py:227
+#: forms.py:16
 msgid "Server settings"
 msgstr "Nastavení serveru"
 
-#: forms.py:231
+#: forms.py:20
 msgid "Server URL"
 msgstr "URL adresa serveru"
 
-#: forms.py:233
+#: forms.py:22
 msgid ""
 "The URL of your Radicale server. It will be used to construct calendar URLs."
 msgstr ""
 "URL adresa serveru Radicale. Adresa bude použita k vytvoření adres kalendářů."
 
-#: forms.py:240
+#: forms.py:29
 msgid "Rights management"
 msgstr "Nastavení oprávnění"
 
-#: forms.py:243
+#: forms.py:32
 msgid "Rights file's path"
 msgstr "Cesta k souboru s právy"
 
-#: forms.py:246
+#: forms.py:35
 msgid "Path to the file that contains rights definition"
 msgstr "Cesta k souboru, který obsahuje seznam oprávnění"
 
-#: forms.py:252
+#: forms.py:41
 msgid "Allow calendars administration"
 msgstr "Povolit správu kalendářů"
 
-#: forms.py:255
+#: forms.py:44
 msgid "Allow domain administrators to manage user calendars (read and write)"
 msgstr ""
 "Povolit správcům domén spravovat kalendáře uživatelů (číst a zapisovat)"
 
-#: handlers.py:36
+#: handlers.py:45
 msgid "Calendars"
 msgstr "Kalendáře"
 
 #: models.py:44
 msgid "Server location is not set, please fix it."
 msgstr ""
-
-#: models.py:101
-msgid "User"
-msgstr "Uživatel"
-
-#: models.py:149
-msgid "Shared"
-msgstr "Sdíleno"
 
 #: modo_extension.py:17
 msgid "Radicale management"
@@ -116,56 +71,84 @@ msgid "Management frontend for Radicale, a simple calendar and contact server."
 msgstr ""
 "Nastavení rozhraní Radicale, jednoduchého serveru pro kalendáře a kontakty."
 
-#: templates/modoboa_radicale/calendar_detail.html:6
-msgid "To access this calendar, use the following address:"
-msgstr "Pro přístup k tomuto kalendáři použijte následující adresu:"
+#: serializers.py:167 serializers.py:169
+msgid "This field is required."
+msgstr ""
 
-#: templates/modoboa_radicale/calendars.html:48
-msgid "Name"
-msgstr "Jméno"
+#: templates/modoboa_radicale/calendar_display.html:6
+#, fuzzy
+#| msgid "Calendars"
+msgid "Calendar"
+msgstr "Kalendáře"
 
-#: templates/modoboa_radicale/calendars.html:49
-msgid "Owner"
-msgstr "Majitel"
+#~ msgid "Username"
+#~ msgstr "Uživatelské jméno"
 
-#: templates/modoboa_radicale/calendars.html:50
-msgid "Tags"
-msgstr "Značky"
+#~ msgid "Read"
+#~ msgstr "Číst"
 
-#: templates/modoboa_radicale/calendars.html:51
-msgid "Actions"
-msgstr "Akce"
+#~ msgid "Write"
+#~ msgstr "Psát"
 
-#: templatetags/radicale_tags.py:27
-msgid "Add calendar"
-msgstr "Přidat kalendář"
+#~ msgid "Mailbox %s does not exist"
+#~ msgstr "Schránka %s neexistuje"
 
-#: templatetags/radicale_tags.py:36
-msgid "Add shared calendar"
-msgstr "Přidat sdílený kalendář"
+#~ msgid "General"
+#~ msgstr "Obecné"
 
-#: templatetags/radicale_tags.py:53
-msgid "View calendar detail"
-msgstr "Zobrazit detaily kalendáře"
+#~ msgid "Rights"
+#~ msgstr "Oprávnění"
 
-#: templatetags/radicale_tags.py:71
-#, python-format
-msgid "Edit %s"
-msgstr "Upravit %s"
+#~ msgid "New calendar"
+#~ msgstr "Nový kalendář"
 
-#: templatetags/radicale_tags.py:75
-#, python-format
-msgid "Delete %s?"
-msgstr "Smazat %s?"
+#~ msgid "Calendar created"
+#~ msgstr "Kalendář vytvořen"
 
-#: views.py:106 views.py:165
-msgid "Calendar removed"
-msgstr "Kalendář odstraněn"
+#~ msgid "Calendar updated"
+#~ msgstr "Kalendář aktualizován"
 
-#: views.py:141
-msgid "New shared calendar"
-msgstr "Nový sdílený kalendář"
+#~ msgid "User"
+#~ msgstr "Uživatel"
 
-#: views.py:144 views.py:181
-msgid "Submit"
-msgstr "Uložit"
+#~ msgid "Shared"
+#~ msgstr "Sdíleno"
+
+#~ msgid "To access this calendar, use the following address:"
+#~ msgstr "Pro přístup k tomuto kalendáři použijte následující adresu:"
+
+#~ msgid "Name"
+#~ msgstr "Jméno"
+
+#~ msgid "Owner"
+#~ msgstr "Majitel"
+
+#~ msgid "Tags"
+#~ msgstr "Značky"
+
+#~ msgid "Actions"
+#~ msgstr "Akce"
+
+#~ msgid "Add calendar"
+#~ msgstr "Přidat kalendář"
+
+#~ msgid "Add shared calendar"
+#~ msgstr "Přidat sdílený kalendář"
+
+#~ msgid "View calendar detail"
+#~ msgstr "Zobrazit detaily kalendáře"
+
+#~ msgid "Edit %s"
+#~ msgstr "Upravit %s"
+
+#~ msgid "Delete %s?"
+#~ msgstr "Smazat %s?"
+
+#~ msgid "Calendar removed"
+#~ msgstr "Kalendář odstraněn"
+
+#~ msgid "New shared calendar"
+#~ msgstr "Nový sdílený kalendář"
+
+#~ msgid "Submit"
+#~ msgstr "Uložit"

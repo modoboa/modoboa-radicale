@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-03 09:31+0100\n"
+"POT-Creation-Date: 2018-03-31 14:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,90 +17,45 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: forms.py:73
-msgid "Username"
-msgstr ""
-
-#: forms.py:77 templates/modoboa_radicale/accessrule.html:6
-msgid "Read"
-msgstr ""
-
-#: forms.py:80 templates/modoboa_radicale/accessrule.html:7
-msgid "Write"
-msgstr ""
-
-#: forms.py:132
-#, python-format
-msgid "Mailbox %s does not exist"
-msgstr ""
-
-#: forms.py:154 forms.py:189
-msgid "General"
-msgstr ""
-
-#: forms.py:160 forms.py:196
-msgid "Rights"
-msgstr ""
-
-#: forms.py:167
-msgid "New calendar"
-msgstr ""
-
-#: forms.py:179 views.py:133
-msgid "Calendar created"
-msgstr ""
-
-#: forms.py:218 views.py:170
-msgid "Calendar updated"
-msgstr ""
-
-#: forms.py:227
+#: forms.py:16
 msgid "Server settings"
 msgstr ""
 
-#: forms.py:231
+#: forms.py:20
 msgid "Server URL"
 msgstr ""
 
-#: forms.py:233
+#: forms.py:22
 msgid ""
 "The URL of your Radicale server. It will be used to construct calendar URLs."
 msgstr ""
 
-#: forms.py:240
+#: forms.py:29
 msgid "Rights management"
 msgstr ""
 
-#: forms.py:243
+#: forms.py:32
 msgid "Rights file's path"
 msgstr ""
 
-#: forms.py:246
+#: forms.py:35
 msgid "Path to the file that contains rights definition"
 msgstr ""
 
-#: forms.py:252
+#: forms.py:41
 msgid "Allow calendars administration"
 msgstr ""
 
-#: forms.py:255
+#: forms.py:44
 msgid "Allow domain administrators to manage user calendars (read and write)"
 msgstr ""
 
-#: handlers.py:36
+#: handlers.py:45
 msgid "Calendars"
 msgstr ""
 
 #: models.py:44
 msgid "Server location is not set, please fix it."
-msgstr ""
-
-#: models.py:101
-msgid "User"
-msgstr ""
-
-#: models.py:149
-msgid "Shared"
 msgstr ""
 
 #: modo_extension.py:17
@@ -111,56 +66,10 @@ msgstr ""
 msgid "Management frontend for Radicale, a simple calendar and contact server."
 msgstr ""
 
-#: templates/modoboa_radicale/calendar_detail.html:6
-msgid "To access this calendar, use the following address:"
+#: serializers.py:167 serializers.py:169
+msgid "This field is required."
 msgstr ""
 
-#: templates/modoboa_radicale/calendars.html:48
-msgid "Name"
-msgstr ""
-
-#: templates/modoboa_radicale/calendars.html:49
-msgid "Owner"
-msgstr ""
-
-#: templates/modoboa_radicale/calendars.html:50
-msgid "Tags"
-msgstr ""
-
-#: templates/modoboa_radicale/calendars.html:51
-msgid "Actions"
-msgstr ""
-
-#: templatetags/radicale_tags.py:27
-msgid "Add calendar"
-msgstr ""
-
-#: templatetags/radicale_tags.py:36
-msgid "Add shared calendar"
-msgstr ""
-
-#: templatetags/radicale_tags.py:53
-msgid "View calendar detail"
-msgstr ""
-
-#: templatetags/radicale_tags.py:71
-#, python-format
-msgid "Edit %s"
-msgstr ""
-
-#: templatetags/radicale_tags.py:75
-#, python-format
-msgid "Delete %s?"
-msgstr ""
-
-#: views.py:106 views.py:165
-msgid "Calendar removed"
-msgstr ""
-
-#: views.py:141
-msgid "New shared calendar"
-msgstr ""
-
-#: views.py:144 views.py:181
-msgid "Submit"
+#: templates/modoboa_radicale/calendar_display.html:6
+msgid "Calendar"
 msgstr ""

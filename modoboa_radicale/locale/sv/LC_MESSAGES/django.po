@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Modoboa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-03 09:31+0100\n"
+"POT-Creation-Date: 2018-03-31 14:08+0200\n"
 "PO-Revision-Date: 2015-01-13 15:18+0000\n"
 "Last-Translator: Olle Gustafsson <olle@dalnix.se>\n"
 "Language-Team: Swedish (http://www.transifex.com/projects/p/modoboa/language/"
@@ -21,94 +21,49 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: forms.py:73
-msgid "Username"
-msgstr "Användarnamn"
-
-#: forms.py:77 templates/modoboa_radicale/accessrule.html:6
-msgid "Read"
-msgstr "Läsa"
-
-#: forms.py:80 templates/modoboa_radicale/accessrule.html:7
-msgid "Write"
-msgstr "Skriva"
-
-#: forms.py:132
-#, python-format
-msgid "Mailbox %s does not exist"
-msgstr "Brevlåda %s existerar inte"
-
-#: forms.py:154 forms.py:189
-msgid "General"
-msgstr "Generellt"
-
-#: forms.py:160 forms.py:196
-msgid "Rights"
-msgstr "Rättigheter"
-
-#: forms.py:167
-msgid "New calendar"
-msgstr "Ny kalendrar"
-
-#: forms.py:179 views.py:133
-msgid "Calendar created"
-msgstr "Kalender skapad"
-
-#: forms.py:218 views.py:170
-msgid "Calendar updated"
-msgstr "Kalender uppdaterad"
-
-#: forms.py:227
+#: forms.py:16
 msgid "Server settings"
 msgstr "Serverinställningar"
 
-#: forms.py:231
+#: forms.py:20
 msgid "Server URL"
 msgstr "Server URL"
 
-#: forms.py:233
+#: forms.py:22
 msgid ""
 "The URL of your Radicale server. It will be used to construct calendar URLs."
 msgstr ""
 "URL till din Radicale server. Den kommer användas för att konstruera "
 "calender URL:er."
 
-#: forms.py:240
+#: forms.py:29
 msgid "Rights management"
 msgstr "Rättighetshantering"
 
-#: forms.py:243
+#: forms.py:32
 msgid "Rights file's path"
 msgstr "Rättighets fil sökväg"
 
-#: forms.py:246
+#: forms.py:35
 msgid "Path to the file that contains rights definition"
 msgstr "Sökväg till filen som innehåller rättighetsdefinitioner"
 
-#: forms.py:252
+#: forms.py:41
 msgid "Allow calendars administration"
 msgstr "Tillåt kalendrars administration"
 
-#: forms.py:255
+#: forms.py:44
 msgid "Allow domain administrators to manage user calendars (read and write)"
 msgstr ""
 "Tillåt domänadmininstratörer att ändra användares kalendrar (läsa och skriva)"
 
-#: handlers.py:36
+#: handlers.py:45
 msgid "Calendars"
 msgstr "Kalendrar"
 
 #: models.py:44
 msgid "Server location is not set, please fix it."
 msgstr ""
-
-#: models.py:101
-msgid "User"
-msgstr "Användare"
-
-#: models.py:149
-msgid "Shared"
-msgstr "Delad"
 
 #: modo_extension.py:17
 msgid "Radicale management"
@@ -119,56 +74,84 @@ msgid "Management frontend for Radicale, a simple calendar and contact server."
 msgstr ""
 "Hanterings frontend för Radicale, en enkel kalender- och kontakt-server"
 
-#: templates/modoboa_radicale/calendar_detail.html:6
-msgid "To access this calendar, use the following address:"
-msgstr "För att få tillgång till denna kalender, använd följande adress:"
+#: serializers.py:167 serializers.py:169
+msgid "This field is required."
+msgstr ""
 
-#: templates/modoboa_radicale/calendars.html:48
-msgid "Name"
-msgstr "Namn"
+#: templates/modoboa_radicale/calendar_display.html:6
+#, fuzzy
+#| msgid "Calendars"
+msgid "Calendar"
+msgstr "Kalendrar"
 
-#: templates/modoboa_radicale/calendars.html:49
-msgid "Owner"
-msgstr "Ägare"
+#~ msgid "Username"
+#~ msgstr "Användarnamn"
 
-#: templates/modoboa_radicale/calendars.html:50
-msgid "Tags"
-msgstr "Tagg"
+#~ msgid "Read"
+#~ msgstr "Läsa"
 
-#: templates/modoboa_radicale/calendars.html:51
-msgid "Actions"
-msgstr "Åtgärder"
+#~ msgid "Write"
+#~ msgstr "Skriva"
 
-#: templatetags/radicale_tags.py:27
-msgid "Add calendar"
-msgstr "Lägg till kalender"
+#~ msgid "Mailbox %s does not exist"
+#~ msgstr "Brevlåda %s existerar inte"
 
-#: templatetags/radicale_tags.py:36
-msgid "Add shared calendar"
-msgstr "Lägg till delad kalender"
+#~ msgid "General"
+#~ msgstr "Generellt"
 
-#: templatetags/radicale_tags.py:53
-msgid "View calendar detail"
-msgstr "Visa kalender detaljer"
+#~ msgid "Rights"
+#~ msgstr "Rättigheter"
 
-#: templatetags/radicale_tags.py:71
-#, python-format
-msgid "Edit %s"
-msgstr "Redigera %s"
+#~ msgid "New calendar"
+#~ msgstr "Ny kalendrar"
 
-#: templatetags/radicale_tags.py:75
-#, python-format
-msgid "Delete %s?"
-msgstr "Radera %s?"
+#~ msgid "Calendar created"
+#~ msgstr "Kalender skapad"
 
-#: views.py:106 views.py:165
-msgid "Calendar removed"
-msgstr "Kalender flyttad"
+#~ msgid "Calendar updated"
+#~ msgstr "Kalender uppdaterad"
 
-#: views.py:141
-msgid "New shared calendar"
-msgstr "Ny delad kalender"
+#~ msgid "User"
+#~ msgstr "Användare"
 
-#: views.py:144 views.py:181
-msgid "Submit"
-msgstr "Skicka"
+#~ msgid "Shared"
+#~ msgstr "Delad"
+
+#~ msgid "To access this calendar, use the following address:"
+#~ msgstr "För att få tillgång till denna kalender, använd följande adress:"
+
+#~ msgid "Name"
+#~ msgstr "Namn"
+
+#~ msgid "Owner"
+#~ msgstr "Ägare"
+
+#~ msgid "Tags"
+#~ msgstr "Tagg"
+
+#~ msgid "Actions"
+#~ msgstr "Åtgärder"
+
+#~ msgid "Add calendar"
+#~ msgstr "Lägg till kalender"
+
+#~ msgid "Add shared calendar"
+#~ msgstr "Lägg till delad kalender"
+
+#~ msgid "View calendar detail"
+#~ msgstr "Visa kalender detaljer"
+
+#~ msgid "Edit %s"
+#~ msgstr "Redigera %s"
+
+#~ msgid "Delete %s?"
+#~ msgstr "Radera %s?"
+
+#~ msgid "Calendar removed"
+#~ msgstr "Kalender flyttad"
+
+#~ msgid "New shared calendar"
+#~ msgstr "Ny delad kalender"
+
+#~ msgid "Submit"
+#~ msgstr "Skicka"

@@ -15,6 +15,8 @@ Features currently supported are:
 * Private calendar creation (available for simple users)
 * Rights management for private calendars
 * Shared calendar creation by domain (available for domain administrators)
+* User and shared calendars display
+* Events creation/update/delete/view
 
 Contents:
 

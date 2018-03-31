@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Modoboa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-03 09:31+0100\n"
+"POT-Creation-Date: 2018-03-31 14:08+0200\n"
 "PO-Revision-Date: 2013-12-03 09:35+0000\n"
 "Last-Translator: Antoine Nguyen <tonio@ngyn.org>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/modoboa/language/"
@@ -19,101 +19,52 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: forms.py:73
-msgid "Username"
-msgstr "Логин пользователя"
-
-#: forms.py:77 templates/modoboa_radicale/accessrule.html:6
-msgid "Read"
-msgstr ""
-
-#: forms.py:80 templates/modoboa_radicale/accessrule.html:7
-msgid "Write"
-msgstr ""
-
-#: forms.py:132
-#, fuzzy, python-format
-msgid "Mailbox %s does not exist"
-msgstr "Домен '%s' не существует"
-
-#: forms.py:154 forms.py:189
-msgid "General"
-msgstr "Основные"
-
-#: forms.py:160 forms.py:196
-msgid "Rights"
-msgstr ""
-
-#: forms.py:167
-#, fuzzy
-msgid "New calendar"
-msgstr "Новый синоним"
-
-#: forms.py:179 views.py:133
-#, fuzzy
-msgid "Calendar created"
-msgstr "Фильтр создан"
-
-#: forms.py:218 views.py:170
-#, fuzzy
-msgid "Calendar updated"
-msgstr "Профиль обновлен"
-
-#: forms.py:227
+#: forms.py:16
 #, fuzzy
 msgid "Server settings"
 msgstr "Настройки фильтров содержания"
 
-#: forms.py:231
+#: forms.py:20
 #, fuzzy
 msgid "Server URL"
 msgstr "Порт сервера"
 
-#: forms.py:233
+#: forms.py:22
 msgid ""
 "The URL of your Radicale server. It will be used to construct calendar URLs."
 msgstr ""
 
-#: forms.py:240
+#: forms.py:29
 #, fuzzy
 msgid "Rights management"
 msgstr "Управление карантином"
 
-#: forms.py:243
+#: forms.py:32
 msgid "Rights file's path"
 msgstr ""
 
-#: forms.py:246
+#: forms.py:35
 msgid "Path to the file that contains rights definition"
 msgstr ""
 
-#: forms.py:252
+#: forms.py:41
 #, fuzzy
 msgid "Allow calendars administration"
 msgstr "Администратор домена"
 
-#: forms.py:255
+#: forms.py:44
 #, fuzzy
 msgid "Allow domain administrators to manage user calendars (read and write)"
 msgstr ""
 "Максимальное количество создаваемых администраторов домена для этого "
 "пользователя"
 
-#: handlers.py:36
+#: handlers.py:45
 msgid "Calendars"
 msgstr ""
 
 #: models.py:44
 msgid "Server location is not set, please fix it."
-msgstr ""
-
-#: models.py:101
-#, fuzzy
-msgid "User"
-msgstr "Логин пользователя"
-
-#: models.py:149
-msgid "Shared"
 msgstr ""
 
 #: modo_extension.py:17
@@ -125,58 +76,53 @@ msgstr "Управление карантином"
 msgid "Management frontend for Radicale, a simple calendar and contact server."
 msgstr ""
 
-#: templates/modoboa_radicale/calendar_detail.html:6
-msgid "To access this calendar, use the following address:"
+#: serializers.py:167 serializers.py:169
+msgid "This field is required."
 msgstr ""
 
-#: templates/modoboa_radicale/calendars.html:48
-msgid "Name"
-msgstr "Логин"
-
-#: templates/modoboa_radicale/calendars.html:49
-msgid "Owner"
-msgstr ""
-
-#: templates/modoboa_radicale/calendars.html:50
-msgid "Tags"
-msgstr "Теги"
-
-#: templates/modoboa_radicale/calendars.html:51
-msgid "Actions"
-msgstr "Действие"
-
-#: templatetags/radicale_tags.py:27
+#: templates/modoboa_radicale/calendar_display.html:6
 #, fuzzy
-msgid "Add calendar"
-msgstr "Добавить синоним"
+msgid "Calendar"
+msgstr "Новый синоним"
 
-#: templatetags/radicale_tags.py:36
-msgid "Add shared calendar"
-msgstr ""
+#~ msgid "Username"
+#~ msgstr "Логин пользователя"
 
-#: templatetags/radicale_tags.py:53
-msgid "View calendar detail"
-msgstr ""
-
-#: templatetags/radicale_tags.py:71
-#, python-format
-msgid "Edit %s"
-msgstr ""
-
-#: templatetags/radicale_tags.py:75
-#, python-format
-msgid "Delete %s?"
-msgstr "Удалить %s?"
-
-#: views.py:106 views.py:165
 #, fuzzy
-msgid "Calendar removed"
-msgstr "Фильтр удален"
+#~ msgid "Mailbox %s does not exist"
+#~ msgstr "Домен '%s' не существует"
 
-#: views.py:141
-msgid "New shared calendar"
-msgstr ""
+#~ msgid "General"
+#~ msgstr "Основные"
 
-#: views.py:144 views.py:181
-msgid "Submit"
-msgstr ""
+#, fuzzy
+#~ msgid "Calendar created"
+#~ msgstr "Фильтр создан"
+
+#, fuzzy
+#~ msgid "Calendar updated"
+#~ msgstr "Профиль обновлен"
+
+#, fuzzy
+#~ msgid "User"
+#~ msgstr "Логин пользователя"
+
+#~ msgid "Name"
+#~ msgstr "Логин"
+
+#~ msgid "Tags"
+#~ msgstr "Теги"
+
+#~ msgid "Actions"
+#~ msgstr "Действие"
+
+#, fuzzy
+#~ msgid "Add calendar"
+#~ msgstr "Добавить синоним"
+
+#~ msgid "Delete %s?"
+#~ msgstr "Удалить %s?"
+
+#, fuzzy
+#~ msgid "Calendar removed"
+#~ msgstr "Фильтр удален"

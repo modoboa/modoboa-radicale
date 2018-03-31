@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Modoboa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-03 09:31+0100\n"
+"POT-Creation-Date: 2018-03-31 14:08+0200\n"
 "PO-Revision-Date: 2013-10-01 09:56+0000\n"
 "Last-Translator: Pedro Gracia <lasarux@neuroomante.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/modoboa/language/"
@@ -20,100 +20,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: forms.py:73
-msgid "Username"
-msgstr "Nombre de usuario"
-
-#: forms.py:77 templates/modoboa_radicale/accessrule.html:6
-msgid "Read"
-msgstr ""
-
-#: forms.py:80 templates/modoboa_radicale/accessrule.html:7
-msgid "Write"
-msgstr ""
-
-#: forms.py:132
-#, fuzzy, python-format
-msgid "Mailbox %s does not exist"
-msgstr "El dominio '%s' no existe"
-
-#: forms.py:154 forms.py:189
-msgid "General"
-msgstr "General"
-
-#: forms.py:160 forms.py:196
-msgid "Rights"
-msgstr ""
-
-#: forms.py:167
-#, fuzzy
-msgid "New calendar"
-msgstr "Nuevo alias"
-
-#: forms.py:179 views.py:133
-#, fuzzy
-msgid "Calendar created"
-msgstr "Filtro creado"
-
-#: forms.py:218 views.py:170
-#, fuzzy
-msgid "Calendar updated"
-msgstr "Perfil actualizado"
-
-#: forms.py:227
+#: forms.py:16
 #, fuzzy
 msgid "Server settings"
 msgstr "Configuración por usuario"
 
-#: forms.py:231
+#: forms.py:20
 #, fuzzy
 msgid "Server URL"
 msgstr "Puerto del servidor"
 
-#: forms.py:233
+#: forms.py:22
 msgid ""
 "The URL of your Radicale server. It will be used to construct calendar URLs."
 msgstr ""
 
-#: forms.py:240
+#: forms.py:29
 #, fuzzy
 msgid "Rights management"
 msgstr "Mantenimiento de la cuarentena"
 
-#: forms.py:243
+#: forms.py:32
 msgid "Rights file's path"
 msgstr ""
 
-#: forms.py:246
+#: forms.py:35
 msgid "Path to the file that contains rights definition"
 msgstr ""
 
-#: forms.py:252
+#: forms.py:41
 #, fuzzy
 msgid "Allow calendars administration"
 msgstr "Administrador de dominio"
 
-#: forms.py:255
+#: forms.py:44
 #, fuzzy
 msgid "Allow domain administrators to manage user calendars (read and write)"
 msgstr ""
 "Número máximo de administradores de dominio que este usuario puede crear"
 
-#: handlers.py:36
+#: handlers.py:45
 msgid "Calendars"
 msgstr ""
 
 #: models.py:44
 msgid "Server location is not set, please fix it."
-msgstr ""
-
-#: models.py:101
-#, fuzzy
-msgid "User"
-msgstr "Nombre de usuario"
-
-#: models.py:149
-msgid "Shared"
 msgstr ""
 
 #: modo_extension.py:17
@@ -125,58 +76,53 @@ msgstr "Mantenimiento de la cuarentena"
 msgid "Management frontend for Radicale, a simple calendar and contact server."
 msgstr ""
 
-#: templates/modoboa_radicale/calendar_detail.html:6
-msgid "To access this calendar, use the following address:"
+#: serializers.py:167 serializers.py:169
+msgid "This field is required."
 msgstr ""
 
-#: templates/modoboa_radicale/calendars.html:48
-msgid "Name"
-msgstr "Nombre"
-
-#: templates/modoboa_radicale/calendars.html:49
-msgid "Owner"
-msgstr ""
-
-#: templates/modoboa_radicale/calendars.html:50
-msgid "Tags"
-msgstr "Tags"
-
-#: templates/modoboa_radicale/calendars.html:51
-msgid "Actions"
-msgstr "Acciones"
-
-#: templatetags/radicale_tags.py:27
+#: templates/modoboa_radicale/calendar_display.html:6
 #, fuzzy
-msgid "Add calendar"
-msgstr "Añadir alias"
+msgid "Calendar"
+msgstr "Nuevo alias"
 
-#: templatetags/radicale_tags.py:36
-msgid "Add shared calendar"
-msgstr ""
+#~ msgid "Username"
+#~ msgstr "Nombre de usuario"
 
-#: templatetags/radicale_tags.py:53
-msgid "View calendar detail"
-msgstr ""
-
-#: templatetags/radicale_tags.py:71
-#, python-format
-msgid "Edit %s"
-msgstr ""
-
-#: templatetags/radicale_tags.py:75
-#, python-format
-msgid "Delete %s?"
-msgstr "¿Eliminar %s?"
-
-#: views.py:106 views.py:165
 #, fuzzy
-msgid "Calendar removed"
-msgstr "Filtro eliminado"
+#~ msgid "Mailbox %s does not exist"
+#~ msgstr "El dominio '%s' no existe"
 
-#: views.py:141
-msgid "New shared calendar"
-msgstr ""
+#~ msgid "General"
+#~ msgstr "General"
 
-#: views.py:144 views.py:181
-msgid "Submit"
-msgstr ""
+#, fuzzy
+#~ msgid "Calendar created"
+#~ msgstr "Filtro creado"
+
+#, fuzzy
+#~ msgid "Calendar updated"
+#~ msgstr "Perfil actualizado"
+
+#, fuzzy
+#~ msgid "User"
+#~ msgstr "Nombre de usuario"
+
+#~ msgid "Name"
+#~ msgstr "Nombre"
+
+#~ msgid "Tags"
+#~ msgstr "Tags"
+
+#~ msgid "Actions"
+#~ msgstr "Acciones"
+
+#, fuzzy
+#~ msgid "Add calendar"
+#~ msgstr "Añadir alias"
+
+#~ msgid "Delete %s?"
+#~ msgstr "¿Eliminar %s?"
+
+#, fuzzy
+#~ msgid "Calendar removed"
+#~ msgstr "Filtro eliminado"
