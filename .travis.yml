@@ -46,6 +46,7 @@ before_deploy:
   - nvm install 6.10
   - npm install
   - npm run build
+  - cd ..
 
 deploy:
   provider: pypi
