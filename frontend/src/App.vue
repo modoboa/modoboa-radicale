@@ -153,9 +153,6 @@ export default {
             this.currentMenu.toggle()
         },
         toggleSharedCalendarMenu (e) {
-            if (!this.$can('modoboa_radicale.add_sharedcalendar')) {
-                return
-            }
             this.toggleSubmenu(e)
         }
     }
