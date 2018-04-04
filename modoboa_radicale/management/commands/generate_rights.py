@@ -91,7 +91,7 @@ permission = %s
             comment="Access rule to domain shared calendars"
         )
         self._generate_acr(
-            "owners-access", r".+", r"%(login)s/.*",
+            "owners-access", r".+", r"%(login)s(/.*)?",
             comment="Read/Write permission for calendar owners"
         )
 
