@@ -1,5 +1,7 @@
 """Radicale signals handlers."""
 
+from __future__ import unicode_literals
+
 from django.db.models import signals
 from django.urls import reverse
 from django.dispatch import receiver
@@ -62,5 +64,4 @@ def set_shared_calendar_path(sender, instance, **kwargs):
     """Set path at creation."""
     if instance.pk:
         return
-    instance._path = "{}/{}".format(
-        instance.domain.name, instance.name)
+    instance._path = "{}/{}".format(instance.domain.name, instance.name)

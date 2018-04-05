@@ -21,12 +21,13 @@ class Caldav_Backend(CalendarBackend):
     def __init__(self, username, password, calendar=None):
         """Constructor."""
         super(Caldav_Backend, self).__init__(calendar)
-        server_url = param_tools.get_global_parameter("server_location")
+        server_url = smart_str(
+            param_tools.get_global_parameter("server_location"))
         self.client = caldav.DAVClient(
             server_url,
             username=username, password=password)
         if self.calendar:
-            self.remote_cal = self.client.calendar(calendar.path)
+            self.remote_cal = self.client.calendar(calendar.encoded_path)
 
     def _serialize_event(self, event):
         """Convert a vevent to a dictionary."""
@@ -73,7 +74,7 @@ class Caldav_Backend(CalendarBackend):
 
     def rename_calendar(self, calendar):
         """Rename an existing calendar."""
-        remote_cal = self.client.calendar(calendar.path)
+        remote_cal = self.client.calendar(calendar.encoded_path)
         remote_cal.set_properties([dav.DisplayName(calendar.name)])
 
     def create_event(self, data):
@@ -125,7 +126,7 @@ class Caldav_Backend(CalendarBackend):
         if "calendar" in data and self.calendar.pk != data["calendar"].pk:
             # Calendar has been changed, remove old event first.
             self.remote_cal.client.delete(url)
-            remote_cal = self.client.calendar(data["calendar"].path)
+            remote_cal = self.client.calendar(data["calendar"].encoded_path)
             url = "{}/{}.ics".format(remote_cal.url.geturl(), uid)
         else:
             remote_cal = self.remote_cal
