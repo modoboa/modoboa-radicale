@@ -6,7 +6,7 @@
     <div slot="body">
       <p><translate>To access this calendar from the outside (such as Mozilla Thunderbird or your smartphone), use the following URL: </translate></p>
       <div class="alert alert-info">
-        {{ calendar.url }}
+        {{ calendar.full_url }}
       </div>
       <p><translate>The credentials are the same than the ones you use to access Modoboa.</translate></p>
       <hr>

@@ -4,8 +4,11 @@ from __future__ import unicode_literals
 
 import os
 
+from six.moves import urllib
+
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible, smart_text
+from django.utils.encoding import (
+    python_2_unicode_compatible, smart_str, smart_text)
 from django.utils.translation import ugettext as _
 
 from modoboa.admin.models import Domain, Mailbox
@@ -34,7 +37,12 @@ class Calendar(models.Model):
         return self._path
 
     @property
-    def url(self):
+    def encoded_path(self):
+        """Return url encoded path."""
+        return urllib.parse.quote(smart_str(self._path))
+
+    @property
+    def full_url(self):
         """Return the calendar URL."""
         if not hasattr(self, "_url"):
             server_location = param_tools.get_global_parameter(
@@ -44,6 +52,19 @@ class Calendar(models.Model):
                     _("Server location is not set, please fix it."))
             self._url = os.path.join(server_location, self._path)
         return self._url
+
+    @property
+    def encoded_url(self):
+        """Return encoded url."""
+        if not hasattr(self, "_encoded_url"):
+            server_location = param_tools.get_global_parameter(
+                "server_location")
+            if not server_location:
+                raise lib_exceptions.InternalError(
+                    _("Server location is not set, please fix it."))
+            self._encoded_url = os.path.join(
+                server_location, self.encoded_path)
+        return self._encoded_url
 
     @property
     def tags(self):

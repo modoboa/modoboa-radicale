@@ -1,3 +1,5 @@
+# coding: utf-8
+
 """Radicale extension unit tests."""
 
 import mock
@@ -178,7 +180,7 @@ class UserCalendarViewSetTestCase(TestDataMixin, ModoAPITestCase):
         response = self.client.post(reverse("core:login"), data)
 
         data = {
-            "name": "Test calendar",
+            "name": "Test calendaré",
             "color": "#ffffff"
         }
         url = reverse("api:user-calendar-list")

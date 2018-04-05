@@ -18,7 +18,7 @@ class CalDAVCalendarMixin(object):
         """Create caldav calendar."""
         request = self.context["request"]
         backend = backends.get_backend_from_request("caldav_", request)
-        backend.create_calendar(calendar.url)
+        backend.create_calendar(calendar.encoded_url)
 
     def rename_remote_calendar(self, calendar):
         """Rename caldav calendar."""
@@ -32,8 +32,8 @@ class UserCalendarSerializer(CalDAVCalendarMixin, serializers.ModelSerializer):
 
     class Meta:
         model = models.UserCalendar
-        fields = ("pk", "name", "color", "path", "url")
-        read_only_fields = ("pk", "path", "url")
+        fields = ("pk", "name", "color", "path", "full_url")
+        read_only_fields = ("pk", "path", "full_url")
 
     def create(self, validated_data):
         """Use current user."""
@@ -74,8 +74,8 @@ class SharedCalendarSerializer(
 
     class Meta:
         model = models.SharedCalendar
-        fields = ("pk", "name", "color", "path", "domain", "url")
-        read_only_fields = ("pk", "path", "url")
+        fields = ("pk", "name", "color", "path", "domain", "full_url")
+        read_only_fields = ("pk", "path", "full_url")
 
     def create(self, validated_data):
         """Create shared calendar."""
