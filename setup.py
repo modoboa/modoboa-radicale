@@ -19,6 +19,7 @@ from setuptools import setup, find_packages
 def get_requirements(requirements_file):
     """Use pip to parse requirements file."""
     requirements = []
+    dependencies = []
     if path.isfile(requirements_file):
         for req in parse_requirements(requirements_file, session="hack"):
             # check markers, such as
@@ -27,12 +28,15 @@ def get_requirements(requirements_file):
             #
             if req.match_markers():
                 requirements.append(str(req.req))
-    return requirements
+                if req.link:
+                    dependencies.append(str(req.link))
+    return requirements, dependencies
 
 
 if __name__ == "__main__":
     HERE = path.abspath(path.dirname(__file__))
-    INSTALL_REQUIRES = get_requirements(path.join(HERE, "requirements.txt"))
+    INSTALL_REQUIRES, DEPENDENCY_LINKS = (
+        get_requirements(path.join(HERE, "requirements.txt")))
 
     with io.open(path.join(HERE, "README.rst"), encoding="utf-8") as readme:
         LONG_DESCRIPTION = readme.read()
@@ -66,6 +70,7 @@ if __name__ == "__main__":
         include_package_data=True,
         zip_safe=False,
         install_requires=INSTALL_REQUIRES,
+        dependency_links=DEPENDENCY_LINKS,
         use_scm_version=True,
         setup_requires=["setuptools_scm"],
     )
