@@ -9,8 +9,9 @@ Installation
 ------------
 
 Install this extension system-wide or inside a virtual environment by
-running the following command::
+running the following commands::
 
+  $ pip install https://github.com/modoboa/caldav/tarball/master#egg=caldav
   $ pip install modoboa-radicale
 
 Edit the settings.py file of your modoboa instance and apply the following modifications:
