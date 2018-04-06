@@ -56,15 +56,15 @@ class SharedCalendarViewSet(viewsets.ModelViewSet):
 class BaseEventViewSet(viewsets.ViewSet):
     """Event viewset."""
 
-    def get_serializer(self, request, data=None, **kwargs):
+    def get_serializer(self, data=None, **kwargs):
         args = []
         options = {
-            "context": {"request": request},
+            "context": {"request": self.request},
             "calendar_type": self.type,
         }
         options.update(kwargs)
         if data is None:
-            data = request.data
+            data = self.request.data
         if self.action in ["list", "retrieve"]:
             sclass = serializers.ROEventSerializer
             args = [data]
@@ -75,7 +75,7 @@ class BaseEventViewSet(viewsets.ViewSet):
 
     def create(self, request, calendar_pk):
         """Create new event."""
-        serializer = self.get_serializer(request)
+        serializer = self.get_serializer()
         serializer.is_valid(raise_exception=True)
         backend = backends.get_backend_from_request(
             "caldav_", request, serializer.validated_data["calendar"])
@@ -91,7 +91,7 @@ class BaseEventViewSet(viewsets.ViewSet):
 
     def update(self, request, pk, calendar_pk):
         """Update existing event."""
-        serializer = self.get_serializer(request)
+        serializer = self.get_serializer()
         new_calendar_type = request.data.get("new_calendar_type")
         if new_calendar_type:
             serializer.update_calendar_field(new_calendar_type)
@@ -106,7 +106,7 @@ class BaseEventViewSet(viewsets.ViewSet):
 
     def partial_update(self, request, pk, calendar_pk):
         """Update existing event."""
-        serializer = self.get_serializer(request, partial=True)
+        serializer = self.get_serializer(partial=True)
         serializer.is_valid(raise_exception=True)
         calendar = self.get_calendar(calendar_pk)
         backend = backends.get_backend_from_request(
@@ -126,7 +126,7 @@ class BaseEventViewSet(viewsets.ViewSet):
             "caldav_", request, calendar)
         events += backend.get_events(
             parse_date_from_iso(start), parse_date_from_iso(end))
-        serializer = self.get_serializer(request, events, many=True)
+        serializer = self.get_serializer(events, many=True)
         return response.Response(serializer.data)
 
     def retrieve(self, request, pk, calendar_pk):
@@ -135,7 +135,7 @@ class BaseEventViewSet(viewsets.ViewSet):
         backend = backends.get_backend_from_request(
             "caldav_", request, calendar)
         event = backend.get_event(pk)
-        serializer = self.get_serializer(request, event)
+        serializer = self.get_serializer(event)
         return response.Response(serializer.data)
 
     def destroy(self, request, pk, calendar_pk):
