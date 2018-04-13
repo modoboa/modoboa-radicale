@@ -50,7 +50,7 @@ class UserCalendarSerializer(CalDAVCalendarMixin, serializers.ModelSerializer):
         for key, value in validated_data.items():
             setattr(instance, key, value)
         instance.save()
-        if old_name != instance.name or old_color != instance_color:
+        if old_name != instance.name or old_color != instance.color:
             self.update_remote_calendar(instance)
         return instance
 
@@ -96,7 +96,7 @@ class SharedCalendarSerializer(
             setattr(instance, key, value)
         instance.domain_id = domain["pk"]
         instance.save()
-        if old_name != instance.name or old_color != instance_color:
+        if old_name != instance.name or old_color != instance.color:
             self.update_remote_calendar(instance)
         return instance
 
