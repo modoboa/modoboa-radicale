@@ -4,7 +4,7 @@ import datetime
 import uuid
 
 import caldav
-from caldav.elements import dav
+from caldav.elements import dav, ical
 import icalendar
 
 from django.utils import timezone
@@ -72,10 +72,11 @@ class Caldav_Backend(CalendarBackend):
         """Create a new calendar."""
         self.client.mkcalendar(url)
 
-    def rename_calendar(self, calendar):
-        """Rename an existing calendar."""
+    def update_calendar(self, calendar):
+        """Update an existing calendar."""
         remote_cal = self.client.calendar(calendar.encoded_path)
-        remote_cal.set_properties([dav.DisplayName(calendar.name)])
+        remote_cal.set_properties([dav.DisplayName(calendar.name),
+                                   ical.CalendarColor(calendar.color)])
 
     def create_event(self, data):
         """Create a new event."""

@@ -20,11 +20,11 @@ class CalDAVCalendarMixin(object):
         backend = backends.get_backend_from_request("caldav_", request)
         backend.create_calendar(calendar.encoded_url)
 
-    def rename_remote_calendar(self, calendar):
-        """Rename caldav calendar."""
+    def update_remote_calendar(self, calendar):
+        """Update caldav calendar."""
         request = self.context["request"]
         backend = backends.get_backend_from_request("caldav_", request)
-        backend.rename_calendar(calendar)
+        backend.update_calendar(calendar)
 
 
 class UserCalendarSerializer(CalDAVCalendarMixin, serializers.ModelSerializer):
@@ -46,11 +46,12 @@ class UserCalendarSerializer(CalDAVCalendarMixin, serializers.ModelSerializer):
     def update(self, instance, validated_data):
         """Update calendar."""
         old_name = instance.name
+        old_color = instance.color
         for key, value in validated_data.items():
             setattr(instance, key, value)
         instance.save()
-        if old_name != instance.name:
-            self.rename_remote_calendar(instance)
+        if old_name != instance.name or old_color != instance.color:
+            self.update_remote_calendar(instance)
         return instance
 
 
@@ -90,12 +91,13 @@ class SharedCalendarSerializer(
         """Update calendar."""
         domain = validated_data.pop("domain")
         old_name = instance.name
+        old_color = instance.color
         for key, value in validated_data.items():
             setattr(instance, key, value)
         instance.domain_id = domain["pk"]
         instance.save()
-        if old_name != instance.name:
-            self.rename_remote_calendar(instance)
+        if old_name != instance.name or old_color != instance.color:
+            self.update_remote_calendar(instance)
         return instance
 
 
