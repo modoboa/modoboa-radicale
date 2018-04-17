@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Modoboa\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-31 14:08+0200\n"
-"PO-Revision-Date: 2013-12-03 09:35+0000\n"
+"PO-Revision-Date: 2018-04-17 16:39+0300\n"
 "Last-Translator: Antoine Nguyen <tonio@ngyn.org>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/modoboa/language/"
 "ru/)\n"
@@ -18,72 +18,67 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: forms.py:16
-#, fuzzy
 msgid "Server settings"
-msgstr "Настройки фильтров содержания"
+msgstr "Параметры сервера"
 
 #: forms.py:20
-#, fuzzy
 msgid "Server URL"
-msgstr "Порт сервера"
+msgstr "URL сервера"
 
 #: forms.py:22
 msgid ""
 "The URL of your Radicale server. It will be used to construct calendar URLs."
-msgstr ""
+msgstr "URL вашего сервера. Будет использован для создания URL календаря."
 
 #: forms.py:29
-#, fuzzy
 msgid "Rights management"
-msgstr "Управление карантином"
+msgstr "Управление правами"
 
 #: forms.py:32
 msgid "Rights file's path"
-msgstr ""
+msgstr "Путь до файла описания прав"
 
 #: forms.py:35
 msgid "Path to the file that contains rights definition"
-msgstr ""
+msgstr "Путь доя файла, который содержит определение прав доступа"
 
 #: forms.py:41
-#, fuzzy
 msgid "Allow calendars administration"
-msgstr "Администратор домена"
+msgstr "Разрешить администрирование календарей"
 
 #: forms.py:44
-#, fuzzy
 msgid "Allow domain administrators to manage user calendars (read and write)"
 msgstr ""
-"Максимальное количество создаваемых администраторов домена для этого "
-"пользователя"
+"Разрешить админам доменов управлять календарями пользователей (чтение и "
+"запись)"
 
 #: handlers.py:45
 msgid "Calendars"
-msgstr ""
+msgstr "Календари"
 
 #: models.py:44
 msgid "Server location is not set, please fix it."
-msgstr ""
+msgstr "Местоположение сервера не указано, пожалуйста, исправьте это."
 
 #: modo_extension.py:17
-#, fuzzy
 msgid "Radicale management"
-msgstr "Управление карантином"
+msgstr "Управление Radicale"
 
 #: modo_extension.py:22
 msgid "Management frontend for Radicale, a simple calendar and contact server."
 msgstr ""
+"Интерфейс управления Radicale, простого сервера календарей и контактов."
 
 #: serializers.py:167 serializers.py:169
 msgid "This field is required."
-msgstr ""
+msgstr "Это поле обязательно."
 
 #: templates/modoboa_radicale/calendar_display.html:6
-#, fuzzy
 msgid "Calendar"
-msgstr "Новый синоним"
+msgstr "Календарь"
 
 #~ msgid "Username"
 #~ msgstr "Логин пользователя"
