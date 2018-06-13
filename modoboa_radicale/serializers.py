@@ -150,15 +150,15 @@ class WritableEventSerializer(EventSerializer):
 
     def update_calendar_field(self, calendar_type):
         """Update field based on given type."""
+        user = self.context["request"].user
         if calendar_type == "user":
             self.fields["calendar"].queryset = (
-                models.UserCalendar.objects.filter(
-                    mailbox__user=self.context["request"].user)
+                models.UserCalendar.objects.filter(mailbox__user=user)
             )
-        else:
+        elif hasattr(user, "mailbox"):
             self.fields["calendar"].queryset = (
                 models.SharedCalendar.objects.filter(
-                    domain=self.context["request"].user.mailbox.domain)
+                    domain=user.mailbox.domain)
             )
 
     def validate(self, data):
