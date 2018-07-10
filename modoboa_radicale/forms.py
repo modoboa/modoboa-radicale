@@ -16,7 +16,7 @@ class ParametersForm(param_forms.AdminParametersForm):
         label=ugettext_lazy("Server settings")
     )
 
-    server_location = forms.CharField(
+    server_location = forms.URLField(
         label=ugettext_lazy("Server URL"),
         help_text=ugettext_lazy(
             "The URL of your Radicale server. "
