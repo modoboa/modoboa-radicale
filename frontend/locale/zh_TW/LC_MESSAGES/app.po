@@ -1,0 +1,184 @@
+# English translations for modoboa-calendar package.
+# Copyright (C) 2018 THE modoboa-calendar'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the modoboa-calendar package.
+# Automatically generated, 2018.
+# 
+# Translators:
+# akong <akong@aspa.idv.tw>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: modoboa-calendar 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-31 14:08+0200\n"
+"PO-Revision-Date: 2018-03-31 14:07+0200\n"
+"Last-Translator: akong <akong@aspa.idv.tw>, 2018\n"
+"Language-Team: Chinese (Taiwan) (https://www.transifex.com/tonio/teams/13749/zh_TW/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/App.vue:21
+msgid "Access rules"
+msgstr "存取規則"
+
+#: src/components/CalendarAccessRulesForm.vue:26
+msgid "Account"
+msgstr "帳號"
+
+#: src/components/EventForm.vue:25
+msgid "All day"
+msgstr "所有日子"
+
+#: src/components/EventForm.vue:44
+msgid "Attendees"
+msgstr "與會者"
+
+#: src/components/CalendarDetail.vue:3
+msgid "Calendar information"
+msgstr "行事曆資訊"
+
+#: src/components/CalendarAccessRulesForm.vue:3
+msgid "Calendar sharing"
+msgstr "行事曆分享"
+
+#: src/components/CalendarAccessRulesForm.vue:52
+#: src/components/CalendarDetail.vue:13 src/components/CalendarForm.vue:31
+#: src/components/CreateEventForm.vue:34 src/components/EventForm.vue:51
+msgid "Close"
+msgstr "關閉"
+
+#: src/components/CalendarForm.vue:27 src/components/CalendarForm.vue:74
+msgid "Color"
+msgstr "色彩"
+
+#: src/App.vue:26 src/App.vue:49 src/components/EventForm.vue:52
+msgid "Delete"
+msgstr "刪除"
+
+#: src/components/EventForm.vue:39
+msgid "Detail"
+msgstr "詳細"
+
+#: src/App.vue:16 src/App.vue:44
+msgid "Edit"
+msgstr "編輯"
+
+#: src/components/CalendarForm.vue:3
+msgid "Edit calendar"
+msgstr "編輯行事曆"
+
+#: src/components/EventForm.vue:2
+msgid "Edit event"
+msgstr "編輯事件"
+
+#: src/App.vue:11 src/App.vue:39
+msgid "Information"
+msgstr "資訊"
+
+#: src/App.vue:5
+msgid "My calendars"
+msgstr "我的行事曆"
+
+#: src/App.vue:4 src/components/CalendarForm.vue:4
+msgid "New calendar"
+msgstr "新的行事曆"
+
+#: src/components/CreateEventForm.vue:3
+msgid "New event"
+msgstr "新的事件"
+
+#: src/components/CalendarAccessRulesForm.vue:14
+#: src/components/CalendarAccessRulesForm.vue:27
+msgid "Read"
+msgstr "讀取"
+
+#: src/App.vue:31
+msgid "Shared calendars"
+msgstr "已分享的行事曆"
+
+#: src/components/CalendarForm.vue:20
+msgid "Shared?"
+msgstr "要分享?"
+
+#: src/components/CalendarDetail.vue:10
+msgid "The credentials are the same than the ones you use to access Modoboa."
+msgstr "此憑證跟您存取 Modoboa 的是一樣的。"
+
+#: src/components/CalendarDetail.vue:6
+msgid ""
+"To access this calendar from the outside (such as Mozilla Thunderbird or "
+"your smartphone), use the following URL:"
+msgstr "要在外部存取這個行事曆 (像是用 Mozilla Thunderbird 或是您的手機), 使用以下的位址:"
+
+#: src/components/CalendarAccessRulesForm.vue:15
+#: src/components/CalendarAccessRulesForm.vue:28
+msgid "Write"
+msgstr "寫"
+
+#: src/components/EventForm.vue:81
+msgid "Description"
+msgstr "描述"
+
+#: src/components/EventForm.vue:84 src/components/CreateEventForm.vue:77
+msgid "Title"
+msgstr "標題"
+
+#: src/components/EventForm.vue:87 src/components/CreateEventForm.vue:80
+msgid "Save"
+msgstr "儲存"
+
+#: src/components/EventForm.vue:116 src/components/CreateEventForm.vue:98
+msgid "A calendar is required."
+msgstr "行事曆是必要的。"
+
+#: src/components/EventForm.vue:127 src/components/EventForm.vue:140
+#: src/components/CalendarForm.vue:116 src/components/Calendar.vue:150
+#: src/App.vue:132
+msgid "Success"
+msgstr "成功"
+
+#: src/components/EventForm.vue:129 src/components/Calendar.vue:152
+msgid "Event updated"
+msgstr "事件已更新"
+
+#: src/components/EventForm.vue:134
+msgid "Are you sure you want to remove this event?"
+msgstr "您確定要移除這個事件嗎?"
+
+#: src/components/EventForm.vue:142
+msgid "Event deleted"
+msgstr "事件已刪除"
+
+#: src/components/CalendarForm.vue:77
+msgid "Name"
+msgstr "名稱"
+
+#: src/components/CalendarForm.vue:80
+msgid "Choose a domain"
+msgstr "選擇網域"
+
+#: src/components/CalendarForm.vue:84
+msgid "Update"
+msgstr "更新"
+
+#: src/components/CalendarForm.vue:86
+msgid "Create"
+msgstr "建立"
+
+#: src/components/CalendarForm.vue:104
+msgid "Calendar updated"
+msgstr "行事曆已更新"
+
+#: src/components/CalendarForm.vue:107
+msgid "Calendar created"
+msgstr "行事曆已建立"
+
+#: src/App.vue:126
+msgid "Are you sure you want to delete this calendar?"
+msgstr "您確定要移除這個行事曆嗎?"
+
+#: src/App.vue:134
+msgid "Calendar deleted"
+msgstr "行事曆已刪除"

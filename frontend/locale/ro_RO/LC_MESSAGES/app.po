@@ -1,0 +1,187 @@
+# English translations for modoboa-calendar package.
+# Copyright (C) 2018 THE modoboa-calendar'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the modoboa-calendar package.
+# Automatically generated, 2018.
+# 
+# Translators:
+# Andrei-Ilie Olteanu <andrei@flashsoft.ro>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: modoboa-calendar 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-31 14:08+0200\n"
+"PO-Revision-Date: 2018-03-31 14:07+0200\n"
+"Last-Translator: Andrei-Ilie Olteanu <andrei@flashsoft.ro>, 2018\n"
+"Language-Team: Romanian (Romania) (https://www.transifex.com/tonio/teams/13749/ro_RO/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ro_RO\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+#: src/App.vue:21
+msgid "Access rules"
+msgstr "Reguli de acces"
+
+#: src/components/CalendarAccessRulesForm.vue:26
+msgid "Account"
+msgstr "Cont"
+
+#: src/components/EventForm.vue:25
+msgid "All day"
+msgstr "Toata ziua"
+
+#: src/components/EventForm.vue:44
+msgid "Attendees"
+msgstr "Participanți"
+
+#: src/components/CalendarDetail.vue:3
+msgid "Calendar information"
+msgstr "Informații calendar"
+
+#: src/components/CalendarAccessRulesForm.vue:3
+msgid "Calendar sharing"
+msgstr "Transmitere calendar"
+
+#: src/components/CalendarAccessRulesForm.vue:52
+#: src/components/CalendarDetail.vue:13 src/components/CalendarForm.vue:31
+#: src/components/CreateEventForm.vue:34 src/components/EventForm.vue:51
+msgid "Close"
+msgstr "Închide"
+
+#: src/components/CalendarForm.vue:27 src/components/CalendarForm.vue:74
+msgid "Color"
+msgstr "Culoare"
+
+#: src/App.vue:26 src/App.vue:49 src/components/EventForm.vue:52
+msgid "Delete"
+msgstr "Șterge"
+
+#: src/components/EventForm.vue:39
+msgid "Detail"
+msgstr "Detaliu"
+
+#: src/App.vue:16 src/App.vue:44
+msgid "Edit"
+msgstr "Editare"
+
+#: src/components/CalendarForm.vue:3
+msgid "Edit calendar"
+msgstr "Editare calendar"
+
+#: src/components/EventForm.vue:2
+msgid "Edit event"
+msgstr "Editare eveniment"
+
+#: src/App.vue:11 src/App.vue:39
+msgid "Information"
+msgstr "Informatie"
+
+#: src/App.vue:5
+msgid "My calendars"
+msgstr "Calendarele mele"
+
+#: src/App.vue:4 src/components/CalendarForm.vue:4
+msgid "New calendar"
+msgstr "Calendar nou"
+
+#: src/components/CreateEventForm.vue:3
+msgid "New event"
+msgstr "Eveniment nou"
+
+#: src/components/CalendarAccessRulesForm.vue:14
+#: src/components/CalendarAccessRulesForm.vue:27
+msgid "Read"
+msgstr "Citit"
+
+#: src/App.vue:31
+msgid "Shared calendars"
+msgstr "Calendare transmise"
+
+#: src/components/CalendarForm.vue:20
+msgid "Shared?"
+msgstr "Transmise?"
+
+#: src/components/CalendarDetail.vue:10
+msgid "The credentials are the same than the ones you use to access Modoboa."
+msgstr ""
+"Datele sunt la fel cu cele pe care le folosești ca să accesezi Modoboa."
+
+#: src/components/CalendarDetail.vue:6
+msgid ""
+"To access this calendar from the outside (such as Mozilla Thunderbird or "
+"your smartphone), use the following URL:"
+msgstr ""
+"Pentru a accesa acest calendar din afară (precum din Mozilla Thunderbird  "
+"sau de pe telefon) foloseste următorul URL:"
+
+#: src/components/CalendarAccessRulesForm.vue:15
+#: src/components/CalendarAccessRulesForm.vue:28
+msgid "Write"
+msgstr "Scrie"
+
+#: src/components/EventForm.vue:81
+msgid "Description"
+msgstr "Descriere"
+
+#: src/components/EventForm.vue:84 src/components/CreateEventForm.vue:77
+msgid "Title"
+msgstr "Titlu"
+
+#: src/components/EventForm.vue:87 src/components/CreateEventForm.vue:80
+msgid "Save"
+msgstr "Salvează"
+
+#: src/components/EventForm.vue:116 src/components/CreateEventForm.vue:98
+msgid "A calendar is required."
+msgstr "Un calendar este necesar."
+
+#: src/components/EventForm.vue:127 src/components/EventForm.vue:140
+#: src/components/CalendarForm.vue:116 src/components/Calendar.vue:150
+#: src/App.vue:132
+msgid "Success"
+msgstr "Succes"
+
+#: src/components/EventForm.vue:129 src/components/Calendar.vue:152
+msgid "Event updated"
+msgstr "Eveniment actualizat"
+
+#: src/components/EventForm.vue:134
+msgid "Are you sure you want to remove this event?"
+msgstr "Ești sigur că vrei să ștergi acest eveniment?"
+
+#: src/components/EventForm.vue:142
+msgid "Event deleted"
+msgstr "Eveniment șters"
+
+#: src/components/CalendarForm.vue:77
+msgid "Name"
+msgstr "Nume"
+
+#: src/components/CalendarForm.vue:80
+msgid "Choose a domain"
+msgstr "Alege un domeniu"
+
+#: src/components/CalendarForm.vue:84
+msgid "Update"
+msgstr "Actualizare"
+
+#: src/components/CalendarForm.vue:86
+msgid "Create"
+msgstr "Creează"
+
+#: src/components/CalendarForm.vue:104
+msgid "Calendar updated"
+msgstr "Calendar actualizat"
+
+#: src/components/CalendarForm.vue:107
+msgid "Calendar created"
+msgstr "Calendar creat"
+
+#: src/App.vue:126
+msgid "Are you sure you want to delete this calendar?"
+msgstr "Ești sigur că vrei să ștergi acest calendar?"
+
+#: src/App.vue:134
+msgid "Calendar deleted"
+msgstr "Calendar șters"
