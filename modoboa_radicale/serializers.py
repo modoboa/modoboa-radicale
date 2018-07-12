@@ -151,6 +151,8 @@ class WritableEventSerializer(EventSerializer):
     def update_calendar_field(self, calendar_type):
         """Update field based on given type."""
         user = self.context["request"].user
+        if user.is_anonymous:
+            return
         if calendar_type == "user":
             self.fields["calendar"].queryset = (
                 models.UserCalendar.objects.filter(mailbox__user=user)
