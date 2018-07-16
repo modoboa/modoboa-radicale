@@ -115,13 +115,15 @@ class Caldav_Backend(CalendarBackend):
             orig_evt.add("dtend", data["end"])
         if "description" in data:
             orig_evt["description"] = data["description"]
-        for attdef in data.get("attendees", []):
-            attendee = icalendar.vCalAddress(
-                "MAILTO:{}".format(attdef["email"]))
-            attendee.params["cn"] = icalendar.vText(attdef["display_name"])
-            attendee.params["ROLE"] = icalendar.vText('REQ-PARTICIPANT')
-            del orig_evt["attendee"]
-            orig_evt.add("attendee", attendee, encode=0)
+        if "attendees" in data:
+            if "attendee" in orig_evt:
+                del orig_evt["attendee"]
+            for attdef in data.get("attendees", []):
+                attendee = icalendar.vCalAddress(
+                    "MAILTO:{}".format(attdef["email"]))
+                attendee.params["cn"] = icalendar.vText(attdef["display_name"])
+                attendee.params["ROLE"] = icalendar.vText('REQ-PARTICIPANT')
+                orig_evt.add("attendee", attendee, encode=0)
         cal.instance.subcomponents = []
         cal.instance.add_component(orig_evt)
         if "calendar" in data and self.calendar.pk != data["calendar"].pk:
