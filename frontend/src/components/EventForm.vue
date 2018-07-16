@@ -43,7 +43,10 @@
         </div>
         <div class="col-sm-5">
           <h4><translate>Attendees</translate></h4>
-          <multiselect multiple label="display_name" :options="attendees" :taggable="true" v-model="event.attendees"></multiselect>
+          <multiselect multiple label="display_name" :options="attendees"
+                       v-model="event.attendees" :close-on-select="false"
+                       :hide-selected="true" track-by="email">
+          </multiselect>
         </div>
       </div>
 
