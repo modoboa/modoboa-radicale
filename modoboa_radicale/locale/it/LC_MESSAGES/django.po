@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Modoboa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-31 14:08+0200\n"
+"POT-Creation-Date: 2018-07-19 15:27+0200\n"
 "PO-Revision-Date: 2015-10-11 12:04+0000\n"
 "Last-Translator: Rocco <mors10@hotmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/tonio/modoboa/language/"
@@ -57,11 +57,11 @@ msgstr ""
 "Permetti agli aministratori di dominio di aministrare i Calendari utenti "
 "(lettura e scrittura)"
 
-#: handlers.py:45
+#: handlers.py:47
 msgid "Calendars"
 msgstr "Calendari"
 
-#: models.py:44
+#: models.py:52 models.py:64
 msgid "Server location is not set, please fix it."
 msgstr ""
 
@@ -75,7 +75,7 @@ msgstr ""
 "Gestione frontend per Radicale , un semplice server di calendario e "
 "contatti ."
 
-#: serializers.py:167 serializers.py:169
+#: serializers.py:171 serializers.py:173
 msgid "This field is required."
 msgstr ""
 
@@ -84,6 +84,10 @@ msgstr ""
 #| msgid "Calendars"
 msgid "Calendar"
 msgstr "Calendari"
+
+#: views.py:20
+msgid "A mailbox is required"
+msgstr ""
 
 #~ msgid "Username"
 #~ msgstr "Nome utente"

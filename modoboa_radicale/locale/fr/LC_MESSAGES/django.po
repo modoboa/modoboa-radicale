@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Modoboa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-31 14:08+0200\n"
-"PO-Revision-Date: 2018-03-31 14:09+0200\n"
+"POT-Creation-Date: 2018-07-19 15:27+0200\n"
+"PO-Revision-Date: 2018-07-19 15:28+0200\n"
 "Last-Translator: Antoine Nguyen <tonio@ngyn.org>\n"
 "Language-Team: French (http://www.transifex.com/tonio/modoboa/language/fr/)\n"
 "Language: fr\n"
@@ -55,11 +55,11 @@ msgstr ""
 "Autorise les administrateurs de domaine à gérer les calendriers des "
 "utilisateurs (lecture et écriture)"
 
-#: handlers.py:45
+#: handlers.py:47
 msgid "Calendars"
 msgstr "Calendriers"
 
-#: models.py:44
+#: models.py:52 models.py:64
 msgid "Server location is not set, please fix it."
 msgstr "La localisation du serveur n'est pas définie, veuillez le faire svp."
 
@@ -73,10 +73,14 @@ msgstr ""
 "Console de gestion pour Radicale, un serveur simple de calendrier et de "
 "contact."
 
-#: serializers.py:167 serializers.py:169
+#: serializers.py:171 serializers.py:173
 msgid "This field is required."
 msgstr "Ce champ est requis."
 
 #: templates/modoboa_radicale/calendar_display.html:6
 msgid "Calendar"
 msgstr "Calendrier"
+
+#: views.py:20
+msgid "A mailbox is required"
+msgstr "Une boite aux lettres est requise."

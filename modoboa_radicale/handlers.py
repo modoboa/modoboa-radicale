@@ -41,7 +41,7 @@ def extra_permissions(sender, role, **kwargs):
 @receiver(core_signals.extra_user_menu_entries)
 def top_menu(sender, location, user, **kwargs):
     """Add extra menu entries."""
-    if location == "top_menu":
+    if location == "top_menu" and hasattr(user, "mailbox"):
         return [
             {"name": "radicale",
              "label": _("Calendars"),
