@@ -74,6 +74,14 @@ class ViewsTestCase(TestDataMixin, ModoTestCase):
         response = self.client.get(url)
         self.assertContains(response, '<div id="app">')
 
+    def test_admin_access(self):
+        """Check admin access with no mailbox."""
+        self.client.login(username="admin", password="password")
+        url = reverse("modoboa_radicale:calendar_detail_view")
+        response = self.client.get(url)
+        self.assertContains(
+            response, "Permission denied: A mailbox is required")
+
 
 class AccessRuleTestCase(ModoTestCase):
 
