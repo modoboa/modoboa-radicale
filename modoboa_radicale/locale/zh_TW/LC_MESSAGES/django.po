@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # akong <akong@aspa.idv.tw>, 2018
 # Radium <ztl8702@126.com>, 2017
@@ -9,14 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Modoboa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-31 14:08+0200\n"
+"POT-Creation-Date: 2018-07-19 15:27+0200\n"
 "PO-Revision-Date: 2018-06-28 09:32+0000\n"
 "Last-Translator: akong <akong@aspa.idv.tw>\n"
-"Language-Team: Chinese (Taiwan) (http://www.transifex.com/tonio/modoboa/language/zh_TW/)\n"
+"Language-Team: Chinese (Taiwan) (http://www.transifex.com/tonio/modoboa/"
+"language/zh_TW/)\n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: forms.py:16
@@ -52,11 +53,11 @@ msgstr "允許行事曆管理"
 msgid "Allow domain administrators to manage user calendars (read and write)"
 msgstr "允許網域管理者管理使用者的行事曆 (讀和寫)"
 
-#: handlers.py:45
+#: handlers.py:47
 msgid "Calendars"
 msgstr "行事曆"
 
-#: models.py:44
+#: models.py:52 models.py:64
 msgid "Server location is not set, please fix it."
 msgstr "伺服器位置未設定，請修正。"
 
@@ -65,14 +66,19 @@ msgid "Radicale management"
 msgstr "Radicale 管理"
 
 #: modo_extension.py:22
-msgid ""
-"Management frontend for Radicale, a simple calendar and contact server."
+msgid "Management frontend for Radicale, a simple calendar and contact server."
 msgstr "管理 Radicale 的前台，簡單的行事曆和連絡人伺服器。"
 
-#: serializers.py:167 serializers.py:169
+#: serializers.py:171 serializers.py:173
 msgid "This field is required."
 msgstr "這個欄位是必填的"
 
 #: templates/modoboa_radicale/calendar_display.html:6
 msgid "Calendar"
 msgstr "行事曆"
+
+#: views.py:20
+#, fuzzy
+#| msgid "This field is required."
+msgid "A mailbox is required"
+msgstr "這個欄位是必填的"
