@@ -8,7 +8,8 @@ module.exports = {
   dev: {
 
     // Paths
-    assetsSubDirectory: 'static',
+    assetsRoot: path.resolve(__dirname, '../../modoboa_radicale/static'),
+    assetsSubDirectory: 'modoboa_radicale',
     assetsPublicPath: 'http://localhost:8080/',
     proxyTable: {},
 

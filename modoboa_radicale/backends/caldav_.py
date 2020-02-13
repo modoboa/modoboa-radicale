@@ -5,7 +5,8 @@ import uuid
 
 import caldav
 from caldav.elements import dav, ical
-import icalendar
+from caldav.objects import Calendar
+import vobject
 
 from django.utils import timezone
 from django.utils.encoding import smart_str
@@ -27,45 +28,52 @@ class Caldav_Backend(CalendarBackend):
             server_url,
             username=username, password=password)
         if self.calendar:
-            self.remote_cal = self.client.calendar(calendar.encoded_path)
+            self.remote_cal = Calendar(self.client, calendar.encoded_path)
 
     def _serialize_event(self, event):
         """Convert a vevent to a dictionary."""
-        vevent = event.instance.walk("vevent")[0]
+        vevent = event.vobject_instance.vevent
+        description = (
+            vevent.description.value
+            if "description" in vevent.contents else ""
+        )
         result = {
-            "id": vevent["uid"],
-            "title": vevent["summary"],
+            "id": vevent.uid.value,
+            "title": vevent.summary.value,
             "color": self.calendar.color,
-            "description": vevent.get("description", ""),
+            "description": description,
             "calendar": self.calendar,
             "attendees": []
         }
-        if isinstance(vevent["dtstart"].dt, datetime.datetime):
+        if isinstance(vevent.dtstart.value, datetime.datetime):
             all_day = False
-            start = vevent["dtstart"].dt
-            end = vevent["dtend"].dt
+            start = vevent.dtstart.value
+            end = vevent.dtend.value
         else:
             tz = timezone.get_current_timezone()
             all_day = True
             start = tz.localize(
                 datetime.datetime.combine(
-                    vevent["dtstart"].dt, datetime.time.min))
+                    vevent.dtstart.value, datetime.time.min))
             end = tz.localize(
                 datetime.datetime.combine(
-                    vevent["dtend"].dt, datetime.time.min))
+                    vevent.dtend.value, datetime.time.min))
         result.update({
             "allDay": all_day,
             "start": start,
             "end": end
         })
-        attendees = vevent.get("attendee", [])
-        if isinstance(attendees, icalendar.vCalAddress):
-            attendees = [attendees]
-        for attendee in attendees:
-            result["attendees"].append({
-                "display_name": attendee.params.get("cn"),
-                "email": smart_str(attendee).replace("MAILTO:", "")
-            })
+        if "attendee" in vevent.contents:
+            for attendee in vevent.contents["attendee"]:
+                email = (
+                    attendee.value
+                    .replace("mailto:", "")
+                    .replace("MAILTO:", "")
+                )
+                result["attendees"].append({
+                    "display_name": attendee.params.get("CN")[0],
+                    "email": email
+                })
         return result
 
     def create_calendar(self, url):
@@ -81,17 +89,16 @@ class Caldav_Backend(CalendarBackend):
     def create_event(self, data):
         """Create a new event."""
         uid = uuid.uuid4()
-        cal = icalendar.Calendar()
-        evt = icalendar.Event()
-        evt.add("uid", uid)
-        evt.add("summary", data["title"])
+        cal = vobject.iCalendar()
+        cal.add("vevent")
+        cal.vevent.add("uid").value = str(uid)
+        cal.vevent.add("summary").value = data["title"]
         if not data["allDay"]:
-            evt.add("dtstart", data["start"])
-            evt.add("dtend", data["end"])
+            cal.vevent.add("dtstart").value = data["start"]
+            cal.vevent.add("dtend").value = data["end"]
         else:
-            evt.add("dtstart", data["start"].date())
-            evt.add("dtend", data["end"].date())
-        cal.add_component(evt)
+            cal.vevent.add("dtstart").value = data["start"].date()
+            cal.vevent.add("dtend").value = data["end"].date()
         self.remote_cal.add_event(cal)
         return uid
 
@@ -100,36 +107,35 @@ class Caldav_Backend(CalendarBackend):
         data = dict(original_data)
         url = "{}/{}.ics".format(self.remote_cal.url.geturl(), uid)
         cal = self.remote_cal.event_by_url(url)
-        orig_evt = cal.instance.walk("vevent")[0]
+        orig_evt = cal.vobject_instance.vevent
         if "title" in data:
-            orig_evt["summary"] = data["title"]
-        if "allDay" in data:
-            if data["allDay"]:
-                data["start"] = data["start"].date()
-                data["end"] = data["end"].date()
+            orig_evt.summary.value = data["title"]
+        if data.get("allDay"):
+            data["start"] = data["start"].date()
+            data["end"] = data["end"].date()
         if "start" in data:
-            del orig_evt["dtstart"]
-            orig_evt.add("dtstart", data["start"])
+            del orig_evt.contents["dtstart"]
+            orig_evt.add("dtstart").value = data["start"]
         if "end" in data:
-            del orig_evt["dtend"]
-            orig_evt.add("dtend", data["end"])
+            del orig_evt.contents["dtend"]
+            orig_evt.add("dtend").value = data["end"]
         if "description" in data:
-            orig_evt["description"] = data["description"]
+            if "description" in orig_evt.contents:
+                orig_evt.description.value = data["description"]
+            else:
+                orig_evt.add("description").value = data["description"]
         if "attendees" in data:
-            if "attendee" in orig_evt:
-                del orig_evt["attendee"]
+            if "attendee" in orig_evt.contents:
+                del orig_evt.contents["attendee"]
             for attdef in data.get("attendees", []):
-                attendee = icalendar.vCalAddress(
-                    "MAILTO:{}".format(attdef["email"]))
-                attendee.params["cn"] = icalendar.vText(attdef["display_name"])
-                attendee.params["ROLE"] = icalendar.vText('REQ-PARTICIPANT')
-                orig_evt.add("attendee", attendee, encode=0)
-        cal.instance.subcomponents = []
-        cal.instance.add_component(orig_evt)
+                attendee = orig_evt.add('attendee')
+                attendee.value = "MAILTO:{}".format(attdef["email"])
+                attendee.params["CN"] = [attdef["display_name"]]
+                attendee.params["ROLE"] = ['REQ-PARTICIPANT']
         if "calendar" in data and self.calendar.pk != data["calendar"].pk:
             # Calendar has been changed, remove old event first.
             self.remote_cal.client.delete(url)
-            remote_cal = self.client.calendar(data["calendar"].encoded_path)
+            remote_cal = Calendar(self.client, data["calendar"].encoded_path)
             url = "{}/{}.ics".format(remote_cal.url.geturl(), uid)
         else:
             remote_cal = self.remote_cal

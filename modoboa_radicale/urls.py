@@ -1,11 +1,12 @@
 """Radicale urls."""
 
-from django.conf.urls import url
+from django.urls import path
 
 from . import views
 
+app_name = 'modoboa_radicale'
 
 urlpatterns = [
-    url(r'^$', views.CalendarDetailView.as_view(),
-        name="calendar_detail_view"),
+    path('', views.CalendarDetailView.as_view(),
+         name="calendar_detail_view"),
 ]

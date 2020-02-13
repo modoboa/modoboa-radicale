@@ -25,12 +25,10 @@ module.exports = {
   entry: {
     app: './src/main.js'
   },
-  plugins: process.env.NODE_ENV === 'production'
-    ? [new BundleTracker({
-        path: config.build.assetsRoot,
-        filename: utils.assetsPath('webpack-stats.json')
-      })]
-    : [new BundleTracker({filename: './webpack-stats.json'})],
+  plugins: [new BundleTracker({
+      path: config.build.assetsRoot,
+      filename: utils.assetsPath('webpack-stats.json')
+  })],
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',

@@ -1,5 +1,5 @@
 modoboa>=1.10.0
-django-filter==1.1.0
+django-filter==2.2.0
 drf-nested-routers
 django-webpack-loader
-https://github.com/modoboa/caldav/tarball/master#egg=caldav
+caldav==0.6.2

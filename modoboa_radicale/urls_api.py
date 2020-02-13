@@ -7,25 +7,25 @@ from . import viewsets
 router = routers.SimpleRouter()
 router.register(
     r"user-calendars", viewsets.UserCalendarViewSet,
-    base_name="user-calendar")
+    basename="user-calendar")
 router.register(
     r"shared-calendars", viewsets.SharedCalendarViewSet,
-    base_name="shared-calendar")
+    basename="shared-calendar")
 router.register(
-    r"attendees", viewsets.AttendeeViewSet, base_name="attendee")
+    r"attendees", viewsets.AttendeeViewSet, basename="attendee")
 router.register(
-    r"mailboxes", viewsets.MailboxViewSet, base_name="mailbox")
+    r"mailboxes", viewsets.MailboxViewSet, basename="mailbox")
 router.register(
-    r"accessrules", viewsets.AccessRuleViewSet, base_name="access-rule")
+    r"accessrules", viewsets.AccessRuleViewSet, basename="access-rule")
 
 calendars_router = routers.NestedSimpleRouter(
     router, r"user-calendars", lookup="calendar")
 calendars_router.register(
-    r"events", viewsets.UserEventViewSet, base_name="event")
+    r"events", viewsets.UserEventViewSet, basename="event")
 shared_calendars_router = routers.NestedSimpleRouter(
     router, r"shared-calendars", lookup="calendar")
 shared_calendars_router.register(
-    r"events", viewsets.SharedEventViewSet, base_name="event")
+    r"events", viewsets.SharedEventViewSet, basename="event")
 
 urlpatterns = (
     router.urls + calendars_router.urls + shared_calendars_router.urls

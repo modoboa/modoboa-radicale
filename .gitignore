@@ -59,6 +59,7 @@ target/
 node_modules
 /static/dist
 /frontend/webpack-stats.json
+/frontend/yarn.lock
 coverage
 /modoboa_radicale/static
 
