@@ -19,8 +19,12 @@ cache:
     - frontend/node_modules
 
 addons:
-  postgresql: '9.3'
+  postgresql: '9.6'
   mysql: '5.5'
+
+services:
+  - postgres
+  - mysql
 
 before_install:
   - pip install codecov
@@ -56,5 +60,5 @@ deploy:
   distributions: sdist bdist_wheel
   on:
     tags: true
-    python: '3.6'
+    python: '3.7'
     condition: "$DB = POSTGRESQL"
