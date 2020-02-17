@@ -1,6 +1,7 @@
 """Radicale test mocks."""
 
 from caldav import objects
+from caldav.lib.url import URL
 
 
 EV1 = """BEGIN:VCALENDAR
@@ -39,17 +40,19 @@ class Url(object):
         return self.path
 
 
-class Calendar(object):
+class Calendar:
 
-    def __init__(self, client, path):
-        self.url = Url(path)
+    def __init__(self, client=None, url=None, parent=None, name=None, id=None,
+                 **extra):
+        self.url = Url(url)
         self.client = client
 
     def add_event(self, data):
         return True
 
     def event_by_url(self, url):
-        return objects.Event(data=EV1, parent=self)
+        res = objects.Event(url=url, data=EV1, parent=self)
+        return res
 
     def date_search(self, start, end):
         return [
@@ -61,14 +64,27 @@ class Calendar(object):
         return True
 
 
-class DAVClientMock(object):
+class Response:
+    """Fake requests response."""
+
+    def __init__(self, status):
+        self.status = status
+        self.raw = ""
+
+
+class DAVClientMock:
     """Mock class for DAVClient instance."""
 
-    def calendar(self, path):
-        return Calendar(self, path)
+    url = URL.objectify("http://localhost")
 
     def mkcalendar(self, url):
         return True
 
     def delete(self, url):
         return True
+
+    def proppatch(self, url, body, dummy=None):
+        return Response(200)
+
+    def request(self, url, method="GET", body="", headers={}):
+        return Response(200)

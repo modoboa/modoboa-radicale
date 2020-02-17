@@ -5,7 +5,7 @@ import uuid
 
 import caldav
 from caldav.elements import dav, ical
-from caldav.objects import Calendar
+from caldav import Calendar
 import vobject
 
 from django.utils import timezone
@@ -82,7 +82,7 @@ class Caldav_Backend(CalendarBackend):
 
     def update_calendar(self, calendar):
         """Update an existing calendar."""
-        remote_cal = self.client.calendar(calendar.encoded_path)
+        remote_cal = Calendar(self.client, calendar.encoded_path)
         remote_cal.set_properties([dav.DisplayName(calendar.name),
                                    ical.CalendarColor(calendar.color)])
 

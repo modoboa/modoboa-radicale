@@ -6,11 +6,7 @@ import mock
 import os
 import tempfile
 
-try:
-    from configparser import ConfigParser
-except ImportError:
-    # SafeConfigParser (py2) == ConfigParser (py3)
-    from ConfigParser import SafeConfigParser as ConfigParser
+from configparser import ConfigParser
 
 from django.urls import reverse
 from django.utils import six
@@ -196,9 +192,11 @@ class UserCalendarViewSetTestCase(TestDataMixin, ModoAPITestCase):
         self.assertEqual(response.status_code, 201)
 
     @mock.patch("caldav.DAVClient")
-    def test_update_calendar(self, client_mock):
+    @mock.patch("caldav.Calendar")
+    def test_update_calendar(self, cal_mock, client_mock):
         """Update existing calendar."""
         client_mock.return_value = mocks.DAVClientMock()
+        cal_mock.return_value = mocks.Calendar()
         data = {"username": "user@test.com", "password": "toto"}
         self.client.post(reverse("core:login"), data)
 
@@ -266,9 +264,11 @@ class SharedCalendarViewSetTestCase(TestDataMixin, ModoAPITestCase):
         self.assertEqual(response.status_code, 201)
 
     @mock.patch("caldav.DAVClient")
-    def test_update_calendar(self, client_mock):
+    @mock.patch("caldav.Calendar")
+    def test_update_calendar(self, cal_mock, client_mock):
         """Update existing calendar."""
         client_mock.return_value = mocks.DAVClientMock()
+        cal_mock.return_value = mocks.Calendar()
         data = {"username": "admin@test.com", "password": "toto"}
         self.client.post(reverse("core:login"), data)
 
@@ -372,10 +372,16 @@ class EventViewSetTestCase(TestDataMixin, ModoAPITestCase):
 
     def setUp(self):
         """Initiate test context."""
-        patcher = mock.patch("caldav.DAVClient")
-        self.client_mock = patcher.start()
+        patcher1 = mock.patch("caldav.DAVClient")
+        self.client_mock = patcher1.start()
         self.client_mock.return_value = mocks.DAVClientMock()
-        self.addCleanup(patcher.stop)
+        self.addCleanup(patcher1.stop)
+
+        patcher2 = mock.patch("caldav.Calendar")
+        self.cal_mock = patcher2.start()
+        self.cal_mock.return_value = mocks.Calendar(client=self.client_mock)
+        self.addCleanup(patcher2.stop)
+
         self.client.force_login(self.account)
         self.set_global_parameter("server_location", "http://localhost")
 
