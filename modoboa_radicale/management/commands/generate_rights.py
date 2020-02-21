@@ -10,7 +10,7 @@ from modoboa.admin.models import Domain
 from modoboa.core.models import User
 from modoboa.parameters import tools as param_tools
 
-from ...models import AccessRule
+from ... import models
 from ...modo_extension import Radicale
 
 
@@ -39,7 +39,7 @@ permission = %s
 
     def _user_access_rules(self):
         """Create user access rules."""
-        for acr in AccessRule.objects.select_related().all():
+        for acr in models.AccessRule.objects.select_related().all():
             section = "%s-to-%s-acr" % (
                 acr.mailbox, acr.calendar
             )
@@ -52,6 +52,16 @@ permission = %s
                 section, acr.mailbox.full_address, acr.calendar.path,
                 permission,
             )
+
+    def _token_access_rules(self):
+        """Create token access rules."""
+        for model in [models.UserCalendar, models.SharedCalendar]:
+            for calendar in model.objects.all():
+                section = "token-{}-access".format(calendar._path)
+                self._generate_acr(
+                    section, calendar.access_token, calendar._path, perm="r",
+                    comment="Read-only access using a token"
+                )
 
     def _super_admin_rules(self):
         """Generate access rules for super administrators."""
@@ -96,6 +106,7 @@ permission = %s
         )
 
         self._user_access_rules()
+        self._token_access_rules()
         self._cfgfile.close()
 
     def handle(self, *args, **options):
@@ -112,7 +123,7 @@ permission = %s
                 pass
             else:
                 tz = timezone.get_current_timezone()
-                qset = AccessRule.objects.filter(
+                qset = models.AccessRule.objects.filter(
                     last_update__gt=tz.localize(mtime))
                 if not qset.exists():
                     return

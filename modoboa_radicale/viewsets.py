@@ -2,7 +2,9 @@
 
 import dateutil
 
+from django import http
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.decorators import action
 from rest_framework import permissions, response, viewsets
 
 from modoboa.admin import models as admin_models
@@ -31,6 +33,21 @@ class UserCalendarViewSet(viewsets.ModelViewSet):
         qset = models.UserCalendar.objects.filter(
             mailbox__user=self.request.user)
         return qset
+
+    @action(detail=False,
+            methods=["post"],
+            serializer_class=serializers.CheckTokenSerializer)
+    def check_token(self, request):
+        """Check token validity."""
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        calendar = models.UserCalendar.objects.filter(
+            _path=serializer.validated_data["calendar"]).first()
+        if not calendar:
+            raise http.Http404()
+        if calendar.access_token != serializer.validated_data["token"]:
+            return response.Response({"status": "ko"})
+        return response.Response({"status": "ok"})
 
 
 class SharedCalendarViewSet(viewsets.ModelViewSet):

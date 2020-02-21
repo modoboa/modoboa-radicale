@@ -9,6 +9,10 @@
         {{ calendar.full_url }}
       </div>
       <p><translate>The credentials are the same than the ones you use to access Modoboa.</translate></p>
+      <p><translate>You can also share a read-only version of this calendar using the following URL: </translate></p>
+      <div class="alert alert-info">
+        {{ calendar.share_url }}
+      </div>
       <hr>
       <div class="pull-right">
         <button type="button" class="btn btn-default" @click="close"><translate>Close</translate></button>
