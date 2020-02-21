@@ -63,7 +63,7 @@ def set_user_calendar_path(sender, instance, **kwargs):
     instance._path = "{}/{}".format(
         instance.mailbox.full_address, instance.name)
     if not instance.access_token:
-        instance.access_token = token_hex(24)
+        instance.access_token = token_hex(16)
 
 
 @receiver(signals.pre_save, sender=models.SharedCalendar)
@@ -73,4 +73,4 @@ def set_shared_calendar_path(sender, instance, **kwargs):
         return
     instance._path = "{}/{}".format(instance.domain.name, instance.name)
     if not instance.access_token:
-        instance.access_token = token_hex(24)
+        instance.access_token = token_hex(16)

@@ -13,11 +13,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='sharedcalendar',
             name='access_token',
-            field=models.CharField(max_length=24),
+            field=models.CharField(max_length=32),
         ),
         migrations.AlterField(
             model_name='usercalendar',
             name='access_token',
-            field=models.CharField(max_length=24),
+            field=models.CharField(max_length=32),
         ),
     ]
