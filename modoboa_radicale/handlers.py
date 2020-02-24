@@ -1,6 +1,11 @@
 """Radicale signals handlers."""
 
-from __future__ import unicode_literals
+try:
+    from secrets import token_hex
+except ImportError:
+    from os import urandom
+    def token_hex(nbytes=None):
+        return urandom(nbytes).hex()
 
 from django.db.models import signals
 from django.urls import reverse
@@ -57,6 +62,8 @@ def set_user_calendar_path(sender, instance, **kwargs):
         return
     instance._path = "{}/{}".format(
         instance.mailbox.full_address, instance.name)
+    if not instance.access_token:
+        instance.access_token = token_hex(16)
 
 
 @receiver(signals.pre_save, sender=models.SharedCalendar)
@@ -65,3 +72,5 @@ def set_shared_calendar_path(sender, instance, **kwargs):
     if instance.pk:
         return
     instance._path = "{}/{}".format(instance.domain.name, instance.name)
+    if not instance.access_token:
+        instance.access_token = token_hex(16)

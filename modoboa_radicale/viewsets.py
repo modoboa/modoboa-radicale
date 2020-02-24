@@ -2,7 +2,9 @@
 
 import dateutil
 
+from django import http
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.decorators import action
 from rest_framework import permissions, response, viewsets
 
 from modoboa.admin import models as admin_models
@@ -17,9 +19,31 @@ def parse_date_from_iso(value):
     return dateutil.parser.parse(value)
 
 
-class UserCalendarViewSet(viewsets.ModelViewSet):
+class CheckTokenMixin:
+    """Mixin to provide the check_token feature."""
+
+    calendar_class = None
+
+    @action(detail=False,
+            methods=["post"],
+            serializer_class=serializers.CheckTokenSerializer)
+    def check_token(self, request):
+        """Check token validity."""
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        calendar = self.calendar_class.objects.filter(
+            _path=serializer.validated_data["calendar"]).first()
+        if not calendar:
+            raise http.Http404()
+        if calendar.access_token != serializer.validated_data["token"]:
+            return response.Response({"status": "ko"})
+        return response.Response({"status": "ok"})
+
+
+class UserCalendarViewSet(CheckTokenMixin, viewsets.ModelViewSet):
     """Calendar viewset."""
 
+    calendar_class = models.UserCalendar
     permission_classes = (
         permissions.IsAuthenticated,
         permissions.DjangoModelPermissions
@@ -33,9 +57,10 @@ class UserCalendarViewSet(viewsets.ModelViewSet):
         return qset
 
 
-class SharedCalendarViewSet(viewsets.ModelViewSet):
+class SharedCalendarViewSet(CheckTokenMixin, viewsets.ModelViewSet):
     """Shared calendar viewset."""
 
+    calendar_class = models.SharedCalendar
     permission_classes = (
         permissions.IsAuthenticated,
         permissions.DjangoModelPermissions

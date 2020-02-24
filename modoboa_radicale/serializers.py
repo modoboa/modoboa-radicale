@@ -32,8 +32,8 @@ class UserCalendarSerializer(CalDAVCalendarMixin, serializers.ModelSerializer):
 
     class Meta:
         model = models.UserCalendar
-        fields = ("pk", "name", "color", "path", "full_url")
-        read_only_fields = ("pk", "path", "full_url")
+        fields = ("pk", "name", "color", "path", "full_url", "share_url")
+        read_only_fields = ("pk", "path", "full_url", "share_url")
 
     def create(self, validated_data):
         """Use current user."""
@@ -75,8 +75,10 @@ class SharedCalendarSerializer(
 
     class Meta:
         model = models.SharedCalendar
-        fields = ("pk", "name", "color", "path", "domain", "full_url")
-        read_only_fields = ("pk", "path", "full_url")
+        fields = (
+            "pk", "name", "color", "path", "domain", "full_url", "share_url"
+        )
+        read_only_fields = ("pk", "path", "full_url", "share_url")
 
     def create(self, validated_data):
         """Create shared calendar."""
@@ -213,3 +215,10 @@ class AccessRuleSerializer(serializers.ModelSerializer):
         instance.mailbox_id = mailbox["pk"]
         instance.save()
         return instance
+
+
+class CheckTokenSerializer(serializers.Serializer):
+    """Serializer for the check_token action."""
+
+    calendar = serializers.CharField()
+    token = serializers.CharField()

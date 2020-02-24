@@ -24,6 +24,7 @@ class Calendar(models.Model):
     name = models.CharField(max_length=200)
     color = models.CharField(max_length=7, default="#3a87ad")
     _path = models.TextField()
+    access_token = models.CharField(max_length=32)
 
     class Meta:
         abstract = True
@@ -52,6 +53,11 @@ class Calendar(models.Model):
                     _("Server location is not set, please fix it."))
             self._url = os.path.join(server_location, self._path)
         return self._url
+
+    @property
+    def share_url(self):
+        """Return calendar share url."""
+        return "{}?token={}".format(self.full_url, self.access_token)
 
     @property
     def encoded_url(self):

@@ -217,6 +217,26 @@ class UserCalendarViewSetTestCase(TestDataMixin, ModoAPITestCase):
         with self.assertRaises(models.UserCalendar.DoesNotExist):
             self.calendar.refresh_from_db()
 
+    def test_check_token(self):
+        """Check token access."""
+        url = reverse("api:user-calendar-check-token")
+        data = {
+            "calendar": self.calendar._path,
+            "token": self.calendar.access_token
+        }
+        response = self.client.post(url, data, format="json")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["status"], "ok")
+
+        data["token"] = "pouet"
+        response = self.client.post(url, data, format="json")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["status"], "ko")
+
+        data["calendar"] = "unknown"
+        response = self.client.post(url, data, format="json")
+        self.assertEqual(response.status_code, 404)
+
 
 class SharedCalendarViewSetTestCase(TestDataMixin, ModoAPITestCase):
     """SharedCalendar viewset tests."""
@@ -295,6 +315,26 @@ class SharedCalendarViewSetTestCase(TestDataMixin, ModoAPITestCase):
         self.assertEqual(response.status_code, 204)
         with self.assertRaises(models.SharedCalendar.DoesNotExist):
             self.scalendar.refresh_from_db()
+
+    def test_check_token(self):
+        """Check token access."""
+        url = reverse("api:shared-calendar-check-token")
+        data = {
+            "calendar": self.scalendar._path,
+            "token": self.scalendar.access_token
+        }
+        response = self.client.post(url, data, format="json")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["status"], "ok")
+
+        data["token"] = "pouet"
+        response = self.client.post(url, data, format="json")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["status"], "ko")
+
+        data["calendar"] = "unknown"
+        response = self.client.post(url, data, format="json")
+        self.assertEqual(response.status_code, 404)
 
 
 class AccessRuleViewSetTestCase(TestDataMixin, ModoAPITestCase):
