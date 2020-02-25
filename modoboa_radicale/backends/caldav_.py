@@ -160,3 +160,15 @@ class Caldav_Backend(CalendarBackend):
         """Delete an event using its uid."""
         url = "{}/{}.ics".format(self.remote_cal.url.geturl(), uid)
         self.remote_cal.client.delete(url)
+
+    def import_events(self, fp):
+        """Import events from file."""
+        content = smart_str(fp.read())
+        counter = 0
+        for cal in vobject.base.readComponents(content):
+            for event in cal.vevent_list:
+                ical = vobject.iCalendar()
+                ical.add(event)
+                self.remote_cal.add_event(ical.serialize())
+                counter += 1
+        return counter

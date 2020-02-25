@@ -27,6 +27,11 @@
                 <span class="fa fa-trash"></span> <translate>Delete</translate>
               </a>
             </li>
+            <li>
+              <a href="#" @click="openImportEventsForm(calendar, $event)">
+                <span class="fa fa-download"></span> <translate>Import</translate>
+              </a>
+            </li>
           </ul>
         </li>
         <li class="nav-header"><translate>Shared calendars</translate></li>
@@ -64,6 +69,9 @@
 
     <calendar-detail v-if="showCalendarDetail" :show.sync="showCalendarDetail" :calendar="currentCalendar"></calendar-detail>
 
+    <import-events-form v-if="showImportEventsForm" :show.sync="showImportEventsForm" :calendar="currentCalendar">
+    </import-events-form>
+
     <notifications position="top right" group="default" />
   </div>
 </template>
@@ -74,12 +82,14 @@ import $ from 'jquery'
 import CalendarForm from './components/CalendarForm.vue'
 import CalendarAccessRulesForm from './components/CalendarAccessRulesForm.vue'
 import CalendarDetail from './components/CalendarDetail.vue'
+import ImportEventsForm from './components/ImportEventsForm.vue'
 
 export default {
     components: {
         'calendar-form': CalendarForm,
         'calendar-accessrules-form': CalendarAccessRulesForm,
-        'calendar-detail': CalendarDetail
+        'calendar-detail': CalendarDetail,
+        'import-events-form': ImportEventsForm
     },
     computed: mapGetters([
         'calendars',
@@ -92,6 +102,7 @@ export default {
             showCalendarForm: false,
             showAccessRulesForm: false,
             showCalendarDetail: false,
+            showImportEventsForm: false,
             currentMenu: null
         }
     },
@@ -135,6 +146,11 @@ export default {
                     })
                 })
             })
+        },
+        openImportEventsForm (calendar, event) {
+            this.closeMenu(event)
+            this.currentCalendar = calendar
+            this.showImportEventsForm = true
         },
         closeMenu (e) {
             $(e.target).closest('ul').toggle()

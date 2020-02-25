@@ -1,13 +1,18 @@
 """Calendar viewsets."""
 
+import os
+
 import dateutil
 
 from django import http
+from django.utils.translation import ugettext as _
+
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import action
 from rest_framework import permissions, response, viewsets
 
 from modoboa.admin import models as admin_models
+from modoboa.lib.web_utils import size2integer
 
 from . import backends
 from . import models
@@ -80,6 +85,8 @@ class SharedCalendarViewSet(CheckTokenMixin, viewsets.ModelViewSet):
 
 class BaseEventViewSet(viewsets.ViewSet):
     """Event viewset."""
+
+    lookup_value_regex = r"[0-9a-zA-Z\-\.@]+"
 
     def get_serializer(self, data=None, **kwargs):
         args = []
@@ -159,6 +166,7 @@ class BaseEventViewSet(viewsets.ViewSet):
         calendar = self.get_calendar(calendar_pk)
         backend = backends.get_backend_from_request(
             "caldav_", request, calendar)
+        print(pk)
         event = backend.get_event(pk)
         serializer = self.get_serializer(event)
         return response.Response(serializer.data)
@@ -170,6 +178,32 @@ class BaseEventViewSet(viewsets.ViewSet):
             "caldav_", request, calendar)
         backend.delete_event(pk)
         return response.Response()
+
+    @action(detail=False,
+            methods=["post"])
+    def import_from_file(self, request, calendar_pk):
+        """Import events from file."""
+        serializer = serializers.ImportFromFileSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        calendar = self.get_calendar(calendar_pk)
+        backend = backends.get_backend_from_request(
+            "caldav_", request, calendar)
+        ics_file = serializer.validated_data["ics_file"]
+        ics_file.seek(0, os.SEEK_END)
+        size = ics_file.tell()
+        max_size = size2integer(
+            request.localconfig.parameters.get_value("max_ics_file_size")
+        )
+        if size > max_size:
+            return response.Response({
+                "ics_file": [
+                    _("Uploaded file is too big (max: {} bytes)")
+                    .format(max_size)
+                ]
+            }, status=400)
+        ics_file.seek(0)
+        counter = backend.import_events(ics_file)
+        return response.Response({"counter": counter})
 
 
 class UserEventViewSet(BaseEventViewSet):
