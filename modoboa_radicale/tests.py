@@ -577,6 +577,15 @@ class EventViewSetTestCase(TestDataMixin, ModoAPITestCase):
             os.path.abspath(os.path.dirname(__file__)),
             "test_data/events.ics"
         )
+        # File too big => fails
+        self.set_global_parameter("max_ics_file_size", "1")
+        with open(path) as fp:
+            data = {
+                "ics_file": fp
+            }
+            response = self.client.post(url, data)
+        self.assertEqual(response.status_code, 400)
+        self.set_global_parameter("max_ics_file_size", "2048")
         with open(path) as fp:
             data = {
                 "ics_file": fp

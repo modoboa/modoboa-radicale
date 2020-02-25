@@ -51,7 +51,7 @@ class ParametersForm(param_forms.AdminParametersForm):
 
     max_ics_file_size = forms.CharField(
         label=ugettext_lazy("Maximum size of ICS files"),
-        initial="2048",
+        initial="10240",
         help_text=ugettext_lazy(
             "Maximum size in bytes of imported ICS files "
             "(or KB, MB, GB if specified)")
