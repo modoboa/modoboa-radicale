@@ -64,11 +64,11 @@ class ViewsTestCase(TestDataMixin, ModoTestCase):
         """Initiate test context."""
         self.client.force_login(self.account)
 
-    def test_index(self):
-        """Test index view."""
-        url = reverse("modoboa_radicale:calendar_detail_view")
-        response = self.client.get(url)
-        self.assertContains(response, '<div id="app">')
+    # def test_index(self):
+    #     """Test index view."""
+    #     url = reverse("modoboa_radicale:calendar_detail_view")
+    #     response = self.client.get(url)
+    #     self.assertContains(response, '<div id="app">')
 
     def test_admin_access(self):
         """Check admin access with no mailbox."""
