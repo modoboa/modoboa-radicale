@@ -571,7 +571,7 @@ class EventViewSetTestCase(TestDataMixin, ModoAPITestCase):
         data = {"username": "user@test.com", "password": "toto"}
         self.client.post(reverse("core:login"), data)
         url = reverse(
-            "api:event-import-from-file", args=[self.calendar.pk]
+            "api:user-event-import-from-file", args=[self.calendar.pk]
         )
         path = os.path.join(
             os.path.abspath(os.path.dirname(__file__)),

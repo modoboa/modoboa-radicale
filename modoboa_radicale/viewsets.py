@@ -166,7 +166,6 @@ class BaseEventViewSet(viewsets.ViewSet):
         calendar = self.get_calendar(calendar_pk)
         backend = backends.get_backend_from_request(
             "caldav_", request, calendar)
-        print(pk)
         event = backend.get_event(pk)
         serializer = self.get_serializer(event)
         return response.Response(serializer.data)

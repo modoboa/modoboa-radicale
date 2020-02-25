@@ -21,11 +21,11 @@ router.register(
 calendars_router = routers.NestedSimpleRouter(
     router, r"user-calendars", lookup="calendar")
 calendars_router.register(
-    r"events", viewsets.UserEventViewSet, basename="event")
+    r"events", viewsets.UserEventViewSet, basename="user-event")
 shared_calendars_router = routers.NestedSimpleRouter(
     router, r"shared-calendars", lookup="calendar")
 shared_calendars_router.register(
-    r"events", viewsets.SharedEventViewSet, basename="event")
+    r"events", viewsets.SharedEventViewSet, basename="shared-event")
 
 urlpatterns = (
     router.urls + calendars_router.urls + shared_calendars_router.urls
