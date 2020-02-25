@@ -51,7 +51,8 @@ export const deleteSharedCalendar = (pk) => {
 
 // events API
 var customEventActions = {
-    patch: { method: 'PATCH', url: '/api/v1{/type}-calendars{/calendar_pk}/events{/pk}/' }
+    patch: { method: 'PATCH', url: '/api/v1{/type}-calendars{/calendar_pk}/events{/pk}/' },
+    importEvents: { method: 'POST', url: '/api/v1{/type}-calendars{/calendar_pk}/events/import_from_file/' }
 }
 var eventResource = Vue.resource(
     '/api/v1{/type}-calendars{/calendar_pk}/events{/pk}/',
@@ -87,6 +88,11 @@ export const patchEvent = (calendar, pk, data) => {
 export const deleteEvent = (calendar, pk) => {
     var type = (calendar.domain) ? 'shared' : 'user'
     return eventResource.delete({type: type, calendar_pk: calendar.pk, pk: pk})
+}
+
+export const importEvents = (calendar, data) => {
+    var type = (calendar.domain) ? 'shared' : 'user'
+    return eventResource.importEvents({type: type, calendar_pk: calendar.pk}, data)
 }
 
 // attendees API

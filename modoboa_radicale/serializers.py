@@ -222,3 +222,9 @@ class CheckTokenSerializer(serializers.Serializer):
 
     calendar = serializers.CharField()
     token = serializers.CharField()
+
+
+class ImportFromFileSerializer(serializers.Serializer):
+    """Serializer for the import_from_file action."""
+
+    ics_file = serializers.FileField()

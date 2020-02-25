@@ -43,6 +43,11 @@ export default {
             var url = this.getEventSourceUrl(calendar.pk, calType)
             this.cal.fullCalendar('removeEventSource', url)
         })
+        this.$bus.$on('eventsImported', (calendar) => {
+            var calType = (calendar.domain) ? 'shared' : 'user'
+            var url = this.getEventSourceUrl(calendar.pk, calType)
+            this.cal.fullCalendar('refetchEventSources', url)
+        })
     },
     mounted () {
         const locale = this.$language.current

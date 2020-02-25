@@ -566,6 +566,34 @@ class EventViewSetTestCase(TestDataMixin, ModoAPITestCase):
         response = self.client.delete(url)
         self.assertEqual(response.status_code, 200)
 
+    def test_import_from_file(self):
+        """Check import feature."""
+        data = {"username": "user@test.com", "password": "toto"}
+        self.client.post(reverse("core:login"), data)
+        url = reverse(
+            "api:user-event-import-from-file", args=[self.calendar.pk]
+        )
+        path = os.path.join(
+            os.path.abspath(os.path.dirname(__file__)),
+            "test_data/events.ics"
+        )
+        # File too big => fails
+        self.set_global_parameter("max_ics_file_size", "1")
+        with open(path) as fp:
+            data = {
+                "ics_file": fp
+            }
+            response = self.client.post(url, data)
+        self.assertEqual(response.status_code, 400)
+        self.set_global_parameter("max_ics_file_size", "2048")
+        with open(path) as fp:
+            data = {
+                "ics_file": fp
+            }
+            response = self.client.post(url, data)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['counter'], 2)
+
 
 class AttendeeViewSetTestCase(ModoAPITestCase):
     """Attendee viewset test case."""

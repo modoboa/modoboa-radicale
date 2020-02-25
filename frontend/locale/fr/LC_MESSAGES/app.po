@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: modoboa-calendar 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-31 14:08+0200\n"
-"PO-Revision-Date: 2018-03-30 09:02+0200\n"
+"POT-Creation-Date: 2020-02-21 16:39+0100\n"
+"PO-Revision-Date: 2020-02-21 16:40+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -42,8 +42,8 @@ msgid "Calendar sharing"
 msgstr "Partage de calendrier"
 
 #: src/components/CalendarAccessRulesForm.vue:52
-#: src/components/CalendarDetail.vue:13 src/components/CalendarForm.vue:31
-#: src/components/CreateEventForm.vue:34 src/components/EventForm.vue:51
+#: src/components/CalendarDetail.vue:17 src/components/CalendarForm.vue:31
+#: src/components/CreateEventForm.vue:34 src/components/EventForm.vue:54
 msgid "Close"
 msgstr "Fermer"
 
@@ -51,7 +51,7 @@ msgstr "Fermer"
 msgid "Color"
 msgstr "Couleur"
 
-#: src/App.vue:26 src/App.vue:49 src/components/EventForm.vue:52
+#: src/App.vue:26 src/App.vue:49 src/components/EventForm.vue:55
 msgid "Delete"
 msgstr "Supprimer"
 
@@ -113,37 +113,41 @@ msgstr "Pour accéder à ce calendrier depuis l'extérieur (par exemple depuis M
 msgid "Write"
 msgstr "Ecriture"
 
-#: src/components/EventForm.vue:81
-msgid "Description"
-msgstr "Description"
+#: src/components/CalendarDetail.vue:11
+msgid "You can also share a read-only version of this calendar using the following URL:"
+msgstr "Vous pouvez aussi partager ce calendrier en lecture seule en utilisant l'URL suivante :"
 
-#: src/components/EventForm.vue:84 src/components/CreateEventForm.vue:77
+#: src/components/CreateEventForm.vue:77 src/components/EventForm.vue:87
 msgid "Title"
 msgstr "Titre"
 
-#: src/components/EventForm.vue:87 src/components/CreateEventForm.vue:80
+#: src/components/CreateEventForm.vue:80 src/components/EventForm.vue:90
 msgid "Save"
 msgstr "Enregistrer"
 
-#: src/components/EventForm.vue:116 src/components/CreateEventForm.vue:98
+#: src/components/CreateEventForm.vue:98 src/components/EventForm.vue:119
 msgid "A calendar is required."
 msgstr "Un calendrier est requis."
 
-#: src/components/EventForm.vue:127 src/components/EventForm.vue:140
-#: src/components/CalendarForm.vue:116 src/components/Calendar.vue:150
+#: src/components/Calendar.vue:150 src/components/EventForm.vue:130
+#: src/components/EventForm.vue:143 src/components/CalendarForm.vue:116
 #: src/App.vue:132
 msgid "Success"
 msgstr "Succès"
 
-#: src/components/EventForm.vue:129 src/components/Calendar.vue:152
+#: src/components/Calendar.vue:152 src/components/EventForm.vue:132
 msgid "Event updated"
 msgstr "Evènement mis à jour"
 
-#: src/components/EventForm.vue:134
+#: src/components/EventForm.vue:84
+msgid "Description"
+msgstr "Description"
+
+#: src/components/EventForm.vue:137
 msgid "Are you sure you want to remove this event?"
 msgstr "Etes vous certain de vouloir supprimer cet évènement ?"
 
-#: src/components/EventForm.vue:142
+#: src/components/EventForm.vue:145
 msgid "Event deleted"
 msgstr "Evènement supprimé"
 
