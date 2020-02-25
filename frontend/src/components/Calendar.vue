@@ -144,7 +144,7 @@ export default {
             }
             if (calEvent.allDay) {
                 var end = DateTime.fromISO(data.start.format())
-                end.plus({days: 1})
+                end.plus({ days: 1 })
                 data.start.time('00:00:00')
                 data.end = end
                 data.allDay = calEvent.allDay

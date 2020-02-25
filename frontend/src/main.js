@@ -21,6 +21,8 @@ import translations from './translations.json'
 import Calendar from './components/Calendar.vue'
 import Modal from './components/Modal.vue'
 
+import 'vuejs-dialog/dist/vuejs-dialog.min.css'
+
 Vue.use(GetTextPlugin, {
     availableLanguages: {
         en: 'English',
@@ -66,7 +68,7 @@ Object.defineProperties(Vue.prototype, {
 })
 
 /* Deal with django CSRF protection */
-let csrftoken = Cookies.get('csrftoken')
+const csrftoken = Cookies.get('csrftoken')
 Vue.http.headers.common['X-CSRFTOKEN'] = csrftoken
 
 // eslint-disable-next-line no-new

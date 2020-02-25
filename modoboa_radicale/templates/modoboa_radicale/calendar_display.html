@@ -10,13 +10,8 @@
 {% endblock %}
 
 {% block extra_js %}
-  {% if not debug %}
-    {% render_bundle 'manifest' 'js' 'CALENDAR' %}
-    {% render_bundle 'vendor' 'js' 'CALENDAR' %}
-    {% render_bundle 'app' 'js' 'CALENDAR' %}
-  {% else %}
-    {% render_bundle 'app' 'js' 'CALENDAR' %}
-  {% endif %}
+  {% render_bundle 'chunk-vendors' 'js' 'CALENDAR' %}
+  {% render_bundle 'app' 'js' 'CALENDAR' %}
 
   <script>
   window.userProfile = {

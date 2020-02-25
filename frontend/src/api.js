@@ -11,7 +11,7 @@ export const getUserCalendars = (data) => {
 }
 
 export const getUserCalendar = (pk) => {
-    return userCalendarResource.get({pk: pk})
+    return userCalendarResource.get({ pk: pk })
 }
 
 export const createUserCalendar = (data) => {
@@ -19,11 +19,11 @@ export const createUserCalendar = (data) => {
 }
 
 export const updateUserCalendar = (pk, data) => {
-    return userCalendarResource.update({pk: pk}, data)
+    return userCalendarResource.update({ pk: pk }, data)
 }
 
 export const deleteUserCalendar = (pk) => {
-    return userCalendarResource.delete({pk: pk})
+    return userCalendarResource.delete({ pk: pk })
 }
 
 // shared calendars API
@@ -34,7 +34,7 @@ export const getSharedCalendars = () => {
 }
 
 export const getSharedCalendar = (pk) => {
-    return sharedCalendarResource.get({pk: pk})
+    return sharedCalendarResource.get({ pk: pk })
 }
 
 export const createSharedCalendar = (data) => {
@@ -42,11 +42,11 @@ export const createSharedCalendar = (data) => {
 }
 
 export const updateSharedCalendar = (pk, data) => {
-    return sharedCalendarResource.update({pk: pk}, data)
+    return sharedCalendarResource.update({ pk: pk }, data)
 }
 
 export const deleteSharedCalendar = (pk) => {
-    return sharedCalendarResource.delete({pk: pk})
+    return sharedCalendarResource.delete({ pk: pk })
 }
 
 // events API
@@ -61,18 +61,18 @@ var eventResource = Vue.resource(
 )
 
 export const getEvent = (calendarPk, calendarType, pk) => {
-    return eventResource.get({type: calendarType, calendar_pk: calendarPk, pk: pk})
+    return eventResource.get({ type: calendarType, calendar_pk: calendarPk, pk: pk })
 }
 
 export const createEvent = (calendar, data) => {
     var type = (calendar.domain) ? 'shared' : 'user'
-    return eventResource.save({type: type, calendar_pk: calendar.pk}, data)
+    return eventResource.save({ type: type, calendar_pk: calendar.pk }, data)
 }
 
 export const updateEvent = (calendar, pk, data) => {
     var newCalType = (data.calendar.domain) ? 'shared' : 'user'
     if (newCalType !== calendar.type) {
-        data['new_calendar_type'] = newCalType
+        data['new_calendar_type'] = newCalType // eslint-disable-line dot-notation
     }
     data.calendar = data.calendar.pk
     return eventResource.update({
@@ -82,17 +82,17 @@ export const updateEvent = (calendar, pk, data) => {
 
 export const patchEvent = (calendar, pk, data) => {
     var type = (calendar.domain) ? 'shared' : 'user'
-    return eventResource.patch({type: type, calendar_pk: calendar.pk, pk: pk}, data)
+    return eventResource.patch({ type: type, calendar_pk: calendar.pk, pk: pk }, data)
 }
 
 export const deleteEvent = (calendar, pk) => {
     var type = (calendar.domain) ? 'shared' : 'user'
-    return eventResource.delete({type: type, calendar_pk: calendar.pk, pk: pk})
+    return eventResource.delete({ type: type, calendar_pk: calendar.pk, pk: pk })
 }
 
 export const importEvents = (calendar, data) => {
     var type = (calendar.domain) ? 'shared' : 'user'
-    return eventResource.importEvents({type: type, calendar_pk: calendar.pk}, data)
+    return eventResource.importEvents({ type: type, calendar_pk: calendar.pk }, data)
 }
 
 // attendees API
@@ -133,9 +133,9 @@ export const createAccessRule = (data) => {
 }
 
 export const updateAccessRule = (pk, data) => {
-    return accessRuleResource.update({pk: pk}, data)
+    return accessRuleResource.update({ pk: pk }, data)
 }
 
 export const deleteAccessRule = (pk) => {
-    return accessRuleResource.delete({pk: pk})
+    return accessRuleResource.delete({ pk: pk })
 }

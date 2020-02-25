@@ -108,7 +108,7 @@ export default {
     methods: {
         close () {
             this.formErrors = {}
-            this.$router.push({name: 'Calendar'})
+            this.$router.push({ name: 'Calendar' })
         },
         onSaveError (response) {
             this.formErrors = response.data
