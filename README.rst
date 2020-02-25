@@ -57,7 +57,7 @@ Once nodejs is installed on your system, run the following commands::
 
   $ cd frontend
   $ npm install
-  $ npm run dev
+  $ npm run serve
 
 To update dist files (the ones that will be distributed with the plugin), run::
 
