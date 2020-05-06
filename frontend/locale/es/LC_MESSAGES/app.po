@@ -2,86 +2,89 @@
 # Copyright (C) 2018 THE modoboa-calendar'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the modoboa-calendar package.
 # Automatically generated, 2018.
-#
+# 
+# Translators:
+# Luis Fajardo López <luis@fajardolopez.com>, 2018
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: modoboa-calendar 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-25 11:02+0100\n"
-"PO-Revision-Date: 2020-05-06 14:26+0200\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
-"Language: en\n"
+"PO-Revision-Date: 2018-03-31 12:12+0000\n"
+"Last-Translator: Luis Fajardo López <luis@fajardolopez.com>, 2018\n"
+"Language-Team: Spanish (https://www.transifex.com/tonio/teams/13749/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/components/ImportEventsForm.vue:66
 #: src/components/ImportEventsForm.vue:67
 msgid "%{ n } event imported"
 msgid_plural "%{ n } events imported"
-msgstr[0] "%{ n } event imported"
-msgstr[1] "%{ n } events imported"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/components/CreateEventForm.vue:98 src/components/EventForm.vue:119
 msgid "A calendar is required."
-msgstr "A calendar is required."
+msgstr "Es necesario un calendario."
 
 #: src/App.vue:21
 msgid "Access rules"
-msgstr "Access rules"
+msgstr "Reglas de acceso"
 
 #: src/components/CalendarAccessRulesForm.vue:26
 msgid "Account"
-msgstr "Account"
+msgstr "Cuenta"
 
 #: src/components/EventForm.vue:25
 msgid "All day"
-msgstr "All day"
+msgstr "Todo el día"
 
 #: src/App.vue:137
 msgid "Are you sure you want to delete this calendar?"
-msgstr "Are you sure you want to delete this calendar?"
+msgstr "¿Está seguro de querer eliminar este calendarioo?"
 
 #: src/components/EventForm.vue:137
 msgid "Are you sure you want to remove this event?"
-msgstr "Are you sure you want to remove this event?"
+msgstr "¿Está seguro de querer eliminar este evento?"
 
 #: src/components/EventForm.vue:44
 msgid "Attendees"
-msgstr "Attendees"
+msgstr "Invitados"
 
 #: src/components/CalendarForm.vue:107
 msgid "Calendar created"
-msgstr "Calendar created"
+msgstr "Calendario creado"
 
 #: src/App.vue:145
 msgid "Calendar deleted"
-msgstr "Calendar deleted"
+msgstr "Calendario eliminado"
 
 #: src/components/CalendarDetail.vue:3
 msgid "Calendar information"
-msgstr "Calendar information"
+msgstr "Información de calendario"
 
 #: src/components/CalendarAccessRulesForm.vue:3
 msgid "Calendar sharing"
-msgstr "Calendar sharing"
+msgstr "Compartición de calendario"
 
 #: src/components/CalendarForm.vue:104
 msgid "Calendar updated"
-msgstr "Calendar updated"
+msgstr "Calendario actualizado"
 
 #: src/components/CalendarForm.vue:80
 msgid "Choose a domain"
-msgstr "Choose a domain"
+msgstr "Elija un dominio"
 
 #: src/components/CalendarAccessRulesForm.vue:52
 #: src/components/CalendarDetail.vue:17 src/components/CalendarForm.vue:31
 #: src/components/CreateEventForm.vue:34 src/components/EventForm.vue:54
 #: src/components/ImportEventsForm.vue:14
 msgid "Close"
-msgstr "Close"
+msgstr "Cerrar"
 
 #: src/components/CalendarForm.vue:27 src/components/CalendarForm.vue:74
 msgid "Color"
@@ -89,120 +92,127 @@ msgstr "Color"
 
 #: src/components/CalendarForm.vue:86
 msgid "Create"
-msgstr "Create"
+msgstr "Crear"
 
 #: src/App.vue:26 src/App.vue:54 src/components/EventForm.vue:55
 msgid "Delete"
-msgstr "Delete"
+msgstr "Borrar"
 
 #: src/components/EventForm.vue:84
 msgid "Description"
-msgstr "Description"
+msgstr "Descripción"
 
 #: src/components/EventForm.vue:39
 msgid "Detail"
-msgstr "Detail"
+msgstr "Detalle"
 
 #: src/App.vue:16 src/App.vue:49
 msgid "Edit"
-msgstr "Edit"
+msgstr "Editar"
 
 #: src/components/CalendarForm.vue:3
 msgid "Edit calendar"
-msgstr "Edit calendar"
+msgstr "Editar calendario"
 
 #: src/components/EventForm.vue:2
 msgid "Edit event"
-msgstr "Edit event"
+msgstr "Editar evento"
 
 #: src/components/EventForm.vue:145
 msgid "Event deleted"
-msgstr "Event deleted"
+msgstr "Evento eliminado"
 
 #: src/components/Calendar.vue:157 src/components/EventForm.vue:132
 msgid "Event updated"
-msgstr "Event updated"
+msgstr "Evento actualizado"
 
 #: src/App.vue:31
 msgid "Import"
-msgstr "Import"
+msgstr ""
 
 #: src/components/ImportEventsForm.vue:3
 msgid "Import events"
-msgstr "Import events"
+msgstr ""
 
 #: src/App.vue:11 src/App.vue:44
 msgid "Information"
-msgstr "Information"
+msgstr "Información"
 
 #: src/App.vue:5
 msgid "My calendars"
-msgstr "My calendars"
+msgstr "Mis calendarios"
 
 #: src/components/CalendarForm.vue:77
 msgid "Name"
-msgstr "Name"
+msgstr "Nombre"
 
 #: src/App.vue:4 src/components/CalendarForm.vue:4
 msgid "New calendar"
-msgstr "New calendar"
+msgstr "Nuevo calendario"
 
 #: src/components/CreateEventForm.vue:3
 msgid "New event"
-msgstr "New event"
+msgstr "Nuevo evento"
 
 #: src/components/CalendarAccessRulesForm.vue:14
 #: src/components/CalendarAccessRulesForm.vue:27
 msgid "Read"
-msgstr "Read"
+msgstr "Leer"
 
 #: src/components/CreateEventForm.vue:80 src/components/EventForm.vue:90
 msgid "Save"
-msgstr "Save"
+msgstr "Guardar"
 
 #: src/components/ImportEventsForm.vue:8
 msgid "Select an ICS file to import and click on the Send button"
-msgstr "Select an ICS file to import and click on the Send button"
+msgstr ""
 
 #: src/components/ImportEventsForm.vue:45
 msgid "Send"
-msgstr "Send"
+msgstr ""
 
 #: src/App.vue:36
 msgid "Shared calendars"
-msgstr "Shared calendars"
+msgstr "Compartir calendarios"
 
 #: src/components/CalendarForm.vue:20
 msgid "Shared?"
-msgstr "Shared?"
+msgstr "¿Compartido?"
 
 #: src/App.vue:143 src/components/Calendar.vue:155
 #: src/components/CalendarForm.vue:116 src/components/EventForm.vue:130
 #: src/components/EventForm.vue:143 src/components/ImportEventsForm.vue:73
 msgid "Success"
-msgstr "Success"
+msgstr "Hecho"
 
 #: src/components/CalendarDetail.vue:10
 msgid "The credentials are the same than the ones you use to access Modoboa."
-msgstr "The credentials are the same than the ones you use to access Modoboa."
+msgstr ""
+"Las credenciales son las mismas que las que usas para acceder a Modoboa."
 
 #: src/components/CreateEventForm.vue:77 src/components/EventForm.vue:87
 msgid "Title"
-msgstr "Title"
+msgstr "Título"
 
 #: src/components/CalendarDetail.vue:6
-msgid "To access this calendar from the outside (such as Mozilla Thunderbird or your smartphone), use the following URL:"
-msgstr "To access this calendar from the outside (such as Mozilla Thunderbird or your smartphone), use the following URL:"
+msgid ""
+"To access this calendar from the outside (such as Mozilla Thunderbird or "
+"your smartphone), use the following URL:"
+msgstr ""
+"Para acceder remotamente a este calendario (como con Mozilla Thunderbird o "
+"con su smartphone) use la siguiente URL:"
 
 #: src/components/CalendarForm.vue:84
 msgid "Update"
-msgstr "Update"
+msgstr "Actualizar"
 
 #: src/components/CalendarAccessRulesForm.vue:15
 #: src/components/CalendarAccessRulesForm.vue:28
 msgid "Write"
-msgstr "Write"
+msgstr "Escribir"
 
 #: src/components/CalendarDetail.vue:11
-msgid "You can also share a read-only version of this calendar using the following URL:"
-msgstr "You can also share a read-only version of this calendar using the following URL:"
+msgid ""
+"You can also share a read-only version of this calendar using the following "
+"URL:"
+msgstr ""

@@ -1,20 +1,23 @@
-# French translations for modoboa-calendar package.
+# English translations for modoboa-calendar package.
 # Copyright (C) 2018 THE modoboa-calendar'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the modoboa-calendar package.
 # Automatically generated, 2018.
-#
+# 
+# Translators:
+# Antoine Nguyen <tonio@ngyn.org>, 2020
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: modoboa-calendar 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-25 11:02+0100\n"
-"PO-Revision-Date: 2020-02-25 11:06+0100\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
-"Language: fr\n"
+"PO-Revision-Date: 2018-03-31 12:12+0000\n"
+"Last-Translator: Antoine Nguyen <tonio@ngyn.org>, 2020\n"
+"Language-Team: French (https://www.transifex.com/tonio/teams/13749/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: src/components/ImportEventsForm.vue:66
@@ -162,7 +165,8 @@ msgstr "Enregistrer"
 
 #: src/components/ImportEventsForm.vue:8
 msgid "Select an ICS file to import and click on the Send button"
-msgstr "Sélectionner un fichier ICS à importer puis cliquer sur le bouton Envoyer"
+msgstr ""
+"Sélectionnez un fichier ICS à importer et cliquez sur le bouton Envoyer"
 
 #: src/components/ImportEventsForm.vue:45
 msgid "Send"
@@ -184,15 +188,20 @@ msgstr "Succès"
 
 #: src/components/CalendarDetail.vue:10
 msgid "The credentials are the same than the ones you use to access Modoboa."
-msgstr "Les identifiants sont les mêmes que ceux utilisés pour accéder à Modoboa."
+msgstr ""
+"Les identifiants sont les mêmes que ceux utilisés pour accéder à Modoboa."
 
 #: src/components/CreateEventForm.vue:77 src/components/EventForm.vue:87
 msgid "Title"
 msgstr "Titre"
 
 #: src/components/CalendarDetail.vue:6
-msgid "To access this calendar from the outside (such as Mozilla Thunderbird or your smartphone), use the following URL:"
-msgstr "Pour accéder à ce calendrier depuis l'extérieur (par exemple depuis Mozilla Thunderbird ou votre smartphone), utilisez l'URL suivante :"
+msgid ""
+"To access this calendar from the outside (such as Mozilla Thunderbird or "
+"your smartphone), use the following URL:"
+msgstr ""
+"Pour accéder à ce calendrier depuis l'extérieur (par exemple depuis Mozilla "
+"Thunderbird ou votre smartphone), utilisez l'URL suivante :"
 
 #: src/components/CalendarForm.vue:84
 msgid "Update"
@@ -204,5 +213,9 @@ msgid "Write"
 msgstr "Ecriture"
 
 #: src/components/CalendarDetail.vue:11
-msgid "You can also share a read-only version of this calendar using the following URL:"
-msgstr "Vous pouvez aussi partager ce calendrier en lecture seule en utilisant l'URL suivante :"
+msgid ""
+"You can also share a read-only version of this calendar using the following "
+"URL:"
+msgstr ""
+"Vous pouvez aussi partager une version en lecture seule de ce calendrier en "
+"utilisant l'URL suivante :"
