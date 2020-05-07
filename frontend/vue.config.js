@@ -3,7 +3,7 @@ var BundleTracker = require('webpack-bundle-tracker');
 
 module.exports = {
     publicPath: process.env.NODE_ENV === 'production'
-              ? '/static/'
+              ? '/sitestatic/'
               : 'http://localhost:8080/',
     outputDir: '../modoboa_radicale/static/',
     assetsDir: 'modoboa_radicale',
