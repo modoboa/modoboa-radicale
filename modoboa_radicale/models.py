@@ -1,7 +1,5 @@
 """Radicale extension models."""
 
-from __future__ import unicode_literals
-
 import os
 
 from six.moves import urllib
@@ -24,7 +22,7 @@ class Calendar(models.Model):
     name = models.CharField(max_length=200)
     color = models.CharField(max_length=7, default="#3a87ad")
     _path = models.TextField()
-    access_token = models.CharField(max_length=32)
+    access_token = models.CharField(max_length=50)
 
     class Meta:
         abstract = True
