@@ -46,7 +46,7 @@ before_deploy:
   - cd ../modoboa_radicale
   - django-admin compilemessages
   - cd ../frontend
-  - nvm install 6.10
+  - nvm install --lts
   - npm install
   - npm run build
   - cd ..
