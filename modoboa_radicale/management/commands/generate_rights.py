@@ -33,7 +33,7 @@ class Command(BaseCommand):
 [%s]
 user = %s
 collection = %s
-permission = %s
+permissions = %s
 """ % (name, user, collection, perm)
         )
 
@@ -101,7 +101,7 @@ permission = %s
             comment="Access rule to domain shared calendars"
         )
         self._generate_acr(
-            "owners-access", r".+", r"%(login)s(/.*)?",
+            "owners-access", r".+", r"{user}(/.*)?",
             comment="Read/Write permission for calendar owners"
         )
 
