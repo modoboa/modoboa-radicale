@@ -11,7 +11,7 @@
   "dependencies": {
     "core-js": "^3.6.4",
     "fullcalendar": "^3.10.1",
-    "jquery": "~3.4.1",
+    "jquery": "~3.5.1",
     "js-cookie": "^2.2.1",
     "luxon": "^1.22.0",
     "moment": "^2.24.0",
