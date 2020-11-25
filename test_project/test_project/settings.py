@@ -58,6 +58,10 @@ INSTALLED_APPS = (
     'ckeditor_uploader',
     'rest_framework',
     'rest_framework.authtoken',
+    'drf_spectacular',
+    'django_otp',
+    'django_otp.plugins.otp_totp',
+    'django_otp.plugins.otp_static',
 )
 
 # A dedicated place to register Modoboa applications
@@ -72,6 +76,9 @@ MODOBOA_APPS = (
     'modoboa.relaydomains',
     'modoboa.limits',
     'modoboa.parameters',
+    'modoboa.dnstools',
+    'modoboa.policyd',
+    'modoboa.maillog',
     # Modoboa extensions here.
     'modoboa_radicale',
 )
@@ -86,6 +93,8 @@ MIDDLEWARE = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django_otp.middleware.OTPMiddleware',
+    'modoboa.core.middleware.TwoFAMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',

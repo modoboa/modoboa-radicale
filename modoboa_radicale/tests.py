@@ -127,7 +127,7 @@ class AccessRuleTestCase(ModoTestCase):
             cfg.get(section, "collection"),
             "admin@test.com/User calendar 0"
         )
-        self.assertEqual(cfg.get(section, "permission"), "r")
+        self.assertEqual(cfg.get(section, "permissions"), "r")
 
         # Call a second time
         management.call_command("generate_rights", verbosity=False)
