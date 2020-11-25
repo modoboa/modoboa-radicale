@@ -29,7 +29,7 @@ services:
 before_install:
   - pip install codecov
   - pip install -r test-requirements.txt
-  - pip install -e git+https://github.com/modoboa/modoboa.git#egg=modoboa
+  - pip install -e git+https://github.com/modoboa/modoboa.git@1.x#egg=modoboa
 
 install:
   - pip install -r requirements.txt
