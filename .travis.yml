@@ -21,6 +21,10 @@ cache:
 addons:
   postgresql: '9.6'
   mysql: '5.5'
+  apt:
+    packages:
+      - librrd-dev
+      - rrdtool
 
 services:
   - postgres
