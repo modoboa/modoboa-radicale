@@ -7,7 +7,7 @@ from modoboa.admin import factories as admin_factories
 from . import models
 
 
-class UserCalendarFactory(factory.django.DjangoModelFactory):
+class UserCalendarFactory(factory.DjangoModelFactory):
 
     class Meta:
         model = models.UserCalendar
@@ -16,7 +16,7 @@ class UserCalendarFactory(factory.django.DjangoModelFactory):
     mailbox = factory.SubFactory(admin_factories.MailboxFactory)
 
 
-class SharedCalendarFactory(factory.django.DjangoModelFactory):
+class SharedCalendarFactory(factory.DjangoModelFactory):
 
     class Meta:
         model = models.SharedCalendar
@@ -25,7 +25,7 @@ class SharedCalendarFactory(factory.django.DjangoModelFactory):
     domain = factory.SubFactory(admin_factories.DomainFactory)
 
 
-class AccessRuleFactory(factory.django.DjangoModelFactory):
+class AccessRuleFactory(factory.DjangoModelFactory):
 
     class Meta:
         model = models.AccessRule
