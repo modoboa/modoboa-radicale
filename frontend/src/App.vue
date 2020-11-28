@@ -34,7 +34,9 @@
             </li>
           </ul>
         </li>
-        <li class="nav-header"><translate>Shared calendars</translate></li>
+        <li v-if="sharedCalendars.length" class="nav-header">
+          <translate>Shared calendars</translate>
+        </li>
         <li v-for="calendar in sharedCalendars" :key="calendar.pk" class="dropdown-submenu">
           <a href="#" @click="toggleSharedCalendarMenu">
             <span class="square" v-bind:style="{ 'background-color': calendar.color }"></span> {{ calendar.name }}

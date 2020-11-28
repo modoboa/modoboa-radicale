@@ -15,16 +15,16 @@
             <span v-if="formErrors['name']" class="help-block">{{ formErrors['name'][0] }}</span>
           </div>
         </div>
-        <div v-can="'modoboa_radicale.add_sharedcalendar'" class="row">
-          <div v-if="!calendar.pk" class="col-sm-3">
-            <div class="checkbox">
-              <label><input type="checkbox" v-model="shared"><translate>Shared?</translate></label>
-            </div>
-          </div>
-          <div class="col-sm-9">
-            <multiselect v-if="shared" :options="domains" label="name" v-model="calendar.domain" :placeholder="domainPlaceHolder"></multiselect>
-          </div>
-        </div>
+        <!-- <div v-can="'modoboa_radicale.add_sharedcalendar'" class="row"> -->
+        <!--   <div v-if="!calendar.pk" class="col-sm-3"> -->
+        <!--     <div class="checkbox"> -->
+        <!--       <label><input type="checkbox" v-model="shared"><translate>Shared?</translate></label> -->
+        <!--     </div> -->
+        <!--   </div> -->
+        <!--   <div class="col-sm-9"> -->
+        <!--     <multiselect v-if="shared" :options="domains" label="name" v-model="calendar.domain" :placeholder="domainPlaceHolder"></multiselect> -->
+        <!--   </div> -->
+        <!-- </div> -->
         <h4><small><translate>Color</translate></small></h4>
         <compact-picker v-model="calendar.color" />
         <hr>
