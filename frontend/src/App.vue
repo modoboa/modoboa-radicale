@@ -156,21 +156,21 @@ export default {
             $(e.target).closest('ul').toggle()
             this.currentMenu = null
         },
-        toggleSubmenu (e) {
-            var newMenu = $(e.target).next('ul')
-            if (this.currentMenu) {
-                this.currentMenu.toggle()
-                if (this.currentMenu.is(newMenu)) {
-                    this.currentMenu = undefined
-                    return
-                }
-            }
-            this.currentMenu = newMenu
-            this.currentMenu.toggle()
-        },
-        toggleSharedCalendarMenu (e) {
-            this.toggleSubmenu(e)
+      toggleSubmenu (e) {
+        var newMenu = $(e.target).next('ul')
+        if (this.currentMenu) {
+          this.currentMenu.toggle()
+          if (this.currentMenu.is(newMenu)) {
+            this.currentMenu = undefined
+            return
+          }
         }
+        this.currentMenu = newMenu
+        this.currentMenu.toggle()
+      },
+      toggleSharedCalendarMenu (e) {
+        this.toggleSubmenu(e)
+      }
     }
 }
 </script>
