@@ -1,5 +1,5 @@
 modoboa>=1.15.0
-django-filter==2.2.0
+django-filter==2.4.0
 drf-nested-routers
 django-webpack-loader
 caldav==0.7.1
