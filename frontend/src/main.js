@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Cookies from 'js-cookie'
-import moment from 'moment'
 
 import GetTextPlugin from 'vue-gettext'
 import Multiselect from 'vue-multiselect'
@@ -49,12 +48,6 @@ Vue.use(VueFlatPickr)
 Vue.component('calendar', Calendar)
 Vue.component('modal', Modal)
 Vue.component('multiselect', Multiselect)
-
-Vue.filter('formatDate', (value, format) => {
-    if (value) {
-        return moment(String(value)).format(format || 'MM/DD/YYYY hh:mm')
-    }
-})
 
 /* Global event bus */
 const EventBus = new Vue()
