@@ -116,8 +116,9 @@ class AccessRuleTestCase(ModoTestCase):
                 cfg.readfp(fpo)
 
         # Check mandatory rules
-        self.assertTrue(cfg.has_section("domain-shared-calendars"))
-        self.assertTrue(cfg.has_section("owners-access"))
+        # self.assertTrue(cfg.has_section("domain-shared-calendars"))
+        self.assertTrue(cfg.has_section("principal"))
+        self.assertTrue(cfg.has_section("calendars"))
 
         # Check user-defined rules
         section = "user@test.com-to-User calendar 0-acr"
@@ -144,8 +145,9 @@ class AccessRuleTestCase(ModoTestCase):
                 cfg.readfp(fpo)
 
         # Check mandatory rules
-        self.assertTrue(cfg.has_section("domain-shared-calendars"))
-        self.assertTrue(cfg.has_section("owners-access"))
+        # self.assertTrue(cfg.has_section("domain-shared-calendars"))
+        self.assertTrue(cfg.has_section("principal"))
+        self.assertTrue(cfg.has_section("calendars"))
 
         # Super admin rules
         section = "sa-admin-acr"
