@@ -70,8 +70,9 @@ class Caldav_Backend(CalendarBackend):
                     .replace("mailto:", "")
                     .replace("MAILTO:", "")
                 )
+                cn = attendee.params.get("CN")
                 result["attendees"].append({
-                    "display_name": attendee.params.get("CN")[0],
+                    "display_name": cn[0] if cn else "",
                     "email": email
                 })
         return result
