@@ -127,10 +127,13 @@ class EventSerializer(serializers.Serializer):
 class ROEventSerializer(EventSerializer):
     """Event serializer for read operations."""
 
+    editable = serializers.BooleanField()
+    recurring = serializers.BooleanField(default=False)
+
     def __init__(self, *args, **kwargs):
         """Set calendar field based on type."""
         calendar_type = kwargs.pop("calendar_type")
-        super(ROEventSerializer, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.fields["calendar"] = (
             UserCalendarSerializer() if calendar_type == "user"
             else SharedCalendarSerializer()
