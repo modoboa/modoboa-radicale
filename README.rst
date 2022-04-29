@@ -1,7 +1,7 @@
 modoboa-radicale
 ================
 
-|travis| |codecov| |landscape|
+|gha| |codecov|
 
 The `Radicale <http://radicale.org/>`_ frontend of Modoboa.
 
@@ -63,10 +63,7 @@ To update dist files (the ones that will be distributed with the plugin), run::
 
   $ npm run build
 
-.. |landscape| image:: https://landscape.io/github/modoboa/modoboa-radicale/master/landscape.svg?style=flat
-   :target: https://landscape.io/github/modoboa/modoboa-radicale/master
-   :alt: Code Health
-.. |travis| image:: https://travis-ci.org/modoboa/modoboa-radicale.png?branch=master
-   :target: https://travis-ci.org/modoboa/modoboa-radicale
+.. |gha| image:: https://github.com/modoboa/modoboa-radicale/actions/workflows/plugin.yml/badge.svg
+   :target: https://github.com/modoboa/modoboa-radicale/actions/workflows/plugin.yml
 .. |codecov| image:: http://codecov.io/github/modoboa/modoboa-radicale/coverage.svg?branch=master
    :target: http://codecov.io/github/modoboa/modoboa-radicale?branch=master
