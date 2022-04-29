@@ -5,8 +5,7 @@ import os
 from six.moves import urllib
 
 from django.db import models
-from django.utils.encoding import (
-    python_2_unicode_compatible, smart_str, smart_text)
+from django.utils.encoding import smart_str, smart_text
 from django.utils.translation import ugettext as _
 
 from modoboa.admin.models import Domain, Mailbox
@@ -15,7 +14,6 @@ from modoboa.lib import exceptions as lib_exceptions
 from modoboa.parameters import tools as param_tools
 
 
-@python_2_unicode_compatible
 class Calendar(models.Model):
     """Abstract calendar definition."""
 
@@ -146,7 +144,6 @@ class SharedCalendar(Calendar):
         return self.domain
 
 
-@python_2_unicode_compatible
 class AccessRule(models.Model):
     """Access rules to user calendars."""
 

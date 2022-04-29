@@ -2,14 +2,13 @@
 
 """Radicale extension unit tests."""
 
-import mock
 import os
 import tempfile
+from unittest import mock
 
 from configparser import ConfigParser
 
 from django.urls import reverse
-from django.utils import six
 from django.core import management
 
 from modoboa.admin import factories as admin_factories
@@ -110,10 +109,7 @@ class AccessRuleTestCase(ModoTestCase):
 
         cfg = ConfigParser()
         with open(self.rights_file_path) as fpo:
-            if six.PY3:
-                cfg.read_file(fpo)
-            else:
-                cfg.readfp(fpo)
+            cfg.read_file(fpo)
 
         # Check mandatory rules
         # self.assertTrue(cfg.has_section("domain-shared-calendars"))
@@ -139,10 +135,7 @@ class AccessRuleTestCase(ModoTestCase):
         management.call_command("generate_rights", verbosity=False)
         cfg = ConfigParser()
         with open(self.rights_file_path) as fpo:
-            if six.PY3:
-                cfg.read_file(fpo)
-            else:
-                cfg.readfp(fpo)
+            cfg.read_file(fpo)
 
         # Check mandatory rules
         # self.assertTrue(cfg.has_section("domain-shared-calendars"))
