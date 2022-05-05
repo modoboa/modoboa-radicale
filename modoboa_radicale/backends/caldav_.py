@@ -6,6 +6,7 @@ import uuid
 import caldav
 from caldav.elements import dav, ical
 from caldav import Calendar
+from dateutil.relativedelta import relativedelta
 import vobject
 
 from django.utils import timezone
@@ -21,7 +22,7 @@ class Caldav_Backend(CalendarBackend):
 
     def __init__(self, username, password, calendar=None):
         """Constructor."""
-        super(Caldav_Backend, self).__init__(calendar)
+        super().__init__(calendar)
         server_url = smart_str(
             param_tools.get_global_parameter("server_location"))
         self.client = caldav.DAVClient(
@@ -30,40 +31,53 @@ class Caldav_Backend(CalendarBackend):
         if self.calendar:
             self.remote_cal = Calendar(self.client, calendar.encoded_path)
 
-    def _serialize_event(self, event):
+    def _serialize_event(
+            self,
+            vevent,
+            start=None,
+            end=None,
+            all_day: bool = False,
+            **kwargs) -> dict:
         """Convert a vevent to a dictionary."""
-        vevent = event.vobject_instance.vevent
         description = (
             vevent.description.value
             if "description" in vevent.contents else ""
         )
+        event_id = vevent.uid.value
         result = {
-            "id": vevent.uid.value,
+            "id": event_id,
             "title": vevent.summary.value,
             "color": self.calendar.color,
             "description": description,
             "calendar": self.calendar,
-            "attendees": []
+            "attendees": [],
+            # Quick way to disable edition of recurring events until
+            # we support it.
+            "editable": not kwargs.get("recurring", False),
+            **kwargs
         }
-        if isinstance(vevent.dtstart.value, datetime.datetime):
-            all_day = False
+        if start is None and end is None:
             start = vevent.dtstart.value
             end = vevent.dtend.value
+        if isinstance(start, datetime.datetime):
+            all_day = all_day
         else:
             tz = timezone.get_current_timezone()
             all_day = True
             start = tz.localize(
-                datetime.datetime.combine(
-                    vevent.dtstart.value, datetime.time.min))
+                datetime.datetime.combine(start, datetime.time.min))
             end = tz.localize(
-                datetime.datetime.combine(
-                    vevent.dtend.value, datetime.time.min))
+                datetime.datetime.combine(end, datetime.time.min))
         result.update({
             "allDay": all_day,
             "start": start,
             "end": end
         })
         if "attendee" in vevent.contents:
+            if "organizer" in vevent.contents:
+                organizer = vevent.organizer.value.replace("mailto:", "")
+                if organizer != self.calendar.mailbox.full_address:
+                    result["editable"] = False
             for attendee in vevent.contents["attendee"]:
                 email = (
                     attendee.value
@@ -75,6 +89,51 @@ class Caldav_Backend(CalendarBackend):
                     "display_name": cn[0] if cn else "",
                     "email": email
                 })
+        return result
+
+    def _serialize_events(self, event, start, end) -> list:
+        """Convert this event to a list of dictionaries.
+
+        In case of recurring event, we will generate as much
+        dictionaries as necessary, according to given start and end
+        dates.
+
+        """
+        tz = timezone.get_current_timezone()
+        result = []
+        for vevent in event.vobject_instance.vevent_list:
+            rruleset = vevent.getrruleset()
+            if rruleset:
+                all_day = True
+                duration = relativedelta(
+                    vevent.dtend.value, vevent.dtstart.value)
+                if isinstance(vevent.dtstart.value, datetime.datetime):
+                    all_day = False
+                for date in list(rruleset):
+                    if date.tzinfo is None:
+                        date = tz.localize(date)
+                    if date >= start and date <= end:
+                        result += [
+                            self._serialize_event(
+                                vevent, date, date + duration, all_day=all_day,
+                                recurring=True
+                            )
+                        ]
+            else:
+                options = {}
+                if "recurrence-id" in vevent.contents:
+                    # Remove previously expanded event because it has
+                    # been overriden
+                    recurrence_id = vevent.recurrence_id.value
+                    options["recurring"] = True
+                    for (pos, item) in enumerate(result):
+                        if (
+                            item["id"] == vevent.uid.value and
+                            item["start"] == recurrence_id
+                        ):
+                            del result[pos]
+                            break
+                result += [self._serialize_event(vevent, **options)]
         return result
 
     def create_calendar(self, url):
@@ -147,14 +206,15 @@ class Caldav_Backend(CalendarBackend):
         """Retrieve and event using its uid."""
         url = "{}/{}.ics".format(self.remote_cal.url.geturl(), uid)
         event = self.remote_cal.event_by_url(url)
-        return self._serialize_event(event)
+        vevent = event.vobject_instance.vevent
+        return self._serialize_event(vevent)
 
     def get_events(self, start, end):
         """Retrieve a list of events."""
         orig_events = self.remote_cal.date_search(start, end)
         events = []
         for event in orig_events:
-            events.append(self._serialize_event(event))
+            events += self._serialize_events(event, start, end)
         return events
 
     def delete_event(self, uid):

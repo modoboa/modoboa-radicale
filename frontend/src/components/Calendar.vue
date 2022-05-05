@@ -90,7 +90,8 @@ export default {
         select: this.selectCallback,
         eventClick: this.eventClickCallback,
         eventDrop: this.eventDropCallback,
-        eventResize: this.eventResizeCallback
+        eventResize: this.eventResizeCallback,
+        scrollTime: '09:00:00'
       })
       this.calendar.render()
       this.addEventSources(this.calendars)
@@ -128,6 +129,9 @@ export default {
       this.calendar.addEvent(event, true)
     },
     eventClickCallback (info) {
+      if (!info.event.startEditable) {
+        return
+      }
       var evtCalendar = info.event.extendedProps.calendar
       var calType = (evtCalendar.domain) ? 'shared' : 'user'
       this.$router.push({
