@@ -26,7 +26,7 @@ class Caldav_Backend(CalendarBackend):
             param_tools.get_global_parameter("server_location"))
         self.client = caldav.DAVClient(
             server_url,
-            username=username, password=password)
+            username=username, password=password, ssl_verify_cert=False)
         if self.calendar:
             self.remote_cal = Calendar(self.client, calendar.encoded_path)
 
