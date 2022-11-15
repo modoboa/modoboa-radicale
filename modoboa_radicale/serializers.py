@@ -129,11 +129,11 @@ class ROEventSerializer(EventSerializer):
 
     def __init__(self, *args, **kwargs):
         """Set calendar field based on type."""
-        calendar_type = kwargs.pop("calendar_type")
-        super(ROEventSerializer, self).__init__(*args, **kwargs)
+        calendar_type = kwargs.pop("calendar_type", None)
+        super().__init__(*args, **kwargs)
         self.fields["calendar"] = (
-            UserCalendarSerializer() if calendar_type == "user"
-            else SharedCalendarSerializer()
+            SharedCalendarSerializer() if calendar_type != "user"
+            else UserCalendarSerializer()
         )
 
 
