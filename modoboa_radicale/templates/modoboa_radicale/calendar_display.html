@@ -6,12 +6,10 @@
 {% block pagetitle %}{% trans "Calendar" %}{% endblock %}
 
 {% block extra_css %}
-  {% render_bundle 'chunk-vendors' 'css' 'CALENDAR' %}
   {% render_bundle 'app' 'css' 'CALENDAR' %}
 {% endblock %}
 
 {% block extra_js %}
-  {% render_bundle 'chunk-vendors' 'js' 'CALENDAR' %}
   {% render_bundle 'app' 'js' 'CALENDAR' %}
 
   <script>
