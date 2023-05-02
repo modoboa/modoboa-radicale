@@ -67,7 +67,7 @@ class ParametersForm(param_forms.AdminParametersForm):
         choices=SSL_VERIFY_CHOICES,
         initial=SSL_VERIFY_CHOICES[0]
         label=ugettext_lazy("Type of ssl verification"),
-        help=ugettext_lazy("It might be needed to set to custom "
+        help_text=ugettext_lazy("It might be needed to set to custom "
             "and set a CA bundle or set to 'Skip verification' "
             "in case of a self-signed cert")
         )
