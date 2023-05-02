@@ -80,7 +80,7 @@ MODOBOA_APPS = (
     'modoboa.maillog',
     'modoboa.dmarc',
     'modoboa.pdfcredentials',
-    'modoboa.imap_migration'
+    'modoboa.imap_migration',
     # Modoboa extensions here.
     'modoboa_radicale',
 )
