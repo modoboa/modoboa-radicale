@@ -1,7 +1,7 @@
 """Radicale management frontend."""
 
 from django.urls import reverse_lazy
-from django.utils.translation import ugettext_lazy
+from django.utils.translation import gettext_lazy
 
 from modoboa.core.extensions import ModoExtension, exts_pool
 from modoboa.parameters import tools as param_tools
@@ -14,11 +14,11 @@ class Radicale(ModoExtension):
     """Radicale extension declaration."""
 
     name = "modoboa_radicale"
-    label = ugettext_lazy("Radicale management")
+    label = gettext_lazy("Radicale management")
     topredirection_url = reverse_lazy("modoboa_radicale:index")
     version = __version__
     url = "calendars"
-    description = ugettext_lazy(
+    description = gettext_lazy(
         "Management frontend for Radicale, a simple calendar and contact "
         "server."
     )

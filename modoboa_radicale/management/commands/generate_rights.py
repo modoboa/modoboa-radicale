@@ -130,7 +130,7 @@ permissions = %s
             else:
                 tz = timezone.get_current_timezone()
                 qset = models.AccessRule.objects.filter(
-                    last_update__gt=tz.localize(mtime))
+                    last_update__gt=mtime.replace(tzinfo=tz))
                 if not qset.exists():
                     return
         self._generate_file(path)

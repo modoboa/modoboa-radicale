@@ -5,8 +5,8 @@ import os
 from six.moves import urllib
 
 from django.db import models
-from django.utils.encoding import smart_str, smart_text
-from django.utils.translation import ugettext as _
+from django.utils.encoding import smart_str
+from django.utils.translation import gettext as _
 
 from modoboa.admin.models import Domain, Mailbox
 
@@ -26,7 +26,7 @@ class Calendar(models.Model):
         abstract = True
 
     def __str__(self):
-        return smart_text(self.name)
+        return smart_str(self.name)
 
     @property
     def path(self):
@@ -161,7 +161,7 @@ class AccessRule(models.Model):
     def __str__(self):
         access = "r" if self.read else ""
         access += "w" if self.write else ""
-        return smart_text(
+        return smart_str(
             "%s access rule to %s -> %s"
             % (self.mailbox, self.calendar, access if access else "no access")
         )

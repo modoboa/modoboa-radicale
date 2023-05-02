@@ -52,12 +52,10 @@ class Caldav_Backend(CalendarBackend):
         else:
             tz = timezone.get_current_timezone()
             all_day = True
-            start = tz.localize(
-                datetime.datetime.combine(
-                    vevent.dtstart.value, datetime.time.min))
-            end = tz.localize(
-                datetime.datetime.combine(
-                    vevent.dtend.value, datetime.time.min))
+            start = datetime.datetime.combine(
+                    vevent.dtstart.value, datetime.time.min).replace(tzinfo=tz)
+            end = datetime.datetime.combine(
+                    vevent.dtend.value, datetime.time.min).replace(tzinfo=tz)
         result.update({
             "allDay": all_day,
             "start": start,
