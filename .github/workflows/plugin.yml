@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:11
+        image: postgres:12
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -41,18 +41,19 @@ jobs:
     strategy:
       matrix:
         database: ['postgres', 'mysql']
-        python-version: [3.7, 3.8, 3.9]
+        python-version: [3.8, 3.9, 3.10]
       fail-fast: false
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          sudo apt-get update -y && sudo apt-get install -y librrd-dev rrdtool 
+          sudo apt-get update -y \
+          && sudo apt-get update -y && sudo apt-get install -y librrd-dev rrdtool
           python -m pip install --upgrade pip
           pip install -e git+https://github.com/modoboa/modoboa.git#egg=modoboa
           pip install -r requirements.txt
