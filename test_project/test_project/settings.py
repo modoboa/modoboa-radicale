@@ -78,6 +78,9 @@ MODOBOA_APPS = (
     'modoboa.dnstools',
     'modoboa.policyd',
     'modoboa.maillog',
+    'modoboa.dmarc',
+    'modoboa.pdfcredentials',
+    'modoboa.imap_migration'
     # Modoboa extensions here.
     'modoboa_radicale',
 )
