@@ -24,9 +24,14 @@ class Caldav_Backend(CalendarBackend):
         super(Caldav_Backend, self).__init__(calendar)
         server_url = smart_str(
             param_tools.get_global_parameter("server_location"))
+        ssl_verify_cert = smart_str(
+            param_tools.get_global_parameter("ssl_verify_cert"))
+        if ssl_verify_cert == "path":
+            ssl_verify_cert = param_tools.get_global_parameter("ssl_ca_bundle_path")
         self.client = caldav.DAVClient(
             server_url,
-            username=username, password=password)
+            username=username, password=password,
+            ssl_verify_cert=ssl_verify_cert)
         if self.calendar:
             self.remote_cal = Calendar(self.client, calendar.encoded_path)
 
