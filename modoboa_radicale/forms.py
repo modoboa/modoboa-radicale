@@ -6,6 +6,14 @@ from django.utils.translation import ugettext_lazy
 from modoboa.lib import form_utils
 from modoboa.parameters import forms as param_forms
 
+from . import constants
+
+SSL_VERIFY_CHOICES = (
+    (constants.VERIFY, ugettext_lazy("Verify")),
+    (constants.NO_VERIFY, ugettext_lazy("Skip verification")),
+    (constants.PATH, ugettext_lazy("Provide CA bundle"))
+)
+
 
 class ParametersForm(param_forms.AdminParametersForm):
     """Global parameters."""
@@ -56,3 +64,23 @@ class ParametersForm(param_forms.AdminParametersForm):
             "Maximum size in bytes of imported ICS files "
             "(or KB, MB, GB if specified)")
     )
+
+    ssl_verify_cert = forms.ChoiceField(
+        choices=SSL_VERIFY_CHOICES,
+        initial=constants.VERIFY,
+        label=ugettext_lazy("Type of ssl verification"),
+        help_text=ugettext_lazy("It might be needed to set to custom "
+            "and set a CA bundle or set to 'Skip verification' "
+            "in case of a self-signed cert")
+        )
+
+    ssl_ca_bundle_path = forms.CharField(
+        label=ugettext_lazy("Path to CA bundle"),
+        initial="",
+        help_text=ugettext_lazy(
+            "Path to the CA bundle. ")
+        )
+
+    visibility_rules = {
+        "ssl_ca_bundle_path": f"ssl_verify_cert={constants.PATH}"
+        }

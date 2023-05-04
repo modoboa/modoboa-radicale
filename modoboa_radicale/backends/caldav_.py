@@ -14,6 +14,7 @@ from django.utils.encoding import smart_str
 from modoboa.parameters import tools as param_tools
 
 from . import CalendarBackend
+from .. import constants
 
 
 class Caldav_Backend(CalendarBackend):
@@ -24,9 +25,17 @@ class Caldav_Backend(CalendarBackend):
         super(Caldav_Backend, self).__init__(calendar)
         server_url = smart_str(
             param_tools.get_global_parameter("server_location"))
+        ssl_verify_cert = param_tools.get_global_parameter("ssl_verify_cert")
+        if ssl_verify_cert == constants.VERIFY:
+            ssl_verify_cert = True
+        elif ssl_verify_cert == constants.NO_VERIFY:
+            ssl_verify_cert = False
+        elif ssl_verify_cert == constants.PATH:
+            ssl_verify_cert = param_tools.get_global_parameter("ssl_ca_bundle_path")
         self.client = caldav.DAVClient(
             server_url,
-            username=username, password=password)
+            username=username, password=password,
+            ssl_verify_cert=ssl_verify_cert)
         if self.calendar:
             self.remote_cal = Calendar(self.client, calendar.encoded_path)
 
