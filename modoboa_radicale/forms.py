@@ -82,5 +82,5 @@ class ParametersForm(param_forms.AdminParametersForm):
         )
 
     visibility_rules = {
-        "ssl_ca_bundle_path": "ssl_verify_cert=path"
+        "ssl_ca_bundle_path": f"ssl_verify_cert={constants.PATH}"
         }
