@@ -6,10 +6,12 @@ from django.utils.translation import ugettext_lazy
 from modoboa.lib import form_utils
 from modoboa.parameters import forms as param_forms
 
+from . import constants
+
 SSL_VERIFY_CHOICES = (
-    (True, ugettext_lazy("Verify")),
-    (False, ugettext_lazy("Skip verification")),
-    ("path", ugettext_lazy("Provide CA bundle"))
+    (constants.VERIFY, ugettext_lazy("Verify")),
+    (constants.NO_VERIFY, ugettext_lazy("Skip verification")),
+    (constants.PATH, ugettext_lazy("Provide CA bundle"))
     )
 
 
