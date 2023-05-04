@@ -67,7 +67,7 @@ class ParametersForm(param_forms.AdminParametersForm):
 
     ssl_verify_cert = forms.ChoiceField(
         choices=SSL_VERIFY_CHOICES,
-        initial=True,
+        initial=constants.VERIFY,
         label=ugettext_lazy("Type of ssl verification"),
         help_text=ugettext_lazy("It might be needed to set to custom "
             "and set a CA bundle or set to 'Skip verification' "
