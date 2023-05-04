@@ -12,7 +12,7 @@ SSL_VERIFY_CHOICES = (
     (constants.VERIFY, ugettext_lazy("Verify")),
     (constants.NO_VERIFY, ugettext_lazy("Skip verification")),
     (constants.PATH, ugettext_lazy("Provide CA bundle"))
-    )
+)
 
 
 class ParametersForm(param_forms.AdminParametersForm):
