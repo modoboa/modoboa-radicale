@@ -5,7 +5,7 @@ import os
 import dateutil
 
 from django import http
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import action
