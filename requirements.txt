@@ -1,4 +1,4 @@
 django-filter==23.5
 drf-nested-routers
-django-webpack-loader==2.0.1
+django-webpack-loader==3.0.0
 caldav==1.3.9
