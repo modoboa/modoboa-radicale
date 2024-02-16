@@ -107,8 +107,6 @@ jobs:
           coverage run --source ../modoboa_radicale manage.py test modoboa_radicale
           coverage xml
           coverage report
-          REDIS_HOST: localhost
-          REDIS_PORT: ${{ job.services.redis.ports[6379] }}
         env:
           # use localhost for the host here because we are running the job on the VM.
           # If we were running the job on in a container this would be postgres
@@ -116,6 +114,8 @@ jobs:
           MYSQL_HOST: 127.0.0.1
           MYSQL_PORT: ${{ job.services.mysql.ports[3306] }} # get randomly assigned published port
           MYSQL_USER: root
+          REDIS_HOST: localhost
+          REDIS_PORT: ${{ job.services.redis.ports[6379] }}
       - name: Upload coverage result
         if: ${{ matrix.python-version == '3.10' }}
         uses: actions/upload-artifact@v3
