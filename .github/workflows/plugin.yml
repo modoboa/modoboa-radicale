@@ -37,6 +37,15 @@ jobs:
         ports:
           - 3306/tcp
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+      redis:
+        image: redis
+        ports:
+          - 6379/tcp
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     strategy:
       matrix:
@@ -52,7 +61,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          sudo apt-get update -y && sudo apt-get install -y librrd-dev rrdtool 
+          sudo apt-get update -y && sudo apt-get install -y librrd-dev rrdtool redis-server
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install -r test-requirements.txt
@@ -62,6 +71,11 @@ jobs:
           python setup.py develop
           cd ../modoboa-radicale
           python setup.py develop
+          echo "Testing redis connection"
+          redis-cli -h $REDIS_HOST -p $REDIS_PORT ping
+        env:
+          REDIS_HOST: localhost
+          REDIS_PORT: ${{ job.services.redis.ports[6379] }}
       - name: Install postgres requirements
         if: ${{ matrix.database == 'postgres' }}
         run: |
@@ -83,6 +97,8 @@ jobs:
           MYSQL_HOST: 127.0.0.1
           MYSQL_PORT: ${{ job.services.mysql.ports[3306] }} # get randomly assigned published port
           MYSQL_USER: root
+          REDIS_HOST: localhost
+          REDIS_PORT: ${{ job.services.redis.ports[6379] }}
 
       - name: Test with pytest and coverage
         if: ${{ matrix.python-version == '3.10' && matrix.database == 'postgres' }}
@@ -91,6 +107,8 @@ jobs:
           coverage run --source ../modoboa_radicale manage.py test modoboa_radicale
           coverage xml
           coverage report
+          REDIS_HOST: localhost
+          REDIS_PORT: ${{ job.services.redis.ports[6379] }}
         env:
           # use localhost for the host here because we are running the job on the VM.
           # If we were running the job on in a container this would be postgres
