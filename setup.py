@@ -40,6 +40,14 @@ def get_requirements(requirements_file):
     return requirements, dependencies
 
 
+def local_scheme(version):
+    """
+    Skip the local version (eg. +xyz of 0.6.1.dev4+gdf99fe2)
+    to be able to upload to Test PyPI
+    """
+    return ""
+
+
 if __name__ == "__main__":
     HERE = path.abspath(path.dirname(__file__))
     INSTALL_REQUIRES, DEPENDENCY_LINKS = (
@@ -64,9 +72,10 @@ if __name__ == "__main__":
             "License :: OSI Approved :: MIT License",
             "Operating System :: OS Independent",
             "Programming Language :: Python :: 3",
-            "Programming Language :: Python :: 3.5",
-            "Programming Language :: Python :: 3.6",
-            "Programming Language :: Python :: 3.7",
+            "Programming Language :: Python :: 3.8",
+            "Programming Language :: Python :: 3.9",
+            "Programming Language :: Python :: 3.10",
+            "Programming Language :: Python :: 3.11",
             "Topic :: Communications :: Email",
             "Topic :: Internet :: WWW/HTTP",
         ],
@@ -76,6 +85,6 @@ if __name__ == "__main__":
         zip_safe=False,
         install_requires=INSTALL_REQUIRES,
         dependency_links=DEPENDENCY_LINKS,
-        use_scm_version=True,
+        use_scm_version={"local_scheme": local_scheme},
         setup_requires=["setuptools_scm"],
     )
