@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=61.0", "setuptools_scm[toml]>=6.4"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "modoboa-radicale"
+dynamic = [
+   "version",
+   "dependencies",
+   "optional-dependencies"
+]
+authors = [
+  { name="Antoine Nguyen", email="tonio@ngyn.org" },
+]
+description = "The Radicale frontend of Modoboa"
+readme = "README.rst"
+requires-python = ">=3.9"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Web Environment",
+    "Framework :: Django :: 4.2",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: ISC License (ISCL)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Communications :: Email",
+    "Topic :: Internet :: WWW/HTTP",
+]
+keywords = ["modoboa", "email", "radicale", "calendar", "caldav"]
+license = {file = "LICENSE"}
+
+[project.urls]
+Homepage = "https://modoboa.org/"
+Documentation = "https://modoboa.readthedocs.io/en/latest/"
+Repository = "https://github.com/modoboa/modoboa-radicale"
+Changelog = "https://github.com/modoboa/modoboa-radicale/blob/master/CHANGELOG.md"
+Issues = "https://github.com/modoboa/modoboa-radicale/issues"
+
+[tool.setuptools.dynamic]
+version = {attr = "modoboa_radicale.version.get_version"}
+dependencies = {file = ["requirements.txt"]}
+optional-dependencies.test = { file = ["test-requirements.txt"] }
